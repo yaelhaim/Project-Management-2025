@@ -4,11 +4,22 @@
   "description": "this is the first commit",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node src/index.js",
+    "test": "mocha tests/*.spec.js",
+    "lint": "eslint src/*.js --color"
   },
+  "type": "module",
   "author": "",
   "license": "ISC",
   "dependencies": {
     "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "@types/chai": "^5.0.1",
+    "@types/mocha": "^10.0.10",
+    "chai": "^5.1.2",
+    "eslint": "^9.17.0",
+    "globals": "^15.14.0",
+    "mocha": "^11.0.1"
   }
 }
