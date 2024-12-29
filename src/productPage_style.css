@@ -300,3 +300,115 @@ html {
   color: black;
   margin: 0;
 }
+
+.review-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 800px;
+  min-height: 400px;
+  margin: 0 auto;
+}
+
+.nav-button {
+  position: absolute;
+  background-color: #1d7fa5;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  font-size: 18px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.left-button {
+  left: -50px;
+}
+
+.right-button {
+  right: -50px;
+}
+.nav-button:hover {
+  background-color: #57adcf;
+}
+
+.review {
+  text-align: start;
+  width: 100%;
+  justify-content: space-between; /* שים את הכותרת והאייקונים בשורה אחת */
+  align-items: center;
+  position: relative;
+}
+
+.review h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.actions {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  position: absolute; /* ממקם את האייקונים במיקום יחסי */
+  top: 0; /* שמים אותם בחלק העליון */
+  right: 0; /* ממקמים בצד ימין */
+}
+
+.actions span {
+  cursor: pointer;
+  font-size: 24px;
+}
+
+.review p {
+  font-size: 16px;
+  line-height: 1.5;
+  word-wrap: break-word;
+  white-space: normal;
+  box-sizing: border-box;
+  padding: 10px;
+}
+
+.review-footer {
+  position: absolute;
+  margin-top: 20px;
+  font-size: 14px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+}
+
+.add-raction-icon {
+  position: relative;
+  top: 0; /* המרחק מהחלק העליון של הקונטיינר */
+  right: 0;
+  display: flex;
+  gap: 10px;
+}
+
+.add-comment-icon {
+  position: absolute;
+  top: -30px; /* Adjust the distance above the actions icons */
+  right: 0; /* Align it to the right, above the other icons */
+  cursor: pointer;
+  font-size: 30px; /* Adjust the size of the icon */
+}
+
+.material-symbols-outlined {
+  font-size: 20px;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.material-symbols-outlined:hover {
+  color: #0056b3;
+}
