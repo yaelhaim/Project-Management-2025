@@ -1,0 +1,302 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f4f4f4;
+  border-bottom: 2px solid #1d7fa5;
+}
+
+header .site-name {
+  color: #1d7fa5;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+header .material-symbols-outlined {
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body,
+html {
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+.main-container {
+  padding: 20px;
+  width: 100vw; /* רוחב של 100% מהמסך */
+  height: auto; /* תן לגובה להתעדכן אוטומטית */
+  overflow-x: hidden; /* מבטלים גלילה אופקית */
+}
+
+.product-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #1d7fa5;
+  color: white;
+  padding: 15px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.product-header h1 {
+  display: inline-block; /* מאפשר לכותרת להיות בשורה אחת עם האלמנטים האחרים */
+  margin-right: 10px;
+  font-size: 24px;
+}
+
+.product-header button.buy-now {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 5px 20px;
+  cursor: pointer;
+  border-radius: 5px;
+  display: inline-block; /* הכפתור יישאר בשורה אחת */
+  vertical-align: middle;
+  justify-content: space-between;
+}
+
+.product-header button.buy-now:hover {
+  background-color: #45a049;
+}
+
+/* makes the 'catalog number' and 'number of purchases' and price labels to be bold*/
+.label {
+  font-weight: bold;
+  color: white;
+}
+
+.price-rating {
+  display: flex; /* יוצר תצוגה אופקית */
+  align-items: center; /* מיישר אנכית */
+  gap: 50px;
+}
+
+.price-rating > * {
+  position: relative;
+}
+
+.price-rating > *:not(:last-child) {
+  border-right: 2px solid white; /* פס הפרדה בין הרכיבים */
+  padding-right: 50px; /*space between the price and rating*/
+}
+
+/* .rating > *:not(:last-child) {
+  border-right: 1px solid white;
+  padding-right: 50px;
+} */
+
+.price-rating .price,
+.price-rating .rating {
+  margin: 0; /* מסיר רווחים מיותרים */
+}
+
+.price-rating .brochure {
+  margin-left: auto; /* דוחף את הקישור לחוברת לצד ימין */
+}
+
+.price {
+  font-size: 20px;
+  color: white;
+  font-weight: bold;
+}
+
+.material-symbols-outlined:hover {
+  color: #ffa500; /* צבע משתנה בעת מעבר עכבר */
+}
+
+.rating {
+  display: flex; /* מיישר את הכוכבים בשורה אחת */
+  align-items: center; /* מרכז את הכוכבים אנכית */
+}
+
+.rating .material-symbols-outlined {
+  font-size: 20px;
+  color: gold;
+  cursor: pointer;
+}
+
+.product-image {
+  margin-left: 20px;
+  flex-shrink: 0;
+  border-radius: 15px; /* פינות מעוגלות */
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.product-header img {
+  width: 150px;
+  height: auto;
+  margin-left: auto;
+  margin-right: 40px;
+}
+
+.price-rating .brochure a {
+  text-decoration: none; /* מסיר קו תחתון */
+  color: white; /* מגדיר צבע לקישור */
+  font-size: 15px;
+}
+
+.price-rating .brochure a:hover {
+  text-decoration: underline; /* מוסיף קו תחתון כשעוברים על הקישור */
+  color: #d3d3d3;
+}
+
+.product-description {
+  margin-bottom: 20px;
+}
+
+.product-description h2 {
+  margin: 0;
+  font-size: 20px;
+  color: black;
+  display: inline; /* מאפשר שיבוץ של התיאור באותה שורה */
+}
+
+.product-description p {
+  display: inline; /* גורם לתיאור להופיע באותה שורה */
+  font-size: 16px;
+  color: black;
+}
+
+.icons {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.icons .material-symbols-outlined {
+  font-size: 25px;
+  color: black;
+  cursor: pointer;
+}
+
+/* .icons .material-symbols-outlined:hover {
+  color: #4caf50;
+} */
+
+.main-product-image {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 60px;
+}
+
+.main-product-image img {
+  max-width: 100%;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.main-product-image img:hover {
+  transform: scale(1.05); /* מגדיל את התמונה ב-5% כשעוברים עליה */
+  transition: transform 0.3s ease;
+}
+
+.info-boxes {
+  display: flex;
+  flex-direction: column; /* מסדר את המלבנים בעמודה */
+  align-items: flex-start; /* מיישר את המלבנים לשמאל */
+  margin-top: 20px; /* רווח מעל המלבנים */
+  width: 100%;
+}
+
+.info-box {
+  display: flex;
+  justify-content: space-between;
+  background-color: #1d7fa5; /* צבע כחול */
+  color: white; /* טקסט בצבע לבן */
+  padding: 10px 20px; /* רווח פנימי */
+  margin-bottom: 5px; /* רווח קטן בין המלבן להסבר */
+  border-radius: 5px; /* פינות מעוגלות */
+  font-size: 16px; /* גודל טקסט */
+  font-weight: bold; /* טקסט מודגש */
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2); /* צל קל */
+  position: relative; /* מאפשר למקם את הכוכבים מחוץ למלבן */
+  width: 20%;
+}
+
+.info-description {
+  font-size: 14px; /* גודל טקסט קטן יותר */
+  color: black; /* צבע טקסט בהיר יותר */
+  margin-top: 5px; /* רווח בין המלבן להסבר */
+}
+
+.friendliness-ranking {
+  position: absolute; /* מיקום מוחלט */
+  right: -150px; /* מניח את הכוכבים מימין למלבן */
+  top: 50%; /* מיישר את הכוכבים במרכז vertikalית */
+  transform: translateY(
+    -50%
+  ); /* מתקן את המיקום כדי שהכוכבים יהיו במרכז בדיוק */
+  display: flex;
+  gap: 5px;
+}
+
+.security-ranking {
+  position: absolute; /* מיקום מוחלט */
+  right: -150px; /* מניח את הכוכבים מימין למלבן */
+  top: 50%; /* מיישר את הכוכבים במרכז vertikalית */
+  transform: translateY(
+    -50%
+  ); /* מתקן את המיקום כדי שהכוכבים יהיו במרכז בדיוק */
+  display: flex;
+  gap: 5px;
+}
+
+.friendliness-ranking .material-symbols-outlined,
+.security-ranking .material-symbols-outlined {
+  font-size: 24px;
+  color: gold;
+  cursor: pointer;
+}
+
+.os-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start; /* שומר על המערכות הפעלה בחלק העליון */
+  /* align-items: flex-end; */
+  margin-left: auto;
+  width: 250px; /* גודל קבוע לרכיב מערכות ההפעלה */
+}
+
+.os-title {
+  align-content: flex-end;
+  font-size: 16px;
+  font-weight: bold;
+  color: #1d7fa5; /* צבע כחול */
+}
+
+.os-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 5px;
+}
+
+.os-list p {
+  font-size: 14px;
+  color: black;
+  margin: 0;
+}
