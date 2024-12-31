@@ -12,6 +12,7 @@ button_buy_now.addEventListener("click", () => {
 
 //when clicking on the 'information brochure' link the brochure wiil be open
 function openPDF() {
+  const pdfUrl = "Mockup_4.pdf";
   var pdfOverlay = document.getElementById("pdf-overlay");
   var canvas = document.getElementById("pdf-canvas");
 
