@@ -1,0 +1,185 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* הגדרת ראש הדף - הכותרת העליונה של הדף*/
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f4f4f4;
+  border-bottom: 2px solid #1d7fa5;
+}
+
+/* הגדרת שם האתר בראש הדף*/
+header .site-name {
+  color: #1d7fa5;
+  font-size: 24px;
+  font-weight: bold;
+}
+
+/* הגדרת אייקונים של סל הקניות וסל המועדפים*/
+header .material-symbols-outlined {
+  font-size: 24px;
+  cursor: pointer;
+  margin-left: 10px;
+}
+
+/* עיצוב רשימת המוצרים */
+.product-list {
+    display: flex;
+    flex-direction: column; /* סידור המוצרים אחד מתחת לשני */
+    gap: 20px;
+    padding: 20px;
+    align-items: center; /* מיישר את המוצרים למרכז */
+  }
+  
+  /* עיצוב כל מוצר */
+  .product {
+    display: flex;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 20px;
+    width: 50%; /* רוחב המוצר שליש מרוחב החלון */
+    max-width: 800px; /* הגבלת רוחב המוצר למקסימום */
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: space-between; /* סידור התמונה, התיאור והכפתורים */
+  }
+  
+  /* עיצוב התמונה */
+  .product-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-right: 20px;
+  }
+  
+  /* עיצוב פרטי המוצר */
+  .product-details {
+    flex-grow: 1;
+  }
+  
+  /* עיצוב שם המוצר */
+  .product-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 5px 0;
+  }
+  
+  /* עיצוב תיאור המוצר */
+  .product-description {
+    font-size: 14px;
+    margin: 0 0 5px 0;
+  }
+  
+  /* עיצוב מחיר המוצר */
+  .product-price {
+    font-size: 16px;
+    color: #1d7fa5;
+    font-weight: bold;
+    margin: 0;
+  }
+  
+  /* עיצוב אזור הכפתורים */
+  .product-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    align-items: flex-end; /* מיישר את הכפתורים לימין */
+  }
+
+  .product {
+    cursor: pointer; /* משנה את סמן העכבר ליד שמראה שהאלמנט לחיץ */
+  }
+
+
+  /* עיצוב כפתור הוספה לסל ו-כפתור הסרה */
+.add-to-cart, .remove {
+    padding: 10px 20px; /* גודל אחיד לכל כפתור */
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 120px; /* רוחב אחיד */
+    text-align: center; /* מוודא שהטקסט יהיה במרכז הכפתור */
+  }
+  
+  /* שינוי צבע הרקע של כפתור ההוספה */
+  .add-to-cart {
+    background-color: #1d7fa5;
+  }
+  
+  /* שינוי צבע הרקע של כפתור הסרה */
+  .remove {
+    background-color: #e74c3c;
+  }
+  
+  /* שיפור מראה הכפתורים בעת ריחוף */
+  .add-to-cart:hover, .remove:hover {
+    opacity: 0.8;
+  }
+
+  /* עיצוב למכשירים קטנים יותר */
+@media (max-width: 768px) {
+    /* הקטנת גודל הכותרת */
+    header .site-name {
+      font-size: 18px; /* גודל קטן יותר */
+    }
+  
+    /* התאמת גודל האייקונים */
+    header .material-symbols-outlined {
+      font-size: 20px;
+    }
+  
+    /* התאמת רוחב המוצרים */
+    .product {
+      width: 80%; /* מוצרים יתפסו 80% מרוחב החלון */
+    }
+  
+    /* התאמת התמונה */
+    .product-image {
+      width: 60px; /* הקטנת התמונה */
+      height: 60px;
+    }
+  
+    /* התאמת הטקסטים */
+    .product-title {
+      font-size: 16px; /* כותרת קטנה יותר */
+    }
+  
+    .product-description {
+      font-size: 12px; /* טקסט תיאור קטן יותר */
+    }
+  
+    .product-price {
+      font-size: 14px; /* מחיר קטן יותר */
+    }
+  
+    /* התאמת כפתורים */
+    .add-to-cart, .remove {
+      padding: 8px 16px; /* התאמת גודל הכפתורים */
+      font-size: 14px;
+    }
+  }
+  
+  /* עיצוב למסכים קטנים מאוד (טלפונים) */
+  @media (max-width: 480px) {
+    /* הקטנת רוחב המוצרים עוד יותר */
+    .product {
+      width: 95%; /* מוצרים יתפסו כמעט את כל המסך */
+    }
+  
+    /* הקטנת הכפתורים */
+    .add-to-cart, .remove {
+      width: 100px; /* כפתורים קטנים יותר */
+      font-size: 12px; /* גודל טקסט קטן יותר */
+    }
+  }
