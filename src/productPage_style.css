@@ -100,11 +100,6 @@ html {
   padding-right: 50px; /*space between the price and rating*/
 }
 
-/* .rating > *:not(:last-child) {
-  border-right: 1px solid white;
-  padding-right: 50px;
-} */
-
 .price-rating .price,
 .price-rating .rating {
   margin: 0; /* מסיר רווחים מיותרים */
@@ -189,10 +184,6 @@ html {
   cursor: pointer;
 }
 
-/* .icons .material-symbols-outlined:hover {
-  color: #4caf50;
-} */
-
 .main-product-image {
   display: flex;
   justify-content: center;
@@ -276,7 +267,6 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: flex-start; /* שומר על המערכות הפעלה בחלק העליון */
-  /* align-items: flex-end; */
   margin-left: auto;
   width: 250px; /* גודל קבוע לרכיב מערכות ההפעלה */
 }
@@ -315,6 +305,7 @@ html {
   max-width: 800px;
   min-height: 400px;
   margin: 0 auto;
+  margin-bottom: 100px;
 }
 
 .nav-button {
@@ -409,6 +400,51 @@ html {
   transition: color 0.3s ease;
 }
 
-.material-symbols-outlined:hover {
-  color: #0056b3;
+.top-category {
+  text-align: center;
+  padding: 20px;
+}
+
+.items-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin: 20px 0;
+}
+
+.item {
+  border: 1px solid white;
+  padding: 10px;
+  width: 140px;
+  height: 120%;
+  text-align: center;
+}
+
+.image-placeholder {
+  width: 140px;
+  height: 120px;
+  background-color: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.arrow-button {
+  margin-left: 10px;
+}
+
+.arrow-button button {
+  background-color: #1d7fa5;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.arrow-button button:hover {
+  background-color: #57adcf;
 }
