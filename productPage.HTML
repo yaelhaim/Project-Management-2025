@@ -9,6 +9,7 @@
       href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
       rel="stylesheet"
     />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
   </head>
   <body>
     <header>
@@ -38,8 +39,21 @@
               <span class="material-symbols-outlined">star</span>
             </div>
             <p class="brochure">
-              <a href="#">Information Brochure</a>
+              <a href="#" onclick="openPDF();">Information Brochure</a>
             </p>
+            <div id="pdf-overlay" style="display: none" onclick="closePDF()">
+              <div id="pdf-container" onclick="event.stopPropagation();">
+                <embed
+                  src="Mockup_4.pdf"
+                  type="application/pdf"
+                  width="100%"
+                  height="600px"
+                />
+                <canvas id="pdf-canvas"></canvas>
+
+                <button onclick="closePDF()">סגור</button>
+              </div>
+            </div>
           </div>
         </div>
         <div>
@@ -175,5 +189,6 @@
         </div>
       </div>
     </div>
+    <script src="productPage.js"></script>
   </body>
 </html>
