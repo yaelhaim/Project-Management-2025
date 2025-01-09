@@ -97,13 +97,13 @@ html {
 }
 
 #original-price {
-  color: black; /* צבע למחיר המקורי */
+  color: white; /* צבע למחיר המקורי */
   margin-left: 10px; /* רווח קטן משמאל למחיר המקורי */
   text-decoration: line-through; /* קו חוצה למחיר המקורי */
 }
 
 #discounted-price {
-  color: black; /* צבע למחיר לאחר הנחה */
+  color: white; /* צבע למחיר לאחר הנחה */
   font-weight: bold; /* הדגשה */
 }
 

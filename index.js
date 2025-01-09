@@ -104,6 +104,11 @@ app.post("/api/products", express.json(), async (req, res) => {
 
 app.use(express.static("src"));
 
+// מסלול ראשי שיגיש את הדף הראשי
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/src/homePage.HTML");
+});
+
 // מסלול ראשי שיגיש את הדף HTML שלך
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/src/productPage.HTML");
