@@ -55,6 +55,7 @@ html {
   padding: 15px;
   border-radius: 5px;
   margin-bottom: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2); /* צל */
 }
 
 .product-header h1 {
@@ -64,7 +65,7 @@ html {
 }
 
 .product-header button.buy-now {
-  background-color: #4caf50;
+  background-color: #28a745;
   color: white;
   border: none;
   padding: 5px 20px;
@@ -88,11 +89,22 @@ html {
 .price-rating {
   display: flex; /* יוצר תצוגה אופקית */
   align-items: center; /* מיישר אנכית */
-  gap: 50px;
+  gap: 10px; /* מרווח קטן בין האלמנטים */
 }
 
 .price-rating > * {
   position: relative;
+}
+
+#original-price {
+  color: black; /* צבע למחיר המקורי */
+  margin-left: 10px; /* רווח קטן משמאל למחיר המקורי */
+  text-decoration: line-through; /* קו חוצה למחיר המקורי */
+}
+
+#discounted-price {
+  color: black; /* צבע למחיר לאחר הנחה */
+  font-weight: bold; /* הדגשה */
 }
 
 .price-rating > *:not(:last-child) {
@@ -114,10 +126,6 @@ html {
   color: white;
   font-weight: bold;
 }
-
-/* .material-symbols-outlined:hover {
-  color: #ffa500; 
-} */
 
 .rating {
   display: flex; /* מיישר את הכוכבים בשורה אחת */
@@ -178,10 +186,43 @@ html {
   margin-bottom: 20px;
 }
 
+/* the message that appears when hovering on the copy icon*/
+.tooltip {
+  visibility: hidden;
+  background-color: black !important;
+  color: white !important;
+  text-align: center;
+  padding: 5px 8px;
+  border-radius: 5px;
+  position: absolute;
+  top: -125%; /* מיקום מעל האייקון */
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.3s;
+  z-index: 1000;
+}
+
+.tooltip {
+  background: linear-gradient(90deg, black, #333); /* מעבר צבע שחור כהה */
+}
+
+.icons .material-symbols-outlined:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/*TODO: fix the change of the copy icon */
 .icons .material-symbols-outlined {
   font-size: 25px;
   color: black;
   cursor: pointer;
+}
+
+.material-symbols-outlined.check-icon {
+  color: green;
+  display: none; /* מוסתר עד שמחליפים */
 }
 
 .main-product-image {
@@ -359,6 +400,74 @@ html {
   font-size: 24px;
 }
 
+/* חלון קופץ */
+.modal {
+  display: none; /* התחל עם הסתרה */
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* רקע כהה */
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 60vw; /* 60% מרוחב המסך */
+  height: 40vh;
+  text-align: left;
+  overflow-y: auto;
+}
+
+.modal-title {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+textarea {
+  width: 100%;
+  height: 15vh;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.modal-buttons button {
+  padding: 10px 20px;
+  font-size: 14px;
+  cursor: pointer;
+}
+
+#approveBtn {
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+#cancelBtn {
+  background-color: red;
+  color: white;
+  border: none;
+  border-radius: 5px;
+}
+
+.add-reaction-icon {
+  cursor: pointer;
+}
+
 .review p {
   font-size: 16px;
   line-height: 1.5;
@@ -417,7 +526,8 @@ html {
   padding: 10px;
   width: 140px;
   height: 120%;
-  text-align: center;
+  text-align: left;
+  position: relative;
 }
 
 .image-placeholder {
@@ -428,6 +538,12 @@ html {
   align-items: center;
   justify-content: center;
   margin-bottom: 10px;
+}
+
+.price-5-top {
+  margin: 10px 0 0 0; /* ריווח בין התמונה למחיר */
+  font-size: 16px; /* גודל גופן */
+  color: black;
 }
 
 .arrow-button {
@@ -473,4 +589,13 @@ html {
   height: 100%;
   align-self: center;
   position: absolute;
+}
+
+.copy-link {
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.copy-link:hover {
+  color: #007bff; /* שינוי צבע בזמן מעבר */
 }
