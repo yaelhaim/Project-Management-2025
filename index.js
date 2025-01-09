@@ -45,7 +45,6 @@ app.get("/api/products", async (req, res) => {
 
     const products = result.rows.map((row) => {
       const {
-        // catalog_number,
         id,
         name,
         price,
@@ -53,10 +52,12 @@ app.get("/api/products", async (req, res) => {
         category_id,
         description,
         pdf_link,
+        catalog_number,
+        discount_price,
+        rating,
       } = row;
 
       return {
-        // catalog_number,
         id,
         name,
         price,
@@ -64,6 +65,9 @@ app.get("/api/products", async (req, res) => {
         category_id,
         description,
         pdf_link,
+        catalog_number,
+        discount_price,
+        rating,
       };
     });
 
@@ -76,8 +80,17 @@ app.get("/api/products", async (req, res) => {
 
 //הוספת מוצר לבסיס נתונים
 app.post("/api/products", express.json(), async (req, res) => {
-  const { name, price, image_url, category_id, description, pdf_url } =
-    req.body;
+  const {
+    name,
+    price,
+    image_url,
+    category_id,
+    description,
+    pdf_url,
+    catalog_number,
+    discount_price,
+    rating,
+  } = req.body;
 
   if (
     !name ||
@@ -85,7 +98,10 @@ app.post("/api/products", express.json(), async (req, res) => {
     !image_url ||
     !category_id ||
     !description ||
-    !pdf_url
+    !pdf_url ||
+    !catalog_number ||
+    !discount_price ||
+    !rating
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
@@ -93,7 +109,17 @@ app.post("/api/products", express.json(), async (req, res) => {
   try {
     const result = await pool.query(
       "INSERT INTO products (name,price,image_url, category_id, description, pdf_url) VALUES ($1, $2, $3) RETURNING *",
-      [name, price, image_url, category_id, description, pdf_url]
+      [
+        name,
+        price,
+        image_url,
+        category_id,
+        description,
+        pdf_url,
+        catalog_number,
+        discount_price,
+        rating,
+      ]
     );
     res.status(201).json(result.rows[0]); // החזרת המוצר החדש
   } catch (error) {
@@ -109,9 +135,14 @@ app.get("/", (req, res) => {
   res.sendFile(__dirname + "/src/homePage.HTML");
 });
 
-// מסלול ראשי שיגיש את הדף HTML שלך
+// מסלול ראשי שיגיש את דף המוצר
 app.get("/", (req, res) => {
   res.sendFile(__dirname + "/src/productPage.HTML");
+});
+
+// מסלול ראשי שיגיש את דף המוצרים האהובים
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/src/favorite_productsPage.HTML");
 });
 
 app.listen(PORT, () => {
