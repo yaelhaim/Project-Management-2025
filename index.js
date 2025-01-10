@@ -78,6 +78,38 @@ app.get("/api/products", async (req, res) => {
   }
 });
 
+// שליפת טבלת הקטגוריות מהבסיס נתונים
+app.get("/api/categories", async (req, res) => {
+  try {
+    // שאילתה לשלוף את כל הקטגוריות מהטבלה
+    const result = await pool.query("SELECT * FROM categories");
+
+    // אם אין קטגוריות, נחזיר תשובה עם קוד שגיאה 404
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "No categories found" });
+    }
+
+    // מפה את התוצאות לפורמט הרצוי
+    const categories = result.rows.map((row) => {
+      const { id, name, description, image_url } = row;
+
+      return {
+        id,
+        name,
+        description,
+        image_url,
+      };
+    });
+
+    // מחזירים את התוצאה כ-JSON
+    res.json(categories);
+  } catch (err) {
+    // טיפול בשגיאות
+    console.error("Error fetching categories:", err);
+    res.status(500).send("Error fetching categories");
+  }
+});
+
 //הוספת מוצר לבסיס נתונים
 app.post("/api/products", express.json(), async (req, res) => {
   const {
@@ -108,7 +140,7 @@ app.post("/api/products", express.json(), async (req, res) => {
 
   try {
     const result = await pool.query(
-      "INSERT INTO products (name,price,image_url, category_id, description, pdf_url) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO products (name,price,image_url, category_id, description, pdf_url, catalog_number, doscount_price, rating) VALUES ($1, $2, $3) RETURNING *",
       [
         name,
         price,
