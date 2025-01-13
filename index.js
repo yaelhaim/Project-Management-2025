@@ -7,6 +7,7 @@ const app = express();
 const PORT = 3000;
 
 app.use(express.static("public"));
+app.use(express.static("src"));
 
 dotenv.config();
 
@@ -48,26 +49,28 @@ app.get("/api/products", async (req, res) => {
         id,
         name,
         price,
-        image_link,
+        image_url,
         category_id,
         description,
         pdf_link,
         catalog_number,
         discount_price,
         rating,
+        created_at,
       } = row;
 
       return {
         id,
         name,
         price,
-        image_link,
+        image_url,
         category_id,
         description,
         pdf_link,
         catalog_number,
         discount_price,
         rating,
+        created_at,
       };
     });
 
@@ -122,6 +125,7 @@ app.post("/api/products", express.json(), async (req, res) => {
     catalog_number,
     discount_price,
     rating,
+    created_at,
   } = req.body;
 
   if (
@@ -133,14 +137,15 @@ app.post("/api/products", express.json(), async (req, res) => {
     !pdf_url ||
     !catalog_number ||
     !discount_price ||
-    !rating
+    !rating ||
+    !created_at
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
   try {
     const result = await pool.query(
-      "INSERT INTO products (name,price,image_url, category_id, description, pdf_url, catalog_number, doscount_price, rating) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO products (name,price,image_url, category_id, description, pdf_url, catalog_number, doscount_price, rating, created_at) VALUES ($1, $2, $3) RETURNING *",
       [
         name,
         price,
@@ -151,6 +156,7 @@ app.post("/api/products", express.json(), async (req, res) => {
         catalog_number,
         discount_price,
         rating,
+        created_at,
       ]
     );
     res.status(201).json(result.rows[0]); // החזרת המוצר החדש
@@ -160,7 +166,40 @@ app.post("/api/products", express.json(), async (req, res) => {
   }
 });
 
-app.use(express.static("src"));
+// Route לטיפול במוצר לפי מזהה
+app.get("/products/:id", (req, res) => {
+  const productId = req.params.id;
+
+  // שלוף את המוצר מהמסד נתונים
+  const product = getProductById(productId);
+
+  if (product) {
+    res.json(product); // מחזיר את פרטי המוצר כ-JSON
+  } else {
+    res.status(404).send("Product not found");
+  }
+});
+
+//   פונקציה לשליפת המוצר מהבסיס נתונים לפי מספר מזהה של המוצר
+async function getProductById(id) {
+  try {
+    // שליפה של המוצר לפי ID
+    const result = await pool.query("SELECT * FROM products WHERE id = $1", [
+      id,
+    ]);
+
+    // אם המוצר לא נמצא, מחזירים שגיאה
+    if (result.rows.length === 0) {
+      throw new Error("Product not found");
+    }
+
+    // מחזירים את המוצר הראשון מהתוצאה (ה-ID הוא ייחודי)
+    return result.rows[0];
+  } catch (err) {
+    console.error("Error fetching product by ID:", err);
+    throw err;
+  }
+}
 
 // מסלול ראשי שיגיש את הדף הראשי
 app.get("/", (req, res) => {

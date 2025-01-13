@@ -124,7 +124,7 @@ let products = [];
 async function updateProductDetails(productId) {
   try {
     // קריאה ל-API לקבלת פרטי המוצר לפי מזהה
-    const response = await fetch(`/api/products/${productId}`);
+    const response = await fetch(`api/products/${productId}`);
     if (!response.ok) throw new Error("Failed to fetch product details");
 
     const product = await response.json();
@@ -172,10 +172,20 @@ async function updateProductDetails(productId) {
       document.getElementById("pdf-overlay").style.display = "none";
     }
 
-    // עדכון דירוג
-    document.querySelector(
-      ".product-details .rating"
-    ).textContent = `Rating: ${product.rating}`;
+    // מצא את אלמנט הכוכבים
+    const ratingContainer = document.querySelector(".rating");
+
+    // קבל את כל אלמנטי הכוכבים
+    const stars = ratingContainer.querySelectorAll(
+      ".material-symbols-outlined"
+    );
+
+    // השאר רק את הכוכבים שצריך (לפי הדירוג)
+    stars.forEach((star, index) => {
+      if (index >= product.rating) {
+        star.remove(); // הסר כוכבים מיותרים
+      }
+    });
 
     // עדכון תמונת המוצר
     document.querySelector(".product-image").src = product.imageUrl;
@@ -198,20 +208,3 @@ if (productId) {
 } else {
   console.error("Product ID not found in the URL");
 }
-
-// // קריאת הפונקציה כשנטען העמוד
-// document.addEventListener("DOMContentLoaded", fetchProducts);
-
-// const productVariables = {}; // אובייקט שיאחסן את המשתנים
-// products.forEach((product, index) => {
-//   productVariables[`product${index + 1}`] = {
-//     // catalogNumber: product.catalogNumber,
-//     id: product.id,
-//     name: product.name,
-//     price: product.price,
-//     imageUrl: product.imageUrl,
-//     categoryNumber: product.categoryNumber,
-//     description: product.description,
-//     pdfLink: product.pdfLink,
-//   };
-// });
