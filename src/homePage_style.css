@@ -247,7 +247,7 @@ header .icons>* {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    width: 82%;
+    width: 95%;
     margin: 0 auto;
 }
 
@@ -332,4 +332,62 @@ header .icons>* {
     color: black;
     vertical-align: middle;
     /* ליישור עם הטקסט */
+}
+
+
+/* תווית רב מכר */
+
+.best-seller-label {
+    display: inline-block;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    color: #FFFFFF;
+    background-color: #1d7fa5;
+    /* צבע רקע מתאים */
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-top: 10px;
+}
+
+.message-container {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #fff;
+    border: 2px solid #1d7fa5;
+    color: #1d7fa5;
+    font-size: 18px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    display: none;
+    /* המוסתר עד שנראה אותו */
+    z-index: 1000;
+    /* להבטיח שההודעה תהיה מעל שאר האלמנטים */
+}
+
+#product-count {
+    background-color: #1d7fa5;
+    color: white;
+    /* צבע טקסט לבן */
+    padding: 10px 20px;
+    /* ריפוד פנימי */
+    border-radius: 12px;
+    /* קצוות מעוגלים */
+    font-size: 16px;
+    /* גודל פונט */
+    font-weight: bold;
+    /* משקל פונט bold */
+    text-align: center;
+    /* יישור טקסט למרכז */
+    margin-top: 20px;
+    /* רווח מלמעלה */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* צלליות עדינות */
+    width: fit-content;
+}
+
+.product-name:hover {
+    color: #00008B;
 }

@@ -59,6 +59,8 @@ app.get("/api/products", async(req, res) => {
                 created_at,
                 rating_friendly,
                 rating_security,
+                number_of_purchases,
+                os_support
             } = row;
 
             return {
@@ -75,6 +77,8 @@ app.get("/api/products", async(req, res) => {
                 created_at,
                 rating_friendly,
                 rating_security,
+                number_of_purchases,
+                os_support
             };
         });
 
@@ -133,6 +137,8 @@ app.post("/api/products", express.json(), async(req, res) => {
         created_at,
         rating_friendly,
         rating_security,
+        number_of_purchases,
+        os_support
     } = req.body;
 
     if (!name ||
@@ -146,7 +152,9 @@ app.post("/api/products", express.json(), async(req, res) => {
         !rating ||
         !created_at ||
         !rating_friendly ||
-        !rating_security
+        !rating_security ||
+        !number_of_purchases ||
+        !os_support
     ) {
         return res.status(400).json({ message: "All fields are required" });
     }
@@ -166,6 +174,8 @@ app.post("/api/products", express.json(), async(req, res) => {
                 created_at,
                 rating_friendly,
                 rating_security,
+                number_of_purchases,
+                os_support
             ]
         );
         res.status(201).json(result.rows[0]); // החזרת המוצר החדש
