@@ -1,302 +1,335 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
+
 
 /* עיצוב כותרת עליונה */
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #f0f0f0;
-  border-bottom: 2px solid #1d7fa5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f0f0f0;
+    border-bottom: 2px solid #1d7fa5;
 }
 
 .favorite-icon {
-  font-variation-settings: "FILL" 1;
-  color: red;
-  /* צבע אדום מלא */
+    font-variation-settings: "FILL" 1;
+    color: red;
+    cursor: pointer;
 }
+
 
 /* עיצוב שם האתר */
 
 header .site-name {
-  color: #1d7fa5;
-  font-size: 24px;
-  font-weight: bold;
+    color: #1d7fa5;
+    font-size: 24px;
+    font-weight: bold;
 }
+
 
 /* עיצוב האייקונים בכותרת */
 
 header .icons {
-  display: flex;
-  align-items: center;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
 }
+
 
 /* מרווחים בין האייקונים */
 
-header .icons > * {
-  margin-left: 12px;
+header .icons>* {
+    margin-left: 12px;
 }
+
 
 /* עיצוב האייקונים */
 
 .material-symbols-outlined {
-  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+    font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
 }
+
 
 /* עיצוב שורת החיפוש ואייקונים מתחת לכותרת */
 
 .search-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px;
-  margin-top: 10px;
-  /* מרווח קטן מתחת לכותרת */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    margin-top: 10px;
+    /* מרווח קטן מתחת לכותרת */
 }
+
 
 /* עיצוב שורת החיפוש */
 
 .search-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
+
 
 /* אייקון היסטוריית מוצרים */
 
 .acute-icon {
-  font-size: 24px;
-  color: #000000;
-  margin-right: 10px;
+    font-size: 24px;
+    color: #000000;
+    margin-right: 10px;
+    cursor: pointer;
+    /* שינוי לעכבר עם כף יד */
 }
+
 
 /* אייקון היסטוריית חיפושים */
 
 .manage-search-icon {
-  font-size: 24px;
-  color: #000000;
-  margin-right: 10px;
+    font-size: 24px;
+    color: #000000;
+    margin-right: 10px;
+    cursor: pointer;
 }
+
 
 /* תיבת חיפוש */
 
 .search-input-container {
-  display: flex;
-  align-items: center;
-  position: relative;
+    display: flex;
+    align-items: center;
+    position: relative;
 }
 
 .search-icon {
-  font-size: 24px;
-  color: #1d7fa5;
-  position: absolute;
-  left: 10px;
+    font-size: 24px;
+    color: #1d7fa5;
+    position: absolute;
+    left: 10px;
 }
 
 .search-input {
-  padding: 8px 8px 8px 30px;
-  font-size: 16px;
-  width: 250px;
-  border: 1px solid #1d7fa5;
-  border-radius: 20px;
-  outline: none;
-  color: #1d7fa5;
-  text-align: center;
+    padding: 8px 8px 8px 30px;
+    font-size: 16px;
+    width: 250px;
+    border: 1px solid #1d7fa5;
+    border-radius: 20px;
+    outline: none;
+    color: #1d7fa5;
+    text-align: center;
 }
 
 .search-input::placeholder {
-  color: #1d7fa5;
+    color: #1d7fa5;
 }
+
 
 /* עיצוב אייקון הרשימה בצד ימין של המסך */
 
 .format-list-icon {
-  font-size: 24px;
-  color: #1d7fa5;
+    font-size: 24px;
+    color: #1d7fa5;
+    cursor: pointer;
 }
 
 .dropdown-container {
-  display: flex;
-  flex-direction: column;
-  margin-right: 10px;
-  margin-left: 120px;
+    display: flex;
+    flex-direction: column;
+    margin-right: 10px;
+    margin-left: 120px;
 }
 
 .dropdown-row {
-  display: flex;
-  align-items: center;
-  margin-bottom: 10px;
-  /* רווח בין השורות */
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    /* רווח בין השורות */
 }
 
+
 /* כיתוב משמאל למלבנים */
+
 .dropdown-label {
-  font-size: 16px;
-  /* גודל טקסט גדול יותר */
-  font-weight: bold;
-  color: #1d7fa5;
-  margin-right: 10px;
-  /* רווח בין הכיתוב למלבן */
+    font-size: 16px;
+    /* גודל טקסט גדול יותר */
+    font-weight: bold;
+    color: #1d7fa5;
+    margin-right: 10px;
+    /* רווח בין הכיתוב למלבן */
 }
+
 
 /* עיצוב למלבן */
 
 .dropdown-box {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: #1d7fa5;
-  color: white;
-  border-radius: 5px;
-  width: 140px;
-  /* רוחב גדול יותר */
-  height: 30px;
-  /* גובה גדול יותר */
-  cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #1d7fa5;
+    color: white;
+    border-radius: 5px;
+    width: 140px;
+    /* רוחב גדול יותר */
+    height: 30px;
+    /* גובה גדול יותר */
+    cursor: pointer;
 }
+
 
 /* חץ לבן בצד שמאל של המלבן */
 
 .dropdown-box {
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  /* יישור תכולת המלבן לשמאל */
-  padding-left: 10px;
-  /* רווח בין החץ לשולי המלבן */
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    /* יישור תכולת המלבן לשמאל */
+    padding-left: 10px;
+    /* רווח בין החץ לשולי המלבן */
 }
 
 .dropdown-box .arrow-icon {
-  font-size: 20px;
-  margin-right: 10px;
-  /* רווח בין החץ לתוכן בתוך המלבן */
+    font-size: 20px;
+    margin-right: 10px;
+    /* רווח בין החץ לתוכן בתוך המלבן */
 }
+
 
 /* עיצוב שורת האייקונים */
 
 .categories-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 80px;
-  margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 80px;
+    margin-bottom: 30px;
 }
 
 .category {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .category-circle {
-  width: 128px;
-  height: 128px;
-  border: 2px solid #1d7fa5;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-  background-color: #fff;
-  margin-bottom: 10px;
+    width: 128px;
+    height: 128px;
+    border: 2px solid #1d7fa5;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background-color: #fff;
+    margin-bottom: 10px;
+    cursor: pointer;
 }
 
 .category img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .category-name {
-  margin-top: 8px;
-  font-size: 16px;
-  color: #1d7fa5;
-  text-align: center;
+    margin-top: 8px;
+    font-size: 16px;
+    color: #1d7fa5;
+    text-align: center;
 }
 
 .products-container {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  width: 82%;
-  margin: 0 auto;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 82%;
+    margin: 0 auto;
 }
 
 .product {
-  width: 360px;
-  height: 400px;
-  background-color: #ffffff;
-  border: 2px solid #1d7fa5;
-  border-radius: 5px;
-  box-sizing: border-box;
-  margin-bottom: 30px;
-  padding: 15px;
-  text-align: left;
-  overflow: hidden;
+    width: 360px;
+    height: 400px;
+    background-color: #ffffff;
+    border: 2px solid #1d7fa5;
+    border-radius: 5px;
+    box-sizing: border-box;
+    margin-bottom: 30px;
+    padding: 15px;
+    text-align: left;
+    overflow: hidden;
 }
 
 .product-name {
-  font-size: 20px;
-  font-weight: bold;
-  color: #1d7fa5;
-  text-decoration: none;
+    font-size: 20px;
+    font-weight: bold;
+    color: #1d7fa5;
+    text-decoration: none;
 }
 
 .product-name:hover {
-  color: #00008b; /* צבע כחול כהה בזמן ריחוף */
+    color: #00008b;
+    /* צבע כחול כהה בזמן ריחוף */
 }
 
 .product-category {
-  display: block;
-  font-size: 14px;
-  color: black;
-  margin-top: 10px;
-  text-decoration: none;
+    display: block;
+    font-size: 14px;
+    color: black;
+    margin-top: 10px;
+    text-decoration: none;
 }
 
 .product-category:hover {
-  color: #00008b; /* הצבע שיתקבל בעת ריחוף */
-  text-decoration: underline; /* הוספת קו תחתון (לא חובה) */
+    color: #00008b;
+    /* הצבע שיתקבל בעת ריחוף */
+    text-decoration: underline;
+    /* הוספת קו תחתון (לא חובה) */
 }
 
 .product-image {
-  max-width: 80%; /* מאפשר לתמונה להתאים לרוחב הזמין */
-  height: auto; /* שומר על פרופורציות התמונה */
-  border-radius: 10px; /* רדיוס פינות */
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* צל */
-  margin-top: 10px;
-  margin-bottom: 10px;
+    max-width: 80%;
+    /* מאפשר לתמונה להתאים לרוחב הזמין */
+    height: auto;
+    /* שומר על פרופורציות התמונה */
+    border-radius: 10px;
+    /* רדיוס פינות */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    /* צל */
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .product-rating .material-symbols-outlined {
-  font-size: 22px; /* גודל הכוכבים */
-  margin-right: 4px; /* רווח בין הכוכבים */
-  color: gold; /* צבע זהב לכוכבים */
+    font-size: 22px;
+    /* גודל הכוכבים */
+    margin-right: 4px;
+    /* רווח בין הכוכבים */
+    color: gold;
+    /* צבע זהב לכוכבים */
 }
 
 .product-description {
-  display: -webkit-box;
-  display: box;
-  -webkit-box-orient: vertical;
-  box-orient: vertical;
-  -webkit-line-clamp: 3;
-  line-clamp: 3;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  font-size: 14px;
-  line-height: 1.5;
-  max-height: calc(1.5em * 3);
-  color: black;
+    display: -webkit-box;
+    display: box;
+    -webkit-box-orient: vertical;
+    box-orient: vertical;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 14px;
+    line-height: 1.5;
+    max-height: calc(1.5em * 3);
+    color: black;
 }
 
 .new-icon .material-symbols-outlined {
-  color: black;
-  vertical-align: middle; /* ליישור עם הטקסט */
+    color: black;
+    vertical-align: middle;
+    /* ליישור עם הטקסט */
 }
