@@ -57,6 +57,8 @@ app.get("/api/products", async (req, res) => {
         discount_price,
         rating,
         created_at,
+        rating_friendly,
+        rating_security,
       } = row;
 
       return {
@@ -71,6 +73,8 @@ app.get("/api/products", async (req, res) => {
         discount_price,
         rating,
         created_at,
+        rating_friendly,
+        rating_security,
       };
     });
 
@@ -94,13 +98,14 @@ app.get("/api/categories", async (req, res) => {
 
     // מפה את התוצאות לפורמט הרצוי
     const categories = result.rows.map((row) => {
-      const { id, name, description, image_url } = row;
+      const { id, name, description, image_url, products_number } = row;
 
       return {
         id,
         name,
         description,
         image_url,
+        products_number,
       };
     });
 
@@ -126,6 +131,8 @@ app.post("/api/products", express.json(), async (req, res) => {
     discount_price,
     rating,
     created_at,
+    rating_friendly,
+    rating_security,
   } = req.body;
 
   if (
@@ -138,14 +145,16 @@ app.post("/api/products", express.json(), async (req, res) => {
     !catalog_number ||
     !discount_price ||
     !rating ||
-    !created_at
+    !created_at ||
+    !rating_friendly ||
+    !rating_security
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
   try {
     const result = await pool.query(
-      "INSERT INTO products (name,price,image_url, category_id, description, pdf_url, catalog_number, doscount_price, rating, created_at) VALUES ($1, $2, $3) RETURNING *",
+      "INSERT INTO products (name,price,image_url, category_id, description, pdf_url, catalog_number, doscount_price, rating, created_at, rating_friendly, rating_security) VALUES ($1, $2, $3) RETURNING *",
       [
         name,
         price,
@@ -157,6 +166,8 @@ app.post("/api/products", express.json(), async (req, res) => {
         discount_price,
         rating,
         created_at,
+        rating_friendly,
+        rating_security,
       ]
     );
     res.status(201).json(result.rows[0]); // החזרת המוצר החדש
