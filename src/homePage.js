@@ -107,25 +107,29 @@ function updateProductList(products) {
         }
 
         productElement.innerHTML = `
-    <a href="/products/${product.id}" class="product-name">${product.name}</a>
-    ${
-      isNewProduct(product.created_at)
-        ? '<span class="material-symbols-outlined new-icon" style="font-size: 30px; margin-left: 20px;">fiber_new</span>'
-        : ""
-    }
-    <a href="/category/${
-      product.category_id
-    }" class="product-category"> <span style="font-weight: bold;">Category:</span> ${getCategoryNameById(
-    product.category_id
-  )}</a>
-    <img src="${product.image_url}" alt="${
-    product.name
-  } "class="product-image" />
-    <div class="product-rating">${stars}</div>
-    <div class="product-description"> <span style="font-weight: bold;">Description:</span> ${
-      product.description
-    }</div>
-  `;
+        <a href="productPage.HTML?productId=${product.id}" class="product-name">${product.name}</a>
+        ${
+          isNewProduct(product.created_at)
+            ? '<span class="material-symbols-outlined new-icon" style="font-size: 30px; margin-left: 20px;">fiber_new</span>'
+            : ""
+        }
+        <a href="#" class="product-category" data-category-id="${product.category_id}"> 
+            <span style="font-weight: bold;">Category:</span> ${getCategoryNameById(product.category_id)}
+        </a>
+        <img src="${product.image_url}" alt="${product.name}" class="product-image" />
+        <div class="product-rating">${stars}</div>
+        <div class="product-description"> 
+            <span style="font-weight: bold;">Description:</span> ${product.description}
+        </div>
+    `;
+
+        productElement.querySelector(".product-category").addEventListener("click", (event) => {
+            event.preventDefault(); // מניעת מעבר לדף חדש
+            const categoryId = product.category_id;
+            selectedCategory = categoryId; // עדכון הקטגוריה הנבחרת
+            loadProducts(categoryId); // קריאה לפונקציה שמציגה מוצרים לפי הקטגוריה
+        });
+
 
         productsContainer.appendChild(productElement);
     });
@@ -135,6 +139,7 @@ function updateProductList(products) {
 document.addEventListener("DOMContentLoaded", () => {
     const categoriesContainer = document.querySelector(".categories-container");
     const productsContainer = document.querySelector(".products-container");
+
 
     // בדיקות אם האלמנטים קיימים
     if (!categoriesContainer) {

@@ -109,9 +109,24 @@ header .icons>* {
 
 .search-icon {
     font-size: 24px;
-    color: #1d7fa5;
+    color: #000000;
     position: absolute;
     left: 10px;
+    cursor: pointer;
+    border: 2px solid transparent;
+    /* מסגרת שקופה כברירת מחדל */
+    border-radius: 5px;
+    /* פינות מעוגלות */
+    padding: 5px;
+    /* ריווח פנימי */
+    transition: border-color 0.3s ease;
+    /* אפקט מעבר חלק */
+}
+
+.search-icon:hover {
+    color: #1d7fa5;
+    border-color: #1d7fa5;
+    /* מסגרת בצבע כחול בעת ריחוף */
 }
 
 .search-input {
@@ -121,12 +136,24 @@ header .icons>* {
     border: 1px solid #1d7fa5;
     border-radius: 20px;
     outline: none;
-    color: #1d7fa5;
+    color: black;
+    /* צבע הטקסט כברירת מחדל */
     text-align: center;
 }
 
 .search-input::placeholder {
+    color: black;
+    /* צבע ה-placeholder כברירת מחדל */
+}
+
+.search-input:hover {
     color: #1d7fa5;
+    /* שינוי צבע הטקסט בעת ריחוף */
+}
+
+.search-input:hover::placeholder {
+    color: #1d7fa5;
+    /* שינוי צבע ה-placeholder בעת ריחוף */
 }
 
 
