@@ -1,7 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import pkg from "pg"; // ייבוא ברירת המחדל של החבילה
-const { Pool } = pkg;
+const { Client } = pkg;
 
 const app = express();
 const PORT = 3000;
@@ -10,25 +10,27 @@ app.use(express.static("public"));
 app.use(express.static("src"));
 
 dotenv.config();
+const connectionDetails = {
+  user: "zohar",
+  host: "dpg-cu3vl3rqf0us73bugfkg-a.frankfurt-postgres.render.com",
+  database: "products_database_yuei",
+  password: "OKxKiuXWzkEzZI6lGPwXJ3kcYrUMmhe1",
+  port: 5432,
+  ssl: true,
+};
+
+console.log(connectionDetails);
 
 // הגדרות חיבור ל-PostgreSQL
-const pool = new Pool({
-  user: process.env.PGUSER || "postgres",
-  host: process.env.PGHOST,
-  database: process.env.PGDATABASE || "products_database",
-  password: process.env.PGPASSWORD || "yael3249",
-  port: process.env.PGPORT,
-});
+const db = new Client(connectionDetails);
 
-pool
-  .connect()
-  .then((client) => {
+db.connect()
+  .then((error) => {
     console.log("Connected to database successfully!");
-    return client
+    return db
       .query("SELECT current_database();") // בדיקה לאיזה בסיס נתונים מחוברים
       .then((res) => {
         console.log("Connected to database:", res.rows[0].current_database);
-        client.release();
       });
   })
   .catch((err) => {
@@ -38,7 +40,7 @@ pool
 //שליפת המוצרים מהבסיס נתונים בצורה של רשימה ובה כל המוצרים, כל מוצר יכיל את כל השדות שלו
 app.get("/api/products", async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM products");
+    const result = await db.query("SELECT * FROM products");
 
     if (result.rows.length === 0) {
       return res.status(404).json({ message: "No products found" });
@@ -93,7 +95,7 @@ app.get("/api/products", async (req, res) => {
 app.get("/api/categories", async (req, res) => {
   try {
     // שאילתה לשלוף את כל הקטגוריות מהטבלה
-    const result = await pool.query("SELECT * FROM categories");
+    const result = await db.query("SELECT * FROM categories");
 
     // אם אין קטגוריות, נחזיר תשובה עם קוד שגיאה 404
     if (result.rows.length === 0) {
@@ -161,7 +163,7 @@ app.post("/api/products", express.json(), async (req, res) => {
   }
 
   try {
-    const result = await pool.query(
+    const result = await db.query(
       "INSERT INTO products (name,price,image_url, category_id, description, pdf_url, catalog_number, doscount_price, rating, created_at, rating_friendly, rating_security) VALUES ($1, $2, $3) RETURNING *",
       [
         name,
@@ -215,9 +217,7 @@ app.get("/products/:id", async (req, res) => {
 async function getProductById(id) {
   try {
     // שליפה של המוצר לפי ID
-    const result = await pool.query("SELECT * FROM products WHERE id = $1", [
-      id,
-    ]);
+    const result = await db.query("SELECT * FROM products WHERE id = $1", [id]);
 
     // מחזירים את המוצר הראשון מהתוצאה אם נמצא
     return result.rows[0] || null;
