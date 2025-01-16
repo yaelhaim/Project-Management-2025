@@ -236,6 +236,57 @@ async function updateProductDetails(productId) {
 
     // מעדכנים את התמנה הראשית
     document.querySelector(".main-product-image img").src = product.image_url;
+
+    const friendly_rating_container = document.querySelector(
+      ".friendliness-ranking"
+    );
+
+    //  קבל את כל אלמנטי הכוכבים בדירוג רמת הידידותיות
+    const friendly_stars = friendly_rating_container.querySelectorAll(
+      ".material-symbols-outlined"
+    );
+    console.log(product);
+
+    // השאר רק את הכוכבים שצריך (לפי הדירוג) בדירוג הידידותיות
+    friendly_stars.forEach((star, index) => {
+      if (index >= product.rating_friendly) {
+        star.remove(); // הסר כוכבים מיותרים
+      }
+    });
+
+    const security_ranking_container =
+      document.querySelector(".security-ranking");
+
+    //  קבל את כל אלמנטי הכוכבים בדירוג רמת הידידותיות
+    const security_stars = security_ranking_container.querySelectorAll(
+      ".material-symbols-outlined"
+    );
+    console.log(product);
+
+    // השאר רק את הכוכבים שצריך (לפי הדירוג) בדירוג הידידותיות
+    security_stars.forEach((star, index) => {
+      if (index >= product.rating_security) {
+        star.remove(); // הסר כוכבים מיותרים
+      }
+    });
+
+    const operatingSystemsString = product.os_support; //the operating systems string
+    const cleanedString = operatingSystemsString.replace(/[{}]/g, "");
+    // המרת המחרוזת למערך על ידי פסיקים
+    const operatingSystemsArray = cleanedString.split(",");
+
+    // קבלת האלמנט שאליו נרצה לעדכן את הרשימה
+    const osList = document.querySelector(".os-list");
+
+    // ניקוי האלמנט לפני עדכון (למקרה שכבר יש תוכן)
+    osList.innerHTML = "";
+
+    // יצירת אלמנטי <p> עבור כל מערכת הפעלה ברשימה והוספתם לאלמנט
+    operatingSystemsArray.forEach((os) => {
+      const osItem = document.createElement("p");
+      osItem.textContent = `- ${os}`; // הוספת המערכת הפעלה
+      osList.appendChild(osItem); // הוספת ה-<p> לרשימה
+    });
   } catch (error) {
     console.error("Error updating product details:", error);
   }

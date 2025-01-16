@@ -27,6 +27,10 @@ header .material-symbols-outlined {
   margin-left: 10px;
 }
 
+header div span:nth-child(1) {
+  color: red; /* צבע אדום לאייקון הראשון */
+}
+
 * {
   box-sizing: border-box;
 }
@@ -295,11 +299,8 @@ html {
 .info-boxes {
   display: flex;
   flex-direction: column;
-  /* מסדר את המלבנים בעמודה */
   align-items: flex-start;
-  /* מיישר את המלבנים לשמאל */
   margin-top: 20px;
-  /* רווח מעל המלבנים */
   width: 100%;
 }
 
@@ -307,57 +308,39 @@ html {
   display: flex;
   justify-content: space-between;
   background-color: #1d7fa5;
-  /* צבע כחול */
   color: white;
-  /* טקסט בצבע לבן */
   padding: 10px 20px;
-  /* רווח פנימי */
   margin-bottom: 5px;
-  /* רווח קטן בין המלבן להסבר */
   border-radius: 5px;
-  /* פינות מעוגלות */
   font-size: 16px;
-  /* גודל טקסט */
   font-weight: bold;
-  /* טקסט מודגש */
   box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  /* צל קל */
   position: relative;
-  /* מאפשר למקם את הכוכבים מחוץ למלבן */
   width: 20%;
+  gap: 5px;
 }
 
 .info-description {
   font-size: 14px;
-  /* גודל טקסט קטן יותר */
   color: black;
-  /* צבע טקסט בהיר יותר */
   margin-top: 5px;
-  /* רווח בין המלבן להסבר */
+  /* margin-bottom: 50px; */
 }
 
 .friendliness-ranking {
   position: absolute;
-  /* מיקום מוחלט */
   right: -150px;
-  /* מניח את הכוכבים מימין למלבן */
   top: 50%;
-  /* מיישר את הכוכבים במרכז vertikalית */
   transform: translateY(-50%);
-  /* מתקן את המיקום כדי שהכוכבים יהיו במרכז בדיוק */
   display: flex;
   gap: 5px;
 }
 
 .security-ranking {
   position: absolute;
-  /* מיקום מוחלט */
   right: -150px;
-  /* מניח את הכוכבים מימין למלבן */
   top: 50%;
-  /* מיישר את הכוכבים במרכז vertikalית */
   transform: translateY(-50%);
-  /* מתקן את המיקום כדי שהכוכבים יהיו במרכז בדיוק */
   display: flex;
   gap: 5px;
 }
@@ -373,10 +356,8 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  /* שומר על המערכות הפעלה בחלק העליון */
   margin-left: auto;
   width: 250px;
-  /* גודל קבוע לרכיב מערכות ההפעלה */
 }
 
 .os-title {
@@ -384,7 +365,7 @@ html {
   font-size: 16px;
   font-weight: bold;
   color: #1d7fa5;
-  /* צבע כחול */
+  margin-top: 100px;
 }
 
 .os-list {
