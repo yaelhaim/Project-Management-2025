@@ -2,78 +2,94 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="homePage_style.css" />
-    <title>Software Products</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="homePage_style.css" />
+  <title>Software Products</title>
 </head>
 
 <body>
-    <!-- כותרת עליונה עם שם האתר ואייקונים -->
-    <header>
-        <div class="site-name">Software Products</div>
-        <div class="icons">
-            <!-- אייקון מוצרים אהובים -->
-            <span class="material-symbols-outlined favorite-icon">favorite</span>
-            <!-- אייקון עגלת קניות -->
-            <span class="material-symbols-outlined shopping_cart-icon">shopping_cart</span>
-        </div>
-    </header>
-
-    <!-- שורת חיפוש ואייקונים מתחת לכותרת -->
-    <div class="search-container">
-        <!-- שורת חיפוש באמצע -->
-        <div class="search-box">
-            <!-- סינון ופילטור-->
-            <div class="dropdown-container">
-                <div class="dropdown-row">
-                    <span class="dropdown-label">Filter by</span>
-                    <div class="dropdown-box">
-                        <span class="arrow-icon material-symbols-outlined">arrow_drop_down</span
-              >
-            </div>
-          </div>
-          <div class="dropdown-row">
-            <span class="dropdown-label">Sort by </span>
-                        <div class="dropdown-box">
-                            <span class="arrow-icon material-symbols-outlined">arrow_drop_down</span
-              >
-            </div>
-          </div>
-        </div>
-
-        <!-- אייקון היסטורית מוצרים -->
-        <span class="material-symbols-outlined acute-icon">acute</span>
-
-
-                            <!-- אייקון היסטורית חיפושים -->
-                            <span class="material-symbols-outlined manage-search-icon">manage_search</span>
-
-                            <!-- תיבת החיפוש -->
-                            <div class="search-input-container">
-                                <span class="material-symbols-outlined search-icon">search</span>
-                                <input type="text" class="search-input" maxlength="100" placeholder="Click to search" />
-                                <p class="error-message" style="display: none; color: black;">Limit of characters is over</p>
-
-                            </div>
-                        </div>
-
-                        <!--אייקון רשימה-->
-                        <span class="material-symbols-outlined format-list-icon">format_list_bulleted</span
-      >
+  <!-- כותרת עליונה עם שם האתר ואייקונים -->
+  <header>
+    <div class="site-name">Software Products</div>
+    <div class="icons">
+      <!-- אייקון מוצרים אהובים -->
+      <span class="material-symbols-outlined favorite-icon">favorite</span>
+      <!-- אייקון עגלת קניות -->
+      <span class="material-symbols-outlined shopping_cart-icon">shopping_cart</span>
     </div>
+  </header>
 
-    <!-- אייקונים של קטגוריות -->
-    <div class="categories-container">
-      <div class="category">
+  <!-- שורת חיפוש ואייקונים מתחת לכותרת -->
+  <div class="search-container">
+    <!-- שורת חיפוש באמצע -->
+    <div class="search-box">
+      <!-- סינון ופילטור-->
+      <div class="dropdown-container">
+        <div id="presentFilter" class="presentFilter_hidden">
+          <h3>By Price</h3>
+          <label for="from">From</label>
+          <input type="text" id="from" size="6">
+          <br>
+          <label for="to">To</label>
+          <input type="text" id="to">
+          <h3>By Rating</h3>
+          <div class="presentFilter-stars">
+            <span class="material-symbols-outlined" data-order="1">star</span>
+            <span class="material-symbols-outlined" data-order="2">star</span>
+            <span class="material-symbols-outlined" data-order="3">star</span>
+            <span class="material-symbols-outlined" data-order="4">star</span>
+            <span class="material-symbols-outlined" data-order="5">star</span>
+          </div>
+          <button type="button" id="btnApply">Apply</button>
+        </div>        
+        <div class="dropdown-row">
+          <span class="dropdown-label">Filter by</span>
+          <div class="dropdown-box" id="filterByDiv">
+            <span class="arrow-icon material-symbols-outlined">arrow_drop_down</span>
+          </div>
+        </div>
+        <div class="dropdown-row">
+          <span class="dropdown-label">Sort by </span>
+          <div class="dropdown-box">
+            <span class="arrow-icon material-symbols-outlined">arrow_drop_down</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- אייקון היסטורית מוצרים -->
+      <span class="material-symbols-outlined acute-icon">acute</span>
+
+
+      <!-- אייקון היסטורית חיפושים -->
+      <span class="material-symbols-outlined manage-search-icon">manage_search</span>
+
+      <!-- תיבת החיפוש -->
+      <div class="search-input-container">
+        <span class="material-symbols-outlined search-icon">search</span>
+        <input type="text" class="search-input" maxlength="100" placeholder="Click to search" />
+        <p class="error-message" style="display: none; color: black;">Limit of characters is over</p>
+
       </div>
     </div>
-    <div class="text-row">
-      <p id="product-count">Loading X products</p>
+
+    <!--אייקון רשימה-->
+    <span class="material-symbols-outlined format-list-icon">format_list_bulleted</span>
   </div>
-  
+
+  <!-- אייקונים של קטגוריות -->
+  <div class="categories-container">
+    <div class="category">
+    </div>
   </div>
-    <div class="products-container"></div>
-    <script src="homePage.js"></script>
-  </body>
+  <div class="text-row">
+    <p id="product-count">Loading X products</p>
+  </div>
+
+  </div>
+  <div class="products-container"></div>
+  <script src="homePage.js"></script>
+</body>
+
 </html>

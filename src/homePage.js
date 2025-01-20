@@ -1,3 +1,4 @@
+
 // הגדרת כל הפונקציות כאן
 async function fetchData(endpoint) {
     try {
@@ -135,6 +136,20 @@ function updateProductList(products) {
     });
 }
 
+function handleFilterStars(starOrder){
+    document.querySelectorAll("#presentFilter>div>span").forEach(s =>{
+        const order = parseInt(s.getAttribute('data-order'));
+        
+        if(order < starOrder){
+            s.setAttribute('data-select', 'true');
+            s.style.color = 'gold';
+        }else if(order > starOrder){
+            s.setAttribute('data-select', 'false');
+            s.style.color = 'black'
+        }
+    })
+}
+
 // ודא שהקוד רץ רק אחרי שכל ה-DOM נטען
 document.addEventListener("DOMContentLoaded", () => {
     const categoriesContainer = document.querySelector(".categories-container");
@@ -195,6 +210,43 @@ document.addEventListener("DOMContentLoaded", () => {
     // טוען את הקטגוריות והמוצרים
     loadCategories();
     loadProducts(); // טוען את כל המוצרים בהתחלה
+
+    // 
+    const presentFilter = document.getElementById("presentFilter");
+    presentFilter.addEventListener('click', (event)=>{
+        event.stopImmediatePropagation();
+    });
+    const starsFilter = document.querySelectorAll("#presentFilter>div>span")
+    for(const star of starsFilter){
+        star.setAttribute('data-select', 'false')
+        star.style.color = 'black'; 
+        star.addEventListener('click', (event)=>{
+            const selected = event.target.getAttribute('data-select');
+            const starOrder = parseInt(event.target.getAttribute('data-order'));
+            if(selected == 'false'){
+                event.target.setAttribute('data-select', 'true');
+                event.target.style.color = 'gold';
+                handleFilterStars(starOrder);
+            }else{
+                event.target.setAttribute('data-select', 'false');
+                event.target.style.color = 'black'; 
+                handleFilterStars(starOrder);
+            }
+        })
+    }
+    document.getElementById("btnApply").addEventListener('click', ()=>{
+        presentFilter.classList.add('presentFilter_hidden');
+    })
+    document.getElementById("filterByDiv").addEventListener('click', (event) => {
+        document.getElementById("presentFilter").classList.remove('presentFilter_hidden');
+        event.stopImmediatePropagation();
+    })
+    document.body.addEventListener('click', () => {
+        presentFilter.classList.add('presentFilter_hidden');
+    })
+    document.addEventListener('scroll', () => {
+        presentFilter.classList.add('presentFilter_hidden');
+    })
 });
 
 // פונקציה להוצאת שם הקטגוריה לפי המספר מזהה שיש במוצר

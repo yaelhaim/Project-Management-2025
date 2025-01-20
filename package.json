@@ -4,7 +4,7 @@
   "description": "this is the first commit",
   "main": "index.js",
   "scripts": {
-    "start": "node src/index.js",
+    "start": "node index.js",
     "test": "mocha tests/*.spec.js",
     "lint": "eslint src/*.js --color"
   },

@@ -418,3 +418,28 @@ header .icons>* {
 .product-name:hover {
     color: #00008B;
 }
+
+.presentFilter_hidden{
+    display:none;
+}
+
+#presentFilter{
+    z-index: 50;
+    width:10rem;
+    color:white;
+    background-color: #1d7fa5;
+    position: fixed;
+    top:5rem;
+    left: 15rem;
+    box-shadow: 1px 1px 2px 2px #aaa;
+    border-radius: 5px;
+    text-align: center;
+}
+
+#presentFilter>input{
+    width:4rem;
+}
+.presentFilter-stars{
+    display:flex;
+    justify-content: center;
+}
