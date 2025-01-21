@@ -416,10 +416,12 @@ document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("filterByDiv").addEventListener('click', (event) => {
         document.getElementById("presentFilter").classList.remove('presentFilter_hidden');
         event.stopImmediatePropagation();
+        sortElements.presentSort.classList.add('presentSort_hidden');
     })
     document.getElementById("sortProducts").addEventListener('click', (event) => {
         sortElements.presentSort.classList.remove('presentSort_hidden');
         event.stopImmediatePropagation();
+        presentFilter.classList.add('presentFilter_hidden');
     })
     document.body.addEventListener('click', () => {
         presentFilter.classList.add('presentFilter_hidden');
