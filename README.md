@@ -5,7 +5,7 @@
 Project Description
 The project includes the development of a product module for a website dedicated to selling software products. The module will enable product management, display of product details to users, and online purchasing services.
 
-Themodule is being developed as part of a collaboration with SCE College, as part of a Project Management course.
+The module is being developed as part of a collaboration with SCE College, as part of a Project Management course.
 
 System Requirements
 - Operating System: Any operating system that supports web technologies (Windows, macOS, Linux).
@@ -36,6 +36,15 @@ Frontend:
   - HTML, CSS, JavaScript
 
 ---
+
+
+---
+
+To run the code, you need to install the Express package by executing the command `npm install express` in the project directory. 
+After that, connect to the server by running the command `node index.js`.(You need to make sure that Node is installed on the computer) 
+Once the server is running and listening on port 3000, you can view the website by opening a browser and navigating to the address `http://localhost:3000/homePage.html`.
+
+--- 
 
 
 
