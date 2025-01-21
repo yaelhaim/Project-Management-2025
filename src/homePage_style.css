@@ -189,6 +189,7 @@ header .icons>* {
     color: #1d7fa5;
     margin-right: 10px;
     /* רווח בין הכיתוב למלבן */
+    width:4rem;
 }
 
 
@@ -418,8 +419,8 @@ header .icons>* {
 
 #presentFilter {
     z-index: 50;
-    width: 10rem;
-    color: white;
+    width:10rem;
+    color:black;
     background-color: #1d7fa5;
     position: fixed;
     top: 5rem;
@@ -429,8 +430,20 @@ header .icons>* {
     text-align: center;
 }
 
-#presentFilter>input {
-    width: 4rem;
+#presentFilter>input{
+    width:5rem;
+}
+#presentFilter>label{
+    display: inline-block;
+    width:3rem;
+}
+#presentFilter>p{
+    font-size: x-small;
+    margin: 5px auto;
+    margin-left: 3rem;
+}
+#presentFilter>button{
+    margin-bottom: 0.5em;
 }
 
 .presentFilter-stars {

@@ -20,42 +20,46 @@
         </div>
     </header>
 
-    <!-- שורת חיפוש ואייקונים מתחת לכותרת -->
-    <div class="search-container">
-        <!-- שורת חיפוש באמצע -->
-        <div class="search-box">
-            <!-- סינון ופילטור-->
-            <div class="dropdown-container">
-                <div id="presentFilter" class="presentFilter_hidden">
-                    <h3>By Price</h3>
-                    <label for="from">From</label>
-                    <input type="text" id="from" size="6">
-                    <br>
-                    <label for="to">To</label>
-                    <input type="text" id="to">
-                    <h3>By Rating</h3>
-                    <div class="presentFilter-stars">
-                        <span class="material-symbols-outlined" data-order="1">star</span>
-                        <span class="material-symbols-outlined" data-order="2">star</span>
-                        <span class="material-symbols-outlined" data-order="3">star</span>
-                        <span class="material-symbols-outlined" data-order="4">star</span>
-                        <span class="material-symbols-outlined" data-order="5">star</span>
-                    </div>
-                    <button type="button" id="btnApply">Apply</button>
-                </div>
-                <div class="dropdown-row">
-                    <span class="dropdown-label">Filter by</span>
-                    <div class="dropdown-box" id="filterByDiv">
-                        <span class="arrow-icon material-symbols-outlined">arrow_drop_down</span>
-                    </div>
-                </div>
-                <div class="dropdown-row">
-                    <span class="dropdown-label">Sort by </span>
-                    <div class="dropdown-box">
-                        <span class="arrow-icon material-symbols-outlined">arrow_drop_down</span>
-                    </div>
-                </div>
-            </div>
+  <!-- שורת חיפוש ואייקונים מתחת לכותרת -->
+  <div class="search-container">
+    <!-- שורת חיפוש באמצע -->
+    <div class="search-box">
+      <!-- סינון ופילטור-->
+      <div class="dropdown-container">
+        <div id="presentFilter" class="presentFilter_hidden">
+          <h3>By Price</h3>
+          <label for="from">From</label>
+          <input type="text" id="from" size="6" value="0">
+          <p id="fromMessage">&nbsp;</p>
+          <label for="to">To</label>
+          <input type="text" id="to" value="0">
+          <p id="toMessage">&nbsp;</p>
+          <hr>
+          <h3>By Rating</h3>
+          <div class="presentFilter-stars">
+            <span class="material-symbols-outlined" data-order="1">star</span>
+            <span class="material-symbols-outlined" data-order="2">star</span>
+            <span class="material-symbols-outlined" data-order="3">star</span>
+            <span class="material-symbols-outlined" data-order="4">star</span>
+            <span class="material-symbols-outlined" data-order="5">star</span>
+          </div>
+          <p>&nbsp;</p>
+          <hr>
+          <button type="button" id="btnApply">Apply</button>
+        </div>        
+        <div class="dropdown-row">
+          <span class="dropdown-label">Filter by</span>
+          <div class="dropdown-box" id="filterByDiv">
+            <span class="arrow-icon material-symbols-outlined">arrow_drop_down</span>
+          </div>
+        </div>
+        <div class="dropdown-row">
+          <span class="dropdown-label">Sort by </span>
+          <div class="dropdown-box">
+            <span class="arrow-icon material-symbols-outlined">arrow_drop_down</span>
+          </div>
+        </div>
+      </div>
 
 
             <!-- אייקון היסטורית מוצרים -->

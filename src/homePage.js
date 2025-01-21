@@ -62,10 +62,10 @@ function updateCategoriesList(categories) {
     });
 }
 
-
+let allProducts = [];
 async function loadProducts(categoryId = null) {
     const products = await fetchData("/api/products");
-
+    allProducts = products;
     // עדכון הכיתוב עם מספר המוצרים
     const productCountElement = document.getElementById("product-count");
     if (!productCountElement) {
@@ -149,12 +149,96 @@ function handleFilterStars(starOrder) {
     })
 }
 
+// js module for accessing the filter elements
+const filterElements = (function(){
+    const from = document.getElementById("from");
+    const to = document.getElementById("to");
+    const fromMessage = document.getElementById("fromMessage");
+    const toMessage = document.getElementById("toMessage");
+    const btnApply = document.getElementById("btnApply");
+    const starsFilter = document.querySelectorAll("#presentFilter>div>span")
+
+    return{from, to, fromMessage, toMessage, btnApply, starsFilter}
+})()
+
+// js module for validating filter input changes
+const filterHandlers = (function(){
+
+    const validateCharacters = (input, p) =>{
+        const value = input.value.trim();   // get the value without space in the start and end
+        try{
+            const num = parseInt(value);    // try to convert to integer
+            if(isNaN(value) || num < 0 || value.length > 10){   // validate value is positive and up to 10 characters
+                throw new Exception()
+            }
+            p.innerHTML = "&nbsp;";
+            input.style.borderColor = 'initial';
+            input.style.outlineColor = 'initial';
+            filterElements.btnApply.disabled = false;
+            return num;
+        }catch(err){    // on failure present an error meesgase
+            p.innerText = "Enter valid values";
+            input.style.borderColor = 'red';
+            input.style.outlineColor = 'red';
+            filterElements.btnApply.disabled = true;
+            return -1;
+        }
+    }
+    const validateFrom = () => {
+        return validateCharacters(filterElements.from, filterElements.fromMessage);
+    }
+    const validateTo = () => {
+        const toNum = validateCharacters(filterElements.to, filterElements.toMessage);
+        const fromNum = validateCharacters(filterElements.from, filterElements.fromMessage);
+        if(toNum > -1 && fromNum > -1){
+            if(toNum < fromNum){
+                filterElements.toMessage.innerText = "Enter valid values";
+                filterElements.to.style.borderColor = 'red';
+                filterElements.to.style.outlineColor = 'red';
+                filterElements.btnApply.disabled = true;
+            }else{
+                filterElements.toMessage.innerHTML = "&nbsp;";
+                filterElements.to.style.borderColor = 'initial';
+                filterElements.to.style.outlineColor = 'initial';
+                filterElements.btnApply.disabled = false;
+                return toNum;
+            }
+        }
+        return -1;
+    }
+    const countStars = () => {
+        let count = 0;
+        for(star of filterElements.starsFilter){
+            if(star.getAttribute("data-select") == "true"){
+                count++;
+            }
+        }
+        return count;
+    }
+    const FilterByPriceAndRating = async () => {
+        const from  = validateFrom();
+        const to  = validateTo();
+        const stars = countStars();
+
+        const filteredProducts = allProducts
+            .filter(p => to > 0? p.price >= from && p.price <= to : true)
+            .filter(p => p.rating >= stars);
+        updateProductList(filteredProducts);
+        const productCountElement = document.getElementById("product-count");
+        productCountElement.textContent = `Loading ${filteredProducts.length} products`;
+    }
+    return{
+        validateFrom,
+        validateTo,
+        FilterByPriceAndRating
+    }
+})()
+
 // ודא שהקוד רץ רק אחרי שכל ה-DOM נטען
 document.addEventListener("DOMContentLoaded", () => {
     const categoriesContainer = document.querySelector(".categories-container");
     const productsContainer = document.querySelector(".products-container");
-
-
+    
     // בדיקות אם האלמנטים קיימים
     if (!categoriesContainer) {
         console.error("Error: .categories-container not found in the DOM!");
@@ -305,6 +389,10 @@ document.addEventListener("DOMContentLoaded", () => {
     document.addEventListener('scroll', () => {
         presentFilter.classList.add('presentFilter_hidden');
     })
+
+    filterElements.from.addEventListener('input', filterHandlers.validateFrom);
+    filterElements.to.addEventListener('input', filterHandlers.validateTo);
+    filterElements.btnApply.addEventListener('click', filterHandlers.FilterByPriceAndRating);
 });
 
 // פונקציה להוצאת שם הקטגוריה לפי המספר מזהה שיש במוצר
