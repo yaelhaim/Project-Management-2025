@@ -484,3 +484,29 @@ header .icons>* {
 .search-button:hover .material-symbols-outlined {
     color: #1d7fa5;
 }
+
+.presentSort_hidden{
+    display:none !important;
+}
+#presentSort {
+    z-index: 50;
+    width:10rem;
+    height: 6rem;
+    color:black;
+    background-color: #1d7fa5;
+    position: fixed;
+    top: 7.7rem;
+    left: 15rem;
+    box-shadow: 1px 1px 2px 2px #aaa;
+    border-radius: 5px;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+#presentSort>button{
+    width:6rem;
+    margin:0.5em;
+}

@@ -62,10 +62,15 @@ function updateCategoriesList(categories) {
     });
 }
 
-let allProducts = [];
+const productsData = {
+    allProducts: [],
+    filteredProducts:[]
+}
+
+
 async function loadProducts(categoryId = null) {
     const products = await fetchData("/api/products");
-    allProducts = products;
+    productsData.allProducts = products;
     // עדכון הכיתוב עם מספר המוצרים
     const productCountElement = document.getElementById("product-count");
     if (!productCountElement) {
@@ -80,7 +85,7 @@ async function loadProducts(categoryId = null) {
 
     // עדכון כמות המוצרים
     productCountElement.textContent = `Loading ${filteredProducts.length} products`;
-
+    productsData.filteredProducts = filteredProducts;
     updateProductList(filteredProducts);
 }
 
@@ -148,6 +153,31 @@ function handleFilterStars(starOrder) {
         }
     })
 }
+
+// module for sort
+const sortElements = (function(){
+    const btnPopularity = document.getElementById("btnPopularity");
+    const btnRecency = document.getElementById("btnRecency");
+    const presentSort = document.getElementById("presentSort");
+
+    const sortByPopularity = () => {
+        productsData.filteredProducts.sort( (p1, p2) => p2.number_of_purchase - p1.number_of_purchases);  //rating
+        updateProductList(productsData.filteredProducts);
+        presentSort.classList.add('presentSort_hidden')
+    }
+    const sortByRecency = () => {
+        productsData.filteredProducts.sort( (p1, p2) => p2.created_at.localeCompare(p1.created_at));
+        updateProductList(productsData.filteredProducts);
+        presentSort.classList.add('presentSort_hidden')
+    }
+    return{
+        btnPopularity,
+        btnRecency,
+        presentSort,
+        sortByPopularity,
+        sortByRecency,
+    }
+})();
 
 // js module for accessing the filter elements
 const filterElements = (function(){
@@ -219,13 +249,16 @@ const filterHandlers = (function(){
         const from  = validateFrom();
         const to  = validateTo();
         const stars = countStars();
-
-        const filteredProducts = allProducts
+        let lastFilter = productsData.filteredProducts;
+        if(lastFilter.length == 0){
+            productsData.allProducts;
+        }
+        productsData.filteredProducts = lastFilter
             .filter(p => to > 0? p.price >= from && p.price <= to : true)
             .filter(p => p.rating >= stars);
-        updateProductList(filteredProducts);
+        updateProductList(productsData.filteredProducts);
         const productCountElement = document.getElementById("product-count");
-        productCountElement.textContent = `Loading ${filteredProducts.length} products`;
+        productCountElement.textContent = `Loading ${productsData.filteredProducts.length} products`;
     }
     return{
         validateFrom,
@@ -320,6 +353,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const filteredProducts = products.filter((product) =>
                 product.name.toLowerCase().includes(query.toLowerCase())
             );
+            productsData.filteredProducts = filteredProducts;
             updateProductList(filteredProducts);
 
             const productCountElement = document.getElementById("product-count");
@@ -383,16 +417,25 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("presentFilter").classList.remove('presentFilter_hidden');
         event.stopImmediatePropagation();
     })
+    document.getElementById("sortProducts").addEventListener('click', (event) => {
+        sortElements.presentSort.classList.remove('presentSort_hidden');
+        event.stopImmediatePropagation();
+    })
     document.body.addEventListener('click', () => {
         presentFilter.classList.add('presentFilter_hidden');
+        sortElements.presentSort.classList.add('presentSort_hidden');
     })
     document.addEventListener('scroll', () => {
         presentFilter.classList.add('presentFilter_hidden');
+        sortElements.presentSort.classList.add('presentSort_hidden');
     })
 
     filterElements.from.addEventListener('input', filterHandlers.validateFrom);
     filterElements.to.addEventListener('input', filterHandlers.validateTo);
     filterElements.btnApply.addEventListener('click', filterHandlers.FilterByPriceAndRating);
+
+    sortElements.btnPopularity.addEventListener('click', sortElements.sortByPopularity);
+    sortElements.btnRecency.addEventListener('click', sortElements.sortByRecency);
 });
 
 // פונקציה להוצאת שם הקטגוריה לפי המספר מזהה שיש במוצר
