@@ -427,7 +427,6 @@ html {
   text-align: start;
   width: 100%;
   justify-content: space-between;
-  /* שים את הכותרת והאייקונים בשורה אחת */
   align-items: center;
   position: relative;
 }
@@ -442,11 +441,8 @@ html {
   gap: 10px;
   align-items: center;
   position: absolute;
-  /* ממקם את האייקונים במיקום יחסי */
   top: 0;
-  /* שמים אותם בחלק העליון */
   right: 0;
-  /* ממקמים בצד ימין */
 }
 
 .actions span {
@@ -454,21 +450,24 @@ html {
   font-size: 24px;
 }
 
-/* חלון קופץ */
-
 .modal {
   display: none;
-  /* התחל עם הסתרה */
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
-  /* רקע כהה */
   justify-content: center;
   align-items: center;
   z-index: 1000;
+}
+
+.review-rating {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-left: 20px;
 }
 
 .modal-content {
@@ -476,8 +475,7 @@ html {
   padding: 20px;
   border-radius: 8px;
   width: 60vw;
-  /* 60% מרוחב המסך */
-  height: 40vh;
+  height: 60vh;
   text-align: left;
   overflow-y: auto;
 }
@@ -487,7 +485,17 @@ html {
   margin-bottom: 20px;
 }
 
-textarea {
+textarea#title {
+  width: 100%;
+  height: 5vh;
+  padding: 10px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-bottom: 20px;
+}
+
+textarea#content {
   width: 100%;
   height: 15vh;
   padding: 10px;
@@ -495,6 +503,33 @@ textarea {
   border: 1px solid #ccc;
   border-radius: 5px;
   margin-bottom: 20px;
+}
+
+#content-rating {
+  display: flex;
+  gap: 3px;
+  margin-top: 10px;
+  margin-bottom: 30px;
+}
+
+.rating-text {
+  font-size: 16px; /* גודל פונט לטקסט */
+  font-weight: bold; /* טקסט מודגש */
+  margin-right: 10px; /* רווח מימין */
+  color: #333; /* צבע הטקסט */
+}
+
+.star {
+  font-size: 24px;
+  color: gray;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.star.selected,
+.star:hover,
+.star:hover ~ .star {
+  color: gold;
 }
 
 .modal-buttons {
@@ -538,7 +573,7 @@ textarea {
 .review-footer {
   position: absolute;
   margin-top: 20px;
-  font-size: 14px;
+  font-size: 18px;
   display: flex;
   justify-content: space-between;
   align-items: center;

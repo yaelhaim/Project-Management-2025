@@ -144,30 +144,28 @@
           <button class="nav-button left-button">&larr;</button>
           <div class="actions">
             <span class="material-symbols-outlined">rate_review</span>
-            <span class="material-symbols-outlined">delete</span>
-            <span class="material-symbols-outlined">add_reaction</span>
+            <span class="material-symbols-outlined delete-review-icon"
+              >delete</span
+            >
+            <span class="material-symbols-outlined add-reaction-icon"
+              >add_reaction</span
+            >
           </div>
-          <div class="review">
-            <h1>Best software ever!</h1>
-            <p>
-              One of the standout features for me is its performance. Whether
-              I'm working on a heavy task or just using it for daily activities,
-              the software runs smoothly without any lag or issues. I also
-              appreciate the extensive range of features available—there’s
-              something for everyone, from beginner to advanced users. The
-              customizable settings allow me to tailor it exactly to my needs,
-              making it even more efficient.
-            </p>
-            <div class="review-footer">
-              <span>Zohar.M</span>
-            </div>
-          </div>
+          <div class="review"></div>
 
           <!-- חלון קופץ -->
           <div class="modal" id="reviewModal">
             <div class="modal-content">
               <h2 class="modal-title">New Review</h2>
               <form>
+                <label for="title">Tilte:</label>
+                <textarea
+                  type="text"
+                  id="title"
+                  name="title"
+                  maxlength="100"
+                ></textarea>
+
                 <label for="content">Content:</label>
                 <textarea
                   id="content"
@@ -175,6 +173,18 @@
                   rows="4"
                   maxlength="500"
                 ></textarea>
+
+                <div id="content-rating">
+                  <span class="rating-text"
+                    >Help others by leaving your rating 😊</span
+                  >
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                </div>
+
                 <div class="modal-buttons">
                   <button type="button" id="approveBtn">Approve</button>
                   <button type="button" id="cancelBtn">Cancel</button>

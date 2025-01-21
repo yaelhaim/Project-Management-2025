@@ -40,125 +40,251 @@ function copyLinkChange(icon) {
   icon.title = "Copied"; // עדכון הטייטל
 }
 
+const addReviewIcon = document.querySelector(".add-reaction-icon");
+const reviewModal = document.getElementById("reviewModal");
+const cancelBtn = document.getElementById("cancelBtn");
+const approveBtn = document.getElementById("approveBtn");
+const contentTextarea = document.getElementById("content");
+const titleInput = document.getElementById("title");
+const deleteIcons = document.querySelectorAll(".delete-review-icon");
+
+const ratingStars = document.querySelectorAll(
+  "#content-rating .material-symbols-outlined"
+);
+let selectedRating = 0;
+
+// פונקציה לעדכון הכוכבים בהתאם לדירוג
+function updateStars(rating) {
+  ratingStars.forEach((star, index) => {
+    if (index < rating) {
+      star.style.color = "gold"; // הדגשה בצבע זהב
+    } else {
+      star.style.color = "gray"; // חזרה לצבע אפור
+    }
+  });
+}
+
+// הוספת מאזיני אירועים לכוכבים
+ratingStars.forEach((star, index) => {
+  // הדגשה זמנית של הכוכבים בעת ריחוף
+  star.addEventListener("mouseover", () => {
+    resetStars();
+    updateStars(index + 1);
+  });
+
+  // הסרת הדגשה זמנית כאשר העכבר יוצא
+  star.addEventListener("mouseout", () => {
+    updateStars(selectedRating);
+  });
+
+  // עדכון דירוג בעת לחיצה
+  star.addEventListener("click", () => {
+    selectedRating = index + 1;
+    updateStars(selectedRating); // הדגשת הכוכבים הקבועה
+  });
+});
+
+// פונקציה לאיפוס הדירוג
+function resetStars() {
+  ratingStars.forEach((star) => {
+    star.style.color = "gray"; // צבע בסיסי (אפור)
+  });
+}
+
+function clearContent() {
+  contentTextarea.value = "";
+  titleInput.value = "";
+}
+
+addReviewIcon.addEventListener("click", () => {
+  reviewModal.style.display = "flex";
+});
+
+cancelBtn.addEventListener("click", function () {
+  reviewModal.style.display = "none";
+  clearContent();
+  resetStars();
+});
+
+approveBtn.addEventListener("click", function (event) {
+  const title = titleInput.value;
+  const content = contentTextarea.value;
+  const selected_rating = selectedRating;
+  if (title.length > 0 && content.length < 100 && content.length <= 500) {
+    const review = {
+      review_title: title,
+      review_text: content,
+      user_name: generateRandomUsername(), // פונקציה ליצירת שם משתמש אקראי
+      product_id: getCurrentProductId(),
+      customer_rating: selected_rating,
+    };
+    resetStars();
+    const reviewContainer = event.target.closest(".review-container");
+
+    // מצא את האייקון של הוספת תגובה בתוך הקונטיינר
+    const addReactionIcon = reviewContainer.querySelector(".add-reaction-icon");
+
+    if (addReactionIcon) {
+      addReactionIcon.style.display = "none"; // הסתר את האייקון
+    }
+
+    // שליחת הביקורת לשרת
+    sendReviewToServer(review)
+      .then(() => {
+        alert("The review added successfully");
+        reviewModal.style.display = "none";
+        clearContent();
+      })
+      .catch((error) => {
+        alert(
+          "There is an error while trying to upload the review" + error.message
+        );
+      });
+  } else {
+    alert(
+      "Please check the length of the title or the content, it might exceed the maximum lenght"
+    );
+  }
+});
+
+function generateRandomUsername() {
+  return "user_" + Math.floor(Math.random() * 1000);
+}
+
+function getCurrentProductId() {
+  return productId;
+}
+
+function sendReviewToServer(review) {
+  return fetch("api/reviews", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(review),
+  }).then((response) => {
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
+    }
+    return response.json();
+  });
+}
+
 document.addEventListener("DOMContentLoaded", () => {
-  // איתור אלמנטים
+  const reviewContainer = document.querySelector(".review-container");
   const leftButton = document.querySelector(".nav-button.left-button");
   const rightButton = document.querySelector(".nav-button.right-button");
-  const reviewContainer = document.querySelector(".review-container .review");
-  const addReactionIcon = document.querySelector(".actions .add_reaction");
-  const deleteIcon = document.querySelector(".actions .delete");
-  const rateReviewIcon = document.querySelector(".actions .rate_review");
+  let reviews = []; // מערך שמחזיק את הביקורות
+  let currentIndex = 0; // האינדקס של הביקורת המוצגת כרגע
 
-  // רשימת ביקורות לדוגמה (ניתן להחליף בנתונים מהשרת)
-  const reviews = [
-    {
-      title: "Best software ever!",
-      content: "Amazing functionality and support.",
-    },
-    {
-      title: "Not bad",
-      content: "Good value for the price, but room for improvement.",
-    },
-    {
-      title: "Could be better",
-      content: "Missing some key features I expected.",
-    },
-  ];
+  // פונקציה ליצירת HTML עבור כוכבים על בסיס דירוג
+  function createStarsHTML(rating) {
+    let starsHTML = "";
+    for (let i = 0; i < rating; i++) {
+      starsHTML += `<span class="material-symbols-outlined" style="color: gold;">star</span>`;
+    }
+    return starsHTML;
+  }
 
-  let currentReviewIndex = 0;
+  // פונקציה ליצירת HTML עבור ביקורת
+  function createReviewHTML(review) {
+    return `
+      <div class="review" data-review-id="${review.review_id}">
+        <h1>${review.review_title}</h1>
+        <p>${review.review_text}</p>
+        <div class="review-footer">
+          <span>${review.user_name}</span>
+          <div class="review-rating">
+            ${createStarsHTML(
+              review.customer_rating
+            )} <!-- הצגת כוכבים לפי הדירוג -->
+          </div>
+        </div>
+      </div>
+    `;
+  }
 
-  // עדכון תוכן הביקורת בתצוגה
+  // פונקציה לעדכון הביקורת המוצגת
   function updateReviewDisplay() {
-    const review = reviews[currentReviewIndex];
-    if (review) {
-      reviewContainer.querySelector("h1").textContent = review.title;
-      reviewContainer.querySelector("p").textContent = review.content;
+    reviewContainer.querySelector(".review").innerHTML = createReviewHTML(
+      reviews[currentIndex]
+    );
+  }
+
+  // שליפת הביקורות מהשרת
+  async function loadReviews() {
+    try {
+      const response = await fetch("/api/reviews");
+      if (!response.ok) throw new Error("Failed to fetch reviews");
+      reviews = await response.json();
+
+      // הצגת הביקורת הראשונה
+      if (reviews.length > 0) {
+        reviewContainer.querySelector(".review").innerHTML = createReviewHTML(
+          reviews[currentIndex]
+        );
+      }
+    } catch (error) {
+      console.error("Error loading reviews:", error);
     }
   }
 
-  // אירוע דפדוף שמאלה
-  if (leftButton) {
-    leftButton.addEventListener("click", () => {
-      currentReviewIndex =
-        (currentReviewIndex - 1 + reviews.length) % reviews.length;
+  // מאזינים ללחיצה על החצים
+  leftButton.addEventListener("click", () => {
+    if (reviews.length > 0) {
+      currentIndex = (currentIndex - 1 + reviews.length) % reviews.length; // חזרה לסוף אם מגיעים לתחילת הרשימה
       updateReviewDisplay();
-    });
-  }
+    }
+  });
 
-  // אירוע דפדוף ימינה (במידה ויש כפתור כזה בעתיד)
-  if (rightButton) {
-    rightButton.addEventListener("click", () => {
-      currentReviewIndex = (currentReviewIndex + 1) % reviews.length;
+  rightButton.addEventListener("click", () => {
+    if (reviews.length > 0) {
+      currentIndex = (currentIndex + 1) % reviews.length; // חזרה להתחלה אם מגיעים לסוף הרשימה
       updateReviewDisplay();
-    });
-  }
+    }
+  });
 
-  // פעולה על כפתור 'rate_review'
-  if (rateReviewIcon) {
-    rateReviewIcon.addEventListener("click", () => {
-      alert("Opening review modal...");
-      // ניתן להוסיף פונקציונליות לפתיחת חלון ביקורת
-    });
-  }
-
-  // פעולה על כפתור 'delete'
-  if (deleteIcon) {
-    deleteIcon.addEventListener("click", () => {
-      const confirmDelete = confirm(
-        "Are you sure you want to delete this review?"
-      );
-      if (confirmDelete) {
-        reviews.splice(currentReviewIndex, 1); // מחיקת הביקורת מהרשימה
-        currentReviewIndex = Math.min(currentReviewIndex, reviews.length - 1); // עדכון אינדקס
-        updateReviewDisplay();
-      }
-    });
-  }
-
-  // פעולה על כפתור 'add_reaction'
-  if (addReactionIcon) {
-    addReactionIcon.addEventListener("click", () => {
-      alert("Reaction added!");
-      // ניתן להוסיף לוגיקה נוספת להוספת תגובה
-    });
-  }
-
-  // טעינת הביקורת הראשונה בעת פתיחת הדף
-  updateReviewDisplay();
+  // טעינת הביקורות
+  loadReviews();
 });
 
-// //implemeting the adding review action
-// const addReviewIcon = document.querySelector(".add-reaction-icon");
-// const reviewModal = document.getElementById("reviewModal");
-// const cancelBtn = document.getElementById("cancelBtn");
-// const approveBtn = document.getElementById("approveBtn");
-// const contentTextarea = document.getElementById("content");
+//implementing the possibility of deleting a review
+deleteIcons.forEach((deleteIcon) => {
+  deleteIcon.addEventListener("click", function (event) {
+    const reviewContainer = deleteIcon.closest(".review-container"); // עכשיו מחפשים את הקונטיינר האב של הביקורת
+    if (!reviewContainer) {
+      console.error("Review container not found.");
+      return; // אם לא מצאנו את הקונטיינר, סיים את הפעולה
+    }
 
-// function clearContent() {
-//   contentTextarea.value = ""; //cleaning the text area
-// }
+    const review = reviewContainer.querySelector(".review"); // מצא את ה-review בתוך ה-container
+    if (!review) {
+      console.error("Review element not found inside the container.");
+      return; // אם לא מצאנו את ה-review, סיים את הפעולה
+    }
 
-// addReviewIcon.addEventListener("click", () => {
-//   reviewModal.style.display = "flex"; //showing the pop window
-// });
+    const review_id = review.dataset.reviewId;
 
-// cancelBtn.addEventListener("click", function () {
-//   reviewModal.style.display = "none"; //hiding the pop window by clicking on the cancel button
-//   clearContent();
-// });
-
-// approveBtn.addEventListener("click", function () {
-//   const content = document.getElementById("content").value;
-//   if (content.length > 0 && content.length <= 500) {
-//     console.log("Review approved:", content);
-//     //TODO: add the review to the data base
-//     alert("The review has been successfully added");
-//     reviewModal.style.display = "none"; // if the content the customer filled is correct then closing the pop window
-//     clearContent();
-//   } else {
-//     alert("Content exceed the maximum number of characters allowed");
-//   }
-// });
+    const isConfirmed = confirm("Are you sure you want to delete this review?");
+    if (isConfirmed) {
+      fetch("api/delete_review", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ review_id: review_id }),
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          alert(data.message); // הצגת הודעת הצלחה
+          review.remove(); // הסרת הביקורת מהדף
+        })
+        .catch((error) => {
+          alert("Error deleting review: " + error.message);
+        });
+    }
+  });
+});
 
 // async function getProducts() {
 //   const response = await fetch("http://localhost:3000/api/products");
@@ -179,7 +305,6 @@ async function updateProductDetails(productId) {
 
     const product = await response.json();
     console.log(product);
-
     // עדכון שם המוצר
     document.querySelector(".product-header h1").textContent = product.name;
 

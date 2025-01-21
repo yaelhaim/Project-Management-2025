@@ -8,6 +8,7 @@ const PORT = 3000;
 
 app.use(express.static("public"));
 app.use(express.static("src"));
+app.use(express.json());
 
 dotenv.config();
 const connectionDetails = {
@@ -226,6 +227,100 @@ async function getProductById(id) {
     throw new Error("Database query error");
   }
 }
+
+app.get("/api/reviews", async (req, res) => {
+  try {
+    const result = await db.query(
+      "SELECT review_id, review_title, review_text, user_name, product_id, customer_rating FROM reviews"
+    );
+
+    // אם אין ביקורות, נחזיר תשובה עם קוד שגיאה 404
+    if (result.rows.length === 0) {
+      return res.status(404).json({ message: "No reviews found" });
+    }
+
+    // מפה את התוצאות לפורמט הרצוי
+    const reviews = result.rows.map((row) => {
+      const {
+        review_id,
+        review_title,
+        review_text,
+        user_name,
+        product_id,
+        customer_rating,
+      } = row;
+
+      return {
+        review_id,
+        review_title,
+        review_text,
+        user_name,
+        product_id,
+        customer_rating,
+      };
+    });
+
+    // מחזירים את התוצאה כ-JSON
+    res.json(reviews);
+  } catch (err) {
+    // טיפול בשגיאות
+    console.error("Error fetching reviews:", err);
+    res.status(500).send("Error fetching reviews");
+  }
+});
+
+app.post("/api/reviews", express.json(), async (req, res) => {
+  const { review_title, review_text, user_name, product_id, customer_rating } =
+    req.body;
+
+  if (
+    !review_title ||
+    !review_text ||
+    !user_name ||
+    !product_id ||
+    !customer_rating
+  ) {
+    return res.status(400).json({ message: "All fields are required" });
+  }
+
+  try {
+    const result = await db.query(
+      "INSERT INTO reviews (review_title, review_text, user_name, product_id, customer_rating) VALUES ($1, $2, $3, $4, $5) RETURNING *",
+      [review_title, review_text, user_name, product_id, customer_rating]
+    );
+    res.status(201).json(result.rows[0]); // החזרת המוצר החדש
+  } catch (error) {
+    console.error("Error adding product:", error);
+    res.status(500).json({ message: "Error adding product" });
+  }
+});
+
+// מסלול למחיקת ביקורת
+app.post("api/delete_review", express.json(), (req, res) => {
+  const { review_id } = req.body; // מקבל את ה-ID של הביקורת
+
+  if (!review_id) {
+    return res.status(400).json({ error: "Review ID is required" });
+  }
+
+  // מחיקת הביקורת מבסיס הנתונים
+  const query = "DELETE FROM reviews WHERE review_id = $1";
+  const values = [review_id];
+
+  client
+    .query(query, values)
+    .then((result) => {
+      if (result.rowCount === 1) {
+        res.json({ message: "Review deleted successfully" });
+      } else {
+        res.status(404).json({ error: "Review not found" });
+      }
+    })
+    .catch((err) => {
+      console.error("Error deleting review:", err);
+      res.status(500).json({ error: "Failed to delete the review" });
+    });
+});
 
 // מסלול ראשי שיגיש את הדף הראשי
 app.get("/", (req, res) => {
