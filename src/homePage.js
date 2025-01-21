@@ -186,27 +186,49 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // הוספת מאזיני אירועים לאייקונים
     const favoriteIcon = document.querySelector(".favorite-icon");
+    console.log(favoriteIcon);
+
+    favoriteIcon.addEventListener("click", () => {
+        alert(
+            "The Favorites module is still under construction, thanks for your patience!"
+        );
+    });
     const shoppingCartIcon = document.querySelector(".material-symbols-outlined.shopping_cart-icon");
+    console.log(shoppingCartIcon);
+
+    shoppingCartIcon.addEventListener("click", () => {
+        alert(
+            "The shopping cart module is still under construction, thanks for your patience!"
+        );
+    });
     const acuteIcon = document.querySelector(".acute-icon");
+    console.log(acuteIcon);
+
+    acuteIcon.addEventListener("click", () => {
+        alert(
+            "The Product History module is still under construction, thanks for your patience!"
+        );
+    });
     const manageSearchIcon = document.querySelector(".manage-search-icon");
+    console.log(manageSearchIcon);
+
+    manageSearchIcon.addEventListener("click", () => {
+        alert(
+            "Search history module is still under construction, thanks for your patience!"
+        );
+    });
+    const format_list_bulletedIcon = document.querySelector(".format-list-icon");
+    console.log(format_list_bulletedIcon);
+
+    format_list_bulletedIcon.addEventListener("click", () => {
+        alert(
+            "List view under construction, thanks for your patience!"
+        );
+    });
     const searchInput = document.getElementById("search-input");
     const searchButton = document.getElementById("search-button");
 
-    // בדוק אם האייקונים קיימים לפני שמוסיף את מאזיני האירועים
-    if (favoriteIcon) {
-        favoriteIcon.addEventListener("click", showMessage);
-    }
 
-    if (shoppingCartIcon) {
-        shoppingCartIcon.addEventListener("click", showMessage);
-    }
-    if (acuteIcon) {
-        acuteIcon.addEventListener("click", showMessage);
-    }
-
-    if (manageSearchIcon) {
-        manageSearchIcon.addEventListener("click", showMessage);
-    }
 
     // פונקציה שתבצע חיפוש במוצרים
     function searchProducts(query) {
