@@ -1,4 +1,3 @@
-
 // הגדרת כל הפונקציות כאן
 async function fetchData(endpoint) {
     try {
@@ -136,14 +135,14 @@ function updateProductList(products) {
     });
 }
 
-function handleFilterStars(starOrder){
-    document.querySelectorAll("#presentFilter>div>span").forEach(s =>{
+function handleFilterStars(starOrder) {
+    document.querySelectorAll("#presentFilter>div>span").forEach(s => {
         const order = parseInt(s.getAttribute('data-order'));
-        
-        if(order < starOrder){
+
+        if (order < starOrder) {
             s.setAttribute('data-select', 'true');
             s.style.color = 'gold';
-        }else if(order > starOrder){
+        } else if (order > starOrder) {
             s.setAttribute('data-select', 'false');
             s.style.color = 'black'
         }
@@ -190,6 +189,8 @@ document.addEventListener("DOMContentLoaded", () => {
     const shoppingCartIcon = document.querySelector(".material-symbols-outlined.shopping_cart-icon");
     const acuteIcon = document.querySelector(".acute-icon");
     const manageSearchIcon = document.querySelector(".manage-search-icon");
+    const searchInput = document.getElementById("search-input");
+    const searchButton = document.getElementById("search-button");
 
     // בדוק אם האייקונים קיימים לפני שמוסיף את מאזיני האירועים
     if (favoriteIcon) {
@@ -207,34 +208,69 @@ document.addEventListener("DOMContentLoaded", () => {
         manageSearchIcon.addEventListener("click", showMessage);
     }
 
+    // פונקציה שתבצע חיפוש במוצרים
+    function searchProducts(query) {
+        fetchData("/api/products").then((products) => {
+            const filteredProducts = products.filter((product) =>
+                product.name.toLowerCase().includes(query.toLowerCase())
+            );
+            updateProductList(filteredProducts);
+
+            const productCountElement = document.getElementById("product-count");
+            productCountElement.textContent = `Found ${filteredProducts.length} products for "${query}"`;
+        });
+    }
+
+    // אירוע לחיצה על כפתור החיפוש
+    searchButton.addEventListener("click", () => {
+        const query = searchInput.value.trim();
+        if (query) {
+            searchProducts(query);
+        } else {
+            loadProducts(); // טען מחדש את כל המוצרים אם אין טקסט בחיפוש
+        }
+    });
+
+    // אפשרות להפעיל את החיפוש בלחיצה על Enter
+    searchInput.addEventListener("keyup", (event) => {
+        if (event.key === "Enter") {
+            const query = searchInput.value.trim();
+            if (query) {
+                searchProducts(query);
+            } else {
+                loadProducts(); // טען מחדש את כל המוצרים אם אין טקסט בחיפוש
+            }
+        }
+    });
+
     // טוען את הקטגוריות והמוצרים
     loadCategories();
     loadProducts(); // טוען את כל המוצרים בהתחלה
 
     // 
     const presentFilter = document.getElementById("presentFilter");
-    presentFilter.addEventListener('click', (event)=>{
+    presentFilter.addEventListener('click', (event) => {
         event.stopImmediatePropagation();
     });
     const starsFilter = document.querySelectorAll("#presentFilter>div>span")
-    for(const star of starsFilter){
+    for (const star of starsFilter) {
         star.setAttribute('data-select', 'false')
-        star.style.color = 'black'; 
-        star.addEventListener('click', (event)=>{
+        star.style.color = 'black';
+        star.addEventListener('click', (event) => {
             const selected = event.target.getAttribute('data-select');
             const starOrder = parseInt(event.target.getAttribute('data-order'));
-            if(selected == 'false'){
+            if (selected == 'false') {
                 event.target.setAttribute('data-select', 'true');
                 event.target.style.color = 'gold';
                 handleFilterStars(starOrder);
-            }else{
+            } else {
                 event.target.setAttribute('data-select', 'false');
-                event.target.style.color = 'black'; 
+                event.target.style.color = 'black';
                 handleFilterStars(starOrder);
             }
         })
     }
-    document.getElementById("btnApply").addEventListener('click', ()=>{
+    document.getElementById("btnApply").addEventListener('click', () => {
         presentFilter.classList.add('presentFilter_hidden');
     })
     document.getElementById("filterByDiv").addEventListener('click', (event) => {
@@ -298,4 +334,42 @@ window.addEventListener("DOMContentLoaded", function() {
             product.appendChild(bestSellerLabel); // הוסף את התווית למוצר
         }
     });
+});
+
+
+// Add this function to handle searching for products
+async function searchProducts(query) {
+    const products = await fetchData("/api/products");
+    const results = products.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
+
+    const searchResultsContainer = document.getElementById("search-results");
+    searchResultsContainer.innerHTML = ""; // Clear previous results
+
+    if (results.length > 0) {
+        results.forEach(product => {
+            const productElement = document.createElement("div");
+            productElement.classList.add("product");
+            productElement.innerHTML = `
+                <a href="productPage.HTML?productId=${product.id}" class="product-name">${product.name}</a>
+                <img src="${product.image_url}" alt="${product.name}" class="product-image" />
+            `;
+            searchResultsContainer.appendChild(productElement);
+        });
+        searchResultsContainer.style.display = "block"; // Show results
+    } else {
+        searchResultsContainer.innerHTML = "<p>No products found.</p>"; // Show no results message
+        searchResultsContainer.style.display = "block"; // Show message
+    }
+}
+
+// Add an event listener for the search button
+document.getElementById("search-button").addEventListener("click", () => {
+    const query = document.querySelector(".search-input").value.trim();
+    if (query) {
+        searchProducts(query);
+    } else {
+        const searchResultsContainer = document.getElementById("search-results");
+        searchResultsContainer.innerHTML = "<p>Please enter a search term.</p>";
+        searchResultsContainer.style.display = "block";
+    }
 });

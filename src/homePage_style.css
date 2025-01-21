@@ -233,8 +233,8 @@ header .icons>* {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 80px;
-    margin-bottom: 30px;
+    padding: 40px;
+    margin-bottom: 5px;
 }
 
 .category {
@@ -253,7 +253,7 @@ header .icons>* {
     justify-content: center;
     overflow: hidden;
     background-color: #fff;
-    margin-bottom: 10px;
+    margin-bottom: 5px;
     cursor: pointer;
 }
 
@@ -307,7 +307,7 @@ header .icons>* {
     display: block;
     font-size: 14px;
     color: black;
-    margin-top: 10px;
+    margin-top: 5px;
     text-decoration: none;
 }
 
@@ -397,49 +397,77 @@ header .icons>* {
 #product-count {
     background-color: #1d7fa5;
     color: white;
-    /* צבע טקסט לבן */
     padding: 10px 20px;
-    /* ריפוד פנימי */
     border-radius: 12px;
-    /* קצוות מעוגלים */
     font-size: 16px;
-    /* גודל פונט */
     font-weight: bold;
-    /* משקל פונט bold */
     text-align: center;
-    /* יישור טקסט למרכז */
-    margin-top: 20px;
-    /* רווח מלמעלה */
+    margin-top: 5px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    /* צלליות עדינות */
     width: fit-content;
+    margin-left: 32px;
 }
 
 .product-name:hover {
     color: #00008B;
 }
 
-.presentFilter_hidden{
-    display:none;
+.presentFilter_hidden {
+    display: none;
 }
 
-#presentFilter{
+#presentFilter {
     z-index: 50;
-    width:10rem;
-    color:white;
+    width: 10rem;
+    color: white;
     background-color: #1d7fa5;
     position: fixed;
-    top:5rem;
+    top: 5rem;
     left: 15rem;
     box-shadow: 1px 1px 2px 2px #aaa;
     border-radius: 5px;
     text-align: center;
 }
 
-#presentFilter>input{
-    width:4rem;
+#presentFilter>input {
+    width: 4rem;
 }
-.presentFilter-stars{
-    display:flex;
+
+.presentFilter-stars {
+    display: flex;
     justify-content: center;
+}
+
+.search-box {
+    display: flex;
+}
+
+.search-input {
+    flex: 1;
+    padding-right: 40px;
+}
+
+.search-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+    margin-left: -40px;
+    display: flex;
+    align-items: center;
+}
+
+
+/* עיצוב בעת ריחוף על הכפתור */
+
+.search-button:hover {
+    outline: 2px solid #1d7fa5;
+    border-radius: 5px;
+}
+
+
+/* שינוי צבע האייקון בעת ריחוף */
+
+.search-button:hover .material-symbols-outlined {
+    color: #1d7fa5;
 }
