@@ -40,7 +40,7 @@ Frontend:
 
 ---
 
-To run the code, you need to install the Express package by executing the command `npm install express` in the project directory. 
+To run the code, you need to install the Express package by executing the command `npm install express` , ` npm install pg` in the project directory. 
 After that, connect to the server by running the command `node index.js`.(You need to make sure that Node is installed on the computer) 
 Once the server is running and listening on port 3000, you can view the website by opening a browser and navigating to the address `http://localhost:3000/homePage.html`.
 
