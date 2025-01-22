@@ -553,3 +553,4 @@ function displayProducts(products, startIndex) {
 
 // קריאה לפונקציה כדי למלא את המוצרים
 fetchProducts();
+// added something
