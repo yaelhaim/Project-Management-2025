@@ -107,10 +107,18 @@ cancelBtn.addEventListener("click", function () {
 });
 
 approveBtn.addEventListener("click", function (event) {
+  const maxTitleLength = 100; // לדוגמה
+  const maxContentLength = 1000;
+
   const title = titleInput.value;
   const content = contentTextarea.value;
   const selected_rating = selectedRating;
-  if (title.length > 0 && content.length < 100 && content.length <= 500) {
+
+  if (title.length > maxTitleLength || content.length > maxContentLength) {
+    alert(
+      "Please check the length of the title or the content, it might exceed the maximum length"
+    );
+  } else {
     const review = {
       review_title: title,
       review_text: content,
@@ -137,13 +145,10 @@ approveBtn.addEventListener("click", function (event) {
       })
       .catch((error) => {
         alert(
-          "There is an error while trying to upload the review" + error.message
+          "There is an error while trying to upload the review: " +
+            error.message
         );
       });
-  } else {
-    alert(
-      "Please check the length of the title or the content, it might exceed the maximum lenght"
-    );
   }
 });
 
@@ -155,19 +160,18 @@ function getCurrentProductId() {
   return productId;
 }
 
-function sendReviewToServer(review) {
-  return fetch("api/reviews", {
+async function sendReviewToServer(review) {
+  const response = await fetch("/api/reviews", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(review),
-  }).then((response) => {
-    if (!response.ok) {
-      throw new Error("Network response was not ok");
-    }
-    return response.json();
   });
+  if (!response.ok) {
+    throw new Error("Network response was not ok");
+  }
+  return await response.json();
 }
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -188,44 +192,87 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // פונקציה ליצירת HTML עבור ביקורת
   function createReviewHTML(review) {
+    if (!review) {
+      return `
+        <div class="no-review">
+          <h1>There are no reviews for this product yet </h1>
+          <p>want to be the first? 😌</p>
+        </div>
+      `;
+    }
     return `
-      <div class="review" data-review-id="${review.review_id}">
-        <h1>${review.review_title}</h1>
-        <p>${review.review_text}</p>
-        <div class="review-footer">
-          <span>${review.user_name}</span>
-          <div class="review-rating">
-            ${createStarsHTML(
-              review.customer_rating
-            )} <!-- הצגת כוכבים לפי הדירוג -->
+        <div class="review" data-review-id=${review.review_id}>
+          <h1>${review.review_title}</h1>
+          <p>${review.review_text}</p>
+          <div class="review-footer">
+            <span>${review.user_name}</span>
+            <div class="review-rating">
+              ${createStarsHTML(
+                review.customer_rating
+              )} <!-- הצגת כוכבים לפי הדירוג -->
+            </div>
           </div>
         </div>
-      </div>
-    `;
+      `;
   }
 
   // פונקציה לעדכון הביקורת המוצגת
   function updateReviewDisplay() {
-    reviewContainer.querySelector(".review").innerHTML = createReviewHTML(
+    reviewContainer.querySelector(".review-data").innerHTML = createReviewHTML(
       reviews[currentIndex]
     );
   }
 
-  // שליפת הביקורות מהשרת
-  async function loadReviews() {
-    try {
-      const response = await fetch("/api/reviews");
-      if (!response.ok) throw new Error("Failed to fetch reviews");
-      reviews = await response.json();
+  document.addEventListener("DOMContentLoaded", async () => {
+    const productId = getProductIdFromURL(); // פונקציה לקבלת מזהה מוצר מכתובת ה-URL
+    const reviewContainer = document.querySelector(".review-container .review");
 
-      // הצגת הביקורת הראשונה
+    try {
+      const response = await fetch(`/api/reviews/${productId}`);
+      if (!response.ok) {
+        throw new Error("Failed to fetch reviews");
+      }
+
+      const reviews = await response.json();
+
+      // הוספת הביקורות לקונטיינר
+      reviewContainer.innerHTML = reviews
+        .map((review) => createReviewHTML(review))
+        .join("");
+    } catch (error) {
+      console.error("Error fetching reviews:", error);
+      reviewContainer.innerHTML = `<p>Can not load review</p>`;
+    }
+  });
+
+  // פונקציה לדוגמה להוצאת מזהה מוצר מכתובת ה-URL
+  function getProductIdFromURL() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get("productId");
+  }
+
+  async function loadReviews() {
+    const productId = getProductIdFromURL(); // קבלת מזהה מוצר
+    try {
+      const response = await fetch(`/api/reviews/${productId}`);
+      if (!response.ok) throw new Error("Failed to fetch reviews");
+
+      reviews = await response.json();
+      // console.log("Reviews received:", reviews);
+
       if (reviews.length > 0) {
-        reviewContainer.querySelector(".review").innerHTML = createReviewHTML(
-          reviews[currentIndex]
-        );
+        // הצגת הביקורת הראשונה אם יש ביקורות
+        currentIndex = 0; // התחלה מהאינדקס הראשון
+        updateReviewDisplay();
+      } else {
+        reviewContainer.querySelector(".review-data").innerHTML =
+          createReviewHTML(null);
       }
     } catch (error) {
       console.error("Error loading reviews:", error);
+      reviewContainer.querySelector(
+        ".review-data"
+      ).innerHTML = `<pCan not load review right now</p>`;
     }
   }
 
@@ -249,41 +296,121 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 //implementing the possibility of deleting a review
-deleteIcons.forEach((deleteIcon) => {
+document.querySelectorAll(".delete-review-icon").forEach((deleteIcon) => {
   deleteIcon.addEventListener("click", function (event) {
-    const reviewContainer = deleteIcon.closest(".review-container"); // עכשיו מחפשים את הקונטיינר האב של הביקורת
+    // מציאת ה-review-container שמכיל את הביקורת
+    const reviewContainer = event.target.closest(".review-container");
     if (!reviewContainer) {
-      console.error("Review container not found.");
-      return; // אם לא מצאנו את הקונטיינר, סיים את הפעולה
+      console.log("Review container not found");
+      return;
+    }
+    console.log(reviewContainer);
+
+    const reviewsC = reviewContainer.querySelector(".review-data");
+    console.log(reviewsC);
+    const review = reviewsC.querySelector(".review");
+    console.log(review);
+    const reviewId = review.getAttribute("data-review-id"); // קבלת מזהה הביקורת
+
+    if (!reviewId) {
+      console.error("Review ID is missing!");
+      return;
     }
 
-    const review = reviewContainer.querySelector(".review"); // מצא את ה-review בתוך ה-container
-    if (!review) {
-      console.error("Review element not found inside the container.");
-      return; // אם לא מצאנו את ה-review, סיים את הפעולה
-    }
+    // הצגת Modal עם שאלה אם ברצונו למחוק את הביקורת
+    const modal = document.getElementById("deleteModal");
+    const confirmDeleteBtn = modal.querySelector("#confirmDeleteBtn");
+    const cancelDeleteBtn = modal.querySelector("#cancelDeleteBtn");
 
-    const review_id = review.dataset.reviewId;
+    console.log(modal); // לוודא שהמודאל נמצא
+    console.log(confirmDeleteBtn);
 
-    const isConfirmed = confirm("Are you sure you want to delete this review?");
-    if (isConfirmed) {
-      fetch("api/delete_review", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({ review_id: review_id }),
-      })
-        .then((response) => response.json())
-        .then((data) => {
-          alert(data.message); // הצגת הודעת הצלחה
-          review.remove(); // הסרת הביקורת מהדף
-        })
-        .catch((error) => {
-          alert("Error deleting review: " + error.message);
+    // הצגת ה-modal
+    modal.style.display = "block";
+
+    // אם המשתמש לוחץ על כפתור "בטוח", מחיקת הביקורת
+    confirmDeleteBtn.addEventListener("click", async function () {
+      try {
+        const response = await fetch(`/api/reviews/${reviewId}`, {
+          method: "DELETE",
         });
-    }
+
+        if (response.ok) {
+          alert("Review deleted successfully");
+          // הסרת הביקורת מהעמוד
+          review.remove();
+        } else {
+          alert("Error deleting review");
+        }
+
+        // סגור את ה-modal אחרי המחיקה
+        modal.style.display = "none";
+      } catch (error) {
+        console.error("Error:", error);
+        alert("Error deleting review");
+        modal.style.display = "none";
+      }
+    });
+
+    // אם המשתמש לוחץ על כפתור "התחרטתי", סגירת ה-modal ללא מחיקה
+    cancelDeleteBtn.addEventListener("click", function () {
+      modal.style.display = "none";
+    });
   });
+});
+
+// הוספת מאזין לאייקון העריכה
+document.querySelectorAll(".edit-icon").forEach((icon) => {
+  icon.addEventListener("click", (e) => {
+    const reviewId = e.target.getAttribute("data-review-id");
+
+    // בקשה לשרת כדי לקבל את פרטי הביקורת (GET)
+    fetch(`/api/reviews/${reviewId}`)
+      .then((response) => response.json())
+      .then((review) => {
+        // ממלא את השדות בטופס
+        document.getElementById("title").value = review.review_title;
+        document.getElementById("content").value = review.review_text;
+
+        // מציג את הדיאלוג
+        document.getElementById("edit-review-modal").style.display = "flex";
+      })
+      .catch((err) => console.error("Error fetching review:", err));
+  });
+});
+
+// סגירת הדיאלוג
+document.getElementById("cancel-edit").addEventListener("click", () => {
+  document.getElementById("edit-review-modal").style.display = "none";
+});
+
+// הגשת הטופס
+document.getElementById("edit-review-form").addEventListener("submit", (e) => {
+  e.preventDefault();
+
+  const reviewId = document
+    .querySelector(".edit-icon")
+    .getAttribute("data-review-id");
+  const updatedReview = {
+    review_title: document.getElementById("title").value,
+    review_text: document.getElementById("content").value,
+  };
+
+  // שליחה לשרת כדי לעדכן את הביקורת (PUT)
+  fetch(`/api/reviews/${reviewId}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(updatedReview),
+  })
+    .then((response) => response.json())
+    .then((data) => {
+      console.log("Review updated:", data);
+      document.getElementById("edit-review-modal").style.display = "none";
+      // עדכון הביקורת בעמוד באופן מיידי (אם רצוי)
+    })
+    .catch((err) => console.error("Error updating review:", err));
 });
 
 // async function getProducts() {
