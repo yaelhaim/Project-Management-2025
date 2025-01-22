@@ -110,6 +110,9 @@ approveBtn.addEventListener("click", function (event) {
   const maxTitleLength = 100; // לדוגמה
   const maxContentLength = 1000;
 
+  const titleInput = document.getElementById("title");
+  const contentTextarea = document.getElementById("content");
+
   const title = titleInput.value;
   const content = contentTextarea.value;
   const selected_rating = selectedRating;
