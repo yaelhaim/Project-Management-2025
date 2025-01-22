@@ -228,6 +228,22 @@ async function getProductById(id) {
   }
 }
 
+// מסלול לשליפת ביקורות לפי מזהה מוצר
+app.get("/api/reviews/:productId", async (req, res) => {
+  const { productId } = req.params;
+
+  try {
+    const result = await db.query(
+      "SELECT review_id, review_title, review_text, user_name, customer_rating FROM reviews WHERE product_id = $1",
+      [productId]
+    );
+    res.json(result.rows); // שליחת הביקורות כ-JavaScript Object Notation
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send("Server error");
+  }
+});
+
 app.get("/api/reviews", async (req, res) => {
   try {
     const result = await db.query(
@@ -296,30 +312,51 @@ app.post("/api/reviews", express.json(), async (req, res) => {
 });
 
 // מסלול למחיקת ביקורת
-app.post("api/delete_review", express.json(), (req, res) => {
-  const { review_id } = req.body; // מקבל את ה-ID של הביקורת
+app.delete("/api/reviews/:reviewId", async (req, res) => {
+  const { reviewId } = req.params; // מזהה הביקורת שמגיעה מה-URL
 
-  if (!review_id) {
-    return res.status(400).json({ error: "Review ID is required" });
+  try {
+    // שליחת בקשת מחיקה למסד הנתונים
+    const result = await db.query(
+      "DELETE FROM reviews WHERE review_id = $1 RETURNING *",
+      [reviewId]
+    );
+
+    if (result.rows.length === 0) {
+      // אם לא נמצאה ביקורת עם מזהה זה
+      return res.status(404).json({ message: "Review not found" });
+    }
+
+    // אם המחיקה הצליחה, מחזירים תשובה עם הודעה מוצלחת
+    res.status(200).json({ message: "Review deleted successfully" });
+  } catch (error) {
+    console.error("Error deleting review:", error);
+    res.status(500).json({ message: "Error deleting review" });
   }
+});
 
-  // מחיקת הביקורת מבסיס הנתונים
-  const query = "DELETE FROM reviews WHERE review_id = $1";
-  const values = [review_id];
+app.put("/api/reviews/:reviewId", async (req, res) => {
+  const reviewId = req.params.reviewId;
+  const { review_title, review_text } = req.body;
 
-  client
-    .query(query, values)
-    .then((result) => {
-      if (result.rowCount === 1) {
-        res.json({ message: "Review deleted successfully" });
-      } else {
-        res.status(404).json({ error: "Review not found" });
-      }
-    })
-    .catch((err) => {
-      console.error("Error deleting review:", err);
-      res.status(500).json({ error: "Failed to delete the review" });
+  try {
+    const result = await db.query(
+      "UPDATE reviews SET review_title = $1, review_text = $2 WHERE review_id = $3 RETURNING *",
+      [review_title, review_text, reviewId]
+    );
+
+    if (result.rowCount === 0) {
+      return res.status(404).json({ error: "Review not found" });
+    }
+
+    res.status(200).json({
+      message: `Review with ID ${reviewId} updated successfully`,
+      review: result.rows[0],
     });
+  } catch (err) {
+    console.error("Error executing query", err.stack);
+    res.status(500).json({ error: "Failed to update review" });
+  }
 });
 
 // מסלול ראשי שיגיש את הדף הראשי

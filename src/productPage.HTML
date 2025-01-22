@@ -1,136 +1,195 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Product Page</title>
     <link rel="stylesheet" href="productPage_style.css" />
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet" />
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
+      rel="stylesheet"
+    />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <header>
-        <div class="site-name">Software Products</div>
-        <div>
-            <span class="material-symbols-outlined" title="Favorite products">favorite</span>
-            <span class="material-symbols-outlined" title="shopping cart">shopping_cart </span>
-        </div>
+      <div class="site-name">Software Products</div>
+      <div>
+        <span class="material-symbols-outlined">favorite</span>
+        <span class="material-symbols-outlined">shopping_cart</span>
+      </div>
     </header>
 
     <div class="main-container">
-        <div class="product-header">
-            <div>
-                <h1>Product Name</h1>
-                <button class="buy-now">Buy Now</button>
-                <p><span class="catalog-number">Catalog number:</span></p>
-                <p><span class="number-of-purchases">Number of purchases:</span></p>
-                <p></p><span class="additional-info"></span></p>
-                <div class="price-rating">
-                    <p class="price">
-                        <span class="label">Price:</span>
-                        <del id="original-price">1000 ₪</del>
-                        <span id="discounted-price">890 ₪</span>
-                    </p>
-                    <div class="rating">
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                    </div>
-                    <p class="brochure">
-                        <a href="#" id="brochure-link">Information Brochure</a>
-                    </p>
-                    <div id="pdf-overlay" style="display: none" onclick="closePDF()">
-                        <div id="pdf-container" onclick="event.stopPropagation();">
-                            <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="600px" />
-                            <canvas id="pdf-canvas"></canvas>
-                            <span class="close-icon" onclick="closePDF()">&#10005;</span>
-                        </div>
-                    </div>
+      <div class="product-header">
+        <div>
+          <h1>Product Name</h1>
+          <button class="buy-now">Buy Now</button>
+          <p><span class="catalog-number">Catalog number:</span></p>
+          <p><span class="number-of-purchases">Number of purchases:</span></p>
+          <div class="price-rating">
+            <p class="price">
+              <span class="label">Price:</span>
+              <del id="original-price">1000 ₪</del>
+              <span id="discounted-price">890 ₪</span>
+            </p>
+            <div class="rating">
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+            </div>
+            <p class="brochure">
+              <a href="#" id="brochure-link">Information Brochure</a>
+            </p>
+            <div id="pdf-overlay" style="display: none" onclick="closePDF()">
+              <div id="pdf-container" onclick="event.stopPropagation();">
+                <embed
+                  id="pdf-embed"
+                  src=""
+                  type="application/pdf"
+                  width="100%"
+                  height="600px"
+                />
+                <canvas id="pdf-canvas"></canvas>
+                <span class="close-icon" onclick="closePDF()">&#10005;</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div>
+          <img
+            class="product-image"
+            src=""
+            alt="Product Image"
+            style="width: 300px; height: auto"
+          />
+        </div>
+      </div>
 
-                </div>
-            </div>
-            <div>
-                <img class="product-image" src="" alt="Product Image" style="width: 300px; height: auto" />
-            </div>
+      <!-- "products_images/Client_Sphere_image.jpg" -->
+      <!-- "/products_brochures/Backup_Xpert.pdf" -->
+
+      <!-- תיאור, אייקונים ותמונות נוספות -->
+      <div class="product-details">
+        <div class="product-description">
+          <h2>Description:</h2>
+          <p>
+            TaskMaster is a leading task management solution designed to
+            streamline your daily planning. With features like task creation,
+            scheduling, and prioritization, TaskMaster helps you stay organized
+            and efficient throughout the day. The software includes advanced
+            features such as task sharing, real-time collaboration, and
+            automatic reminders, ensuring that nothing slips through the cracks.
+            Whether you're managing personal tasks or team projects, TaskMaster
+            provides a comprehensive platform for maximum productivity.
+          </p>
         </div>
 
-        <!-- "products_images/Client_Sphere_image.jpg" -->
-        <!-- "/products_brochures/Backup_Xpert.pdf" -->
-
-        <!-- תיאור, אייקונים ותמונות נוספות -->
-        <div class="product-details">
-            <div class="product-description">
-                <h2>Description:</h2>
-                <p>
-                    TaskMaster is a leading task management solution designed to streamline your daily planning. With features like task creation, scheduling, and prioritization, TaskMaster helps you stay organized and efficient throughout the day. The software includes
-                    advanced features such as task sharing, real-time collaboration, and automatic reminders, ensuring that nothing slips through the cracks. Whether you're managing personal tasks or team projects, TaskMaster provides a comprehensive
-                    platform for maximum productivity.
-                </p>
-            </div>
-
-            <div class="icons">
-                <span class="material-symbols-outlined" title="Add to favorite products">favorite</span>
-                <span class="material-symbols-outlined" title="Add to cart">add_shopping_cart</span>
-                <span class="material-symbols-outlined copy-link" title="Copy link" onclick="copyLink(this)">content_copy
+        <div class="icons">
+          <span class="material-symbols-outlined">favorite</span>
+          <span class="material-symbols-outlined">add_shopping_cart</span>
+          <span
+            class="material-symbols-outlined copy-link"
+            title="Copy link"
+            onclick="copyLink(this)"
+            >content_copy
             <span class="tooltip">Copy URL </span>
-                </span>
-                <span class="material-symbols-outlined" title="Add to compare">compare</span>
+          </span>
+          <span class="material-symbols-outlined">compare</span>
+        </div>
+
+        <div class="main-product-image">
+          <img src="" alt="Product Image 1" />
+        </div>
+
+        <div class="info-boxes">
+          <div class="info-box">
+            User-Friendliness
+            <div class="friendliness-ranking">
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
             </div>
+          </div>
+          <p class="info-description">-Ease of use</p>
 
-            <div class="main-product-image">
-                <img src="" alt="Product Image 1" />
+          <div class="info-box">
+            Security
+            <div class="security-ranking">
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
+              <span class="material-symbols-outlined">star</span>
             </div>
+          </div>
+          <p class="info-description">-Protection of data and privacy</p>
+        </div>
 
-            <div class="info-boxes">
-                <div class="info-box">
-                    User-Friendliness
-                    <div class="friendliness-ranking">
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                    </div>
-                </div>
-                <p class="info-description">-Ease of use</p>
+        <div class="os-section">
+          <p class="os-title">Available operating systems:</p>
+          <div class="os-list">
+            <p>- Windows</p>
+            <p>- Linux</p>
+            <p>- macOS</p>
+          </div>
+        </div>
 
-                <div class="info-box">
-                    Security
-                    <div class="security-ranking">
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                        <span class="material-symbols-outlined">star</span>
-                    </div>
-                </div>
-                <p class="info-description">-Protection of data and privacy</p>
-            </div>
-
-            <div class="os-section">
-                <p class="os-title">Available operating systems:</p>
-                <div class="os-list">
-                    <p>- Windows</p>
-                    <p>- Linux</p>
-                    <p>- macOS</p>
-                </div>
-            </div>
-
-            <div class="review-container" style="margin-top: 150px">
-                <button class="nav-button left-button">&larr;</button>
-                <div class="actions">
-                    <span class="material-symbols-outlined" title="Edit Review">rate_review</span>
-                    <span class="material-symbols-outlined delete-review-icon" title="Delete Review">delete</span
+        <div class="review-container" style="margin-top: 150px">
+          <button class="nav-button left-button">&larr;</button>
+          <div class="actions">
+            <span class="material-symbols-outlined">rate_review</span>
+            <span class="material-symbols-outlined delete-review-icon"
+              >delete</span
             >
-            <span class="material-symbols-outlined add-reaction-icon"title="Add Review"
+            <span class="material-symbols-outlined add-reaction-icon"
               >add_reaction</span
             >
           </div>
-          <div class="review"></div>
+          <div class="review-data"></div>
+
+          <div id="deleteModal" class="delete-modal" style="display: none">
+            <div class="delete-modal-content">
+              <p>Are you sure you want to delete this review?</p>
+              <button id="confirmDeleteBtn">Yes, I'm sure</button>
+              <button id="cancelDeleteBtn">No, I changed my mind</button>
+            </div>
+          </div>
+
+          <div class="modal" id="edit-review-modal">
+            <div class="content">
+              <h2 class="modal-title">Edit Review</h2>
+              <form id="edit-review-form">
+                <label for="title">Title:</label>
+                <textarea
+                  type="text"
+                  id="title"
+                  name="title"
+                  maxlength="100"
+                  required
+                ></textarea>
+
+                <label for="content">Content:</label>
+                <textarea
+                  id="content"
+                  name="content"
+                  rows="4"
+                  maxlength="500"
+                  required
+                ></textarea>
+
+                <div class="modal-footer">
+                  <button type="submit" id="save-review">Save</button>
+                  <button type="button" id="cancel-edit">Cancel</button>
+                </div>
+              </form>
+            </div>
+          </div>
 
           <!-- חלון קופץ -->
           <div class="modal" id="reviewModal">
@@ -158,40 +217,54 @@
                     >Help others by leaving your rating 😊</span
                   >
                   <span class="material-symbols-outlined">star</span>
-                    <span class="material-symbols-outlined">star</span>
-                    <span class="material-symbols-outlined">star</span>
-                    <span class="material-symbols-outlined">star</span>
-                    <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
                 </div>
 
                 <div class="modal-buttons">
-                    <button type="button" id="approveBtn">Approve</button>
-                    <button type="button" id="cancelBtn">Cancel</button>
+                  <button type="button" id="approveBtn">Approve</button>
+                  <button type="button" id="cancelBtn">Cancel</button>
                 </div>
-                </form>
+              </form>
             </div>
+          </div>
+
+          <button class="nav-button right-button">&rarr;</button>
         </div>
 
-        <button class="nav-button right-button">&rarr;</button>
-    </div>
-
-
-    <div class="top-category">
-        <h2>Top 5 in this category:</h2>
-        <div class="products-container">
-            <div class="items-container">
-                <!-- המוצרים יתווספו כאן -->
+        <div class="top-category">
+          <h2>Top 5 in this category:</h2>
+          <div class="items-container">
+            <div class="item">
+              <img class="image-placeholder" src="" />
+              <p class="price-5-top">999 ₪</p>
             </div>
+            <div class="item">
+              <img class="image-placeholder" src="" />
+              <p class="price-5-top">1119 ₪</p>
+            </div>
+            <div class="item">
+              <img class="image-placeholder" src="" />
+              <p class="price-5-top">2000 ₪</p>
+            </div>
+            <div class="item">
+              <img class="image-placeholder" src="" />
+              <p class="price-5-top">1500 ₪</p>
+            </div>
+            <div class="item">
+              <img class="image-placeholder" src="" />
+              <p class="price-5-top">880 ₪</p>
+            </div>
+
             <div class="arrow-button">
-                <button id="nextButton">→</button>
-                <!-- החץ המיועד -->
+              <button>→</button>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-
-
-
     <script src="productPage.js"></script>
-</body>
-
+  </body>
 </html>
