@@ -195,11 +195,13 @@ const filterElements = (function(){
 const filterHandlers = (function(){
 
     const validateCharacters = (input, p) =>{
+        
         input.setAttribute("maxlength", "10"); // Ensure the input has a maxlength
         const value = input.value.trim();   // get the value without space in the start and end
+         // Handle empty input
         try{
             const num = parseInt(value);    // try to convert to integer
-            if(isNaN(value) || num < 0 || value.length > 10){   // validate value is positive and up to 10 characters
+            if(isNaN(value) || num < 0 || value.length > 10 || input.value.includes(".") ){   // validate value is positive and up to 10 characters
                 throw new Exception()
             }
             p.innerHTML = "&nbsp;";
