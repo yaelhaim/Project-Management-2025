@@ -195,6 +195,7 @@ const filterElements = (function(){
 const filterHandlers = (function(){
 
     const validateCharacters = (input, p) =>{
+        input.setAttribute("maxlength", "10"); // Ensure the input has a maxlength
         const value = input.value.trim();   // get the value without space in the start and end
         try{
             const num = parseInt(value);    // try to convert to integer
