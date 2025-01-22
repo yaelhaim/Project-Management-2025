@@ -333,16 +333,22 @@ async function updateProductDetails(productId) {
             ".price-rating #discounted-price"
         );
 
+        // הצג את המחיר המקורי
         originalPriceElement.textContent = `${product.price} ₪`;
-        if (product.discountPrice) {
+
+        // בדוק אם יש מחיר הנחה
+        if (product.discount_price) {
             discountedPriceElement.textContent = `${product.discount_price} ₪`;
-            discountedPriceElement.style.display = "inline";
-            originalPriceElement.style.display = "inline";
+            discountedPriceElement.style.display = "inline"; // ודא שהמחיר המוזל מוצג
+            originalPriceElement.style.textDecoration = "line-through"; // הוסף קו חוצה למחיר המקורי
+            originalPriceElement.style.display = "inline"; // ודא שהמחיר המקורי מוצג
         } else {
-            discountedPriceElement.style.display = "none";
+            discountedPriceElement.style.display = "none"; // הסתר את המחיר המוזל אם אין הנחה
+            originalPriceElement.style.textDecoration = "none"; // הסר קו חוצה אם אין הנחה
+            originalPriceElement.style.display = "inline"; // ודא שהמחיר המקורי מוצג
         }
 
-        product_pdf_url = product.pdf_url;
+
 
         // מצא את אלמנט הכוכבים
         const ratingContainer = document.querySelector(".rating");
@@ -482,3 +488,68 @@ document
 
         openPDF(); // קריאה לפונקציה עם ה-URL של ה-PDF
     });
+
+let currentIndex = 0; // משתנה שמזכיר את המיקום הנוכחי במערך
+const itemsToShow = 5; // מספר המוצרים המוצגים בכל פעם
+
+async function fetchProducts() {
+    try {
+        const response = await fetch("/api/products"); // עדכן כאן עם ה-URL שלך
+        const products = await response.json(); // הנחה שהנתונים מגיעים בפורמט JSON
+
+        // מיין את המוצרים לפי מספר הרכישות מהגבוה לנמוך
+        const sortedProducts = products.sort((a, b) => b.purchaseCount - a.purchaseCount);
+
+        // קח את 10 המוצרים הכי נמכרים
+        const topProducts = sortedProducts.slice(0, 10);
+
+        // מלא את הקונטיינר הראשון
+        displayProducts(topProducts, currentIndex);
+
+        // הוספת מאזין לאירוע לחיצה על הכפתור
+        document.getElementById('nextButton').addEventListener('click', () => {
+            currentIndex += itemsToShow; // הגדל את המיקום הנוכחי
+            if (currentIndex >= topProducts.length) {
+                currentIndex = 0; // אם הגעת לסוף, חזור להתחלה
+            }
+            displayProducts(topProducts, currentIndex);
+        });
+    } catch (error) {
+        console.error('Error fetching products:', error);
+    }
+}
+
+function displayProducts(products, startIndex) {
+    const itemsContainer = document.querySelector('.items-container');
+    itemsContainer.innerHTML = ''; // לנקות את הקונטיינר לפני הוספת מוצרים
+
+    const endIndex = Math.min(startIndex + itemsToShow, products.length);
+    const productsToDisplay = products.slice(startIndex, endIndex); // קח את המוצרים להציג
+
+    productsToDisplay.forEach(product => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('item');
+
+        // יצירת אלמנט <a> לקישור לדף המוצר
+        const linkElement = document.createElement('a');
+        linkElement.href = `productPage.HTML?productId=${product.id}`;
+
+        const imgElement = document.createElement('img');
+        imgElement.classList.add('image-placeholder');
+        imgElement.src = product.image_url; // הנחה שיש שדה image_url במוצר
+        imgElement.alt = product.name; // הוספת טקסט חלופי לתמונה
+
+        const priceElement = document.createElement('p');
+        priceElement.classList.add('price-5-top');
+        priceElement.textContent = `${product.price} ₪`; // הנחה שיש שדה price במוצר
+
+        // הוספת התמונה והמחיר לאלמנט <a>
+        linkElement.appendChild(imgElement);
+        itemDiv.appendChild(linkElement); // הוספת הקישור ל-div של המוצר
+        itemDiv.appendChild(priceElement);
+        itemsContainer.appendChild(itemDiv);
+    });
+}
+
+// קריאה לפונקציה כדי למלא את המוצרים
+fetchProducts();
