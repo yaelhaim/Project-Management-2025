@@ -1,774 +1,840 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
 body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 10px 20px;
-  background-color: #f4f4f4;
-  border-bottom: 2px solid #1d7fa5;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #1d7fa5;
 }
 
 header .site-name {
-  color: #1d7fa5;
-  font-size: 24px;
-  font-weight: bold;
+    color: #1d7fa5;
+    font-size: 24px;
+    font-weight: bold;
 }
 
 header .material-symbols-outlined {
-  font-size: 24px;
-  cursor: pointer;
-  margin-left: 10px;
+    font-size: 24px;
+    cursor: pointer;
+    margin-left: 10px;
 }
 
 header div span:nth-child(1) {
-  color: red; /* צבע אדום לאייקון הראשון */
+    color: red;
+    /* צבע אדום לאייקון הראשון */
 }
 
 * {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 
 body,
 html {
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 .main-container {
-  padding: 20px;
-  width: 100vw;
-  /* רוחב של 100% מהמסך */
-  height: auto;
-  /* תן לגובה להתעדכן אוטומטית */
-  overflow-x: hidden;
-  /* מבטלים גלילה אופקית */
+    padding: 20px;
+    width: 100vw;
+    /* רוחב של 100% מהמסך */
+    height: auto;
+    /* תן לגובה להתעדכן אוטומטית */
+    overflow-x: hidden;
+    /* מבטלים גלילה אופקית */
 }
 
 .product-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #1d7fa5;
-  color: white;
-  padding: 15px;
-  border-radius: 5px;
-  margin-bottom: 20px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
-  /* צל */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #1d7fa5;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    /* צל */
 }
 
 .product-header h1 {
-  display: inline-block;
-  /* מאפשר לכותרת להיות בשורה אחת עם האלמנטים האחרים */
-  margin-right: 10px;
-  font-size: 24px;
+    display: inline-block;
+    /* מאפשר לכותרת להיות בשורה אחת עם האלמנטים האחרים */
+    margin-right: 10px;
+    font-size: 24px;
 }
 
 .product-header button.buy-now {
-  background-color: #28a745;
-  color: white;
-  border: none;
-  padding: 5px 20px;
-  cursor: pointer;
-  border-radius: 5px;
-  display: inline-block;
-  /* הכפתור יישאר בשורה אחת */
-  vertical-align: middle;
-  justify-content: space-between;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+    /* הכפתור יישאר בשורה אחת */
+    vertical-align: middle;
+    justify-content: space-between;
 }
 
 .product-header button.buy-now:hover {
-  background-color: #218838;
+    background-color: #218838;
 }
 
 .catalog-number {
-  font-weight: bold;
-  color: white;
+    font-weight: bold;
+    color: white;
 }
 
 .number-of-purchases {
-  font-weight: bold;
-  color: white;
+    font-weight: bold;
+    color: white;
 }
 
 .price-rating {
-  display: flex;
-  /* יוצר תצוגה אופקית */
-  align-items: center;
-  /* מיישר אנכית */
-  gap: 10px;
-  /* מרווח קטן בין האלמנטים */
+    display: flex;
+    /* יוצר תצוגה אופקית */
+    align-items: center;
+    /* מיישר אנכית */
+    gap: 10px;
+    /* מרווח קטן בין האלמנטים */
 }
 
-.price-rating > * {
-  position: relative;
+.price-rating>* {
+    position: relative;
 }
 
 #original-price {
-  color: white;
-  /* צבע למחיר המקורי */
-  margin-left: 10px;
-  /* רווח קטן משמאל למחיר המקורי */
-  text-decoration: line-through;
-  /* קו חוצה למחיר המקורי */
+    color: white;
+    /* צבע למחיר המקורי */
+    margin-left: 10px;
+    /* רווח קטן משמאל למחיר המקורי */
+    text-decoration: line-through;
+    /* קו חוצה למחיר המקורי */
 }
 
 #discounted-price {
-  color: white;
-  /* צבע למחיר לאחר הנחה */
-  font-weight: bold;
-  /* הדגשה */
+    color: white;
+    /* צבע למחיר לאחר הנחה */
+    font-weight: bold;
+    /* הדגשה */
 }
 
-.price-rating > *:not(:first-child) {
-  border-right: 2px solid white;
-  /* פס הפרדה בין הרכיבים */
-  padding-right: 50px;
-  /*space between the price and rating*/
-  padding-left: 50px;
+.price-rating>*:not(:first-child) {
+    border-right: 2px solid white;
+    /* פס הפרדה בין הרכיבים */
+    padding-right: 50px;
+    /*space between the price and rating*/
+    padding-left: 50px;
 }
 
-.price-rating > *:not(:last-child) {
-  border-right: 2px solid white;
-  /* פס הפרדה בין הרכיבים */
-  padding-right: 50px;
-  /*space between the price and rating*/
-  margin-left: 50px;
+.price-rating>*:not(:last-child) {
+    border-right: 2px solid white;
+    /* פס הפרדה בין הרכיבים */
+    padding-right: 50px;
+    /*space between the price and rating*/
+    margin-left: 50px;
 }
 
 .price-rating .price,
 .price-rating .rating {
-  margin: 0;
+    margin: 0;
 }
 
 .price-rating .brochure {
-  margin-left: auto;
-  /* דוחף את הקישור לחוברת לצד ימין */
+    margin-left: auto;
+    /* דוחף את הקישור לחוברת לצד ימין */
 }
 
 .price {
-  font-size: 20px;
-  color: white;
-  font-weight: bold;
+    font-size: 20px;
+    color: white;
+    font-weight: bold;
 }
 
 .rating {
-  display: flex;
-  /* מיישר את הכוכבים בשורה אחת */
-  align-items: center;
-  /* מרכז את הכוכבים אנכית */
+    display: flex;
+    /* מיישר את הכוכבים בשורה אחת */
+    align-items: center;
+    /* מרכז את הכוכבים אנכית */
 }
 
 .rating .material-symbols-outlined {
-  font-size: 20px;
-  color: gold;
-  cursor: pointer;
+    font-size: 20px;
+    color: gold;
+    cursor: pointer;
 }
 
 .product-image {
-  margin-left: 20px;
-  flex-shrink: 0;
-  border-radius: 15px;
-  /* פינות מעוגלות */
-  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
-  max-width: 100%;
-  /* הגבלת רוחב מקסימלי */
-  height: auto;
-  /* שמירה על פרופורציות */
-  object-fit: cover;
+    margin-left: 20px;
+    flex-shrink: 0;
+    border-radius: 15px;
+    /* פינות מעוגלות */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    /* הגבלת רוחב מקסימלי */
+    height: auto;
+    /* שמירה על פרופורציות */
+    object-fit: cover;
 }
 
 .product-header img {
-  width: 150px;
-  height: auto;
-  margin-left: auto;
-  margin-right: 40px;
+    width: 150px;
+    height: auto;
+    margin-left: auto;
+    margin-right: 40px;
 }
 
 .price-rating .brochure a {
-  text-decoration: none;
-  /* מסיר קו תחתון */
-  color: white;
-  /* מגדיר צבע לקישור */
-  font-size: 15px;
+    text-decoration: none;
+    /* מסיר קו תחתון */
+    color: white;
+    /* מגדיר צבע לקישור */
+    font-size: 15px;
 }
 
 .price-rating .brochure a:hover {
-  text-decoration: underline;
-  /* מוסיף קו תחתון כשעוברים על הקישור */
-  color: #d3d3d3;
+    text-decoration: underline;
+    /* מוסיף קו תחתון כשעוברים על הקישור */
+    color: #d3d3d3;
 }
 
 .product-description {
-  margin-bottom: 20px;
+    margin-bottom: 20px;
 }
 
 .product-description h2 {
-  margin: 0;
-  font-size: 20px;
-  color: black;
-  display: inline;
-  /* מאפשר שיבוץ של התיאור באותה שורה */
+    margin: 0;
+    font-size: 20px;
+    color: black;
+    display: inline;
+    /* מאפשר שיבוץ של התיאור באותה שורה */
 }
 
 .product-description p {
-  display: inline;
-  /* גורם לתיאור להופיע באותה שורה */
-  font-size: 16px;
-  color: black;
+    display: inline;
+    /* גורם לתיאור להופיע באותה שורה */
+    font-size: 16px;
+    color: black;
 }
 
 .icons {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
+    display: flex;
+    gap: 10px;
+    margin-bottom: 20px;
 }
+
 
 /* the message that appears when hovering on the copy icon*/
 
 .tooltip {
-  visibility: hidden;
-  background-color: black !important;
-  color: white !important;
-  text-align: center;
-  padding: 5px 8px;
-  border-radius: 5px;
-  position: absolute;
-  top: -125%;
-  /* מיקום מעל האייקון */
-  left: 50%;
-  transform: translateX(-50%);
-  white-space: nowrap;
-  opacity: 0;
-  transition: opacity 0.3s;
-  z-index: 1000;
+    visibility: hidden;
+    background-color: black !important;
+    color: white !important;
+    text-align: center;
+    padding: 5px 8px;
+    border-radius: 5px;
+    position: absolute;
+    top: -125%;
+    /* מיקום מעל האייקון */
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    opacity: 0;
+    transition: opacity 0.3s;
+    z-index: 1000;
 }
 
 .tooltip {
-  background: linear-gradient(90deg, black, #333);
-  /* מעבר צבע שחור כהה */
+    background: linear-gradient(90deg, black, #333);
+    /* מעבר צבע שחור כהה */
 }
 
 .icons .material-symbols-outlined:hover .tooltip {
-  visibility: visible;
-  opacity: 1;
+    visibility: visible;
+    opacity: 1;
 }
 
 .icons .material-symbols-outlined {
-  font-size: 25px;
-  color: black;
-  cursor: pointer;
+    font-size: 25px;
+    color: black;
+    cursor: pointer;
 }
 
 .material-symbols-outlined.check-icon {
-  color: green;
-  display: none;
-  /* מוסתר עד שמחליפים */
+    color: green;
+    display: none;
+    /* מוסתר עד שמחליפים */
 }
 
 .main-product-image {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 60px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 60px;
 }
 
 .main-product-image img {
-  max-width: 80%;
-  border: 1px solid #ddd;
-  border-radius: 5px;
-  padding: 5px;
-  cursor: pointer;
+    max-width: 80%;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 5px;
+    cursor: pointer;
 }
 
 .main-product-image img:hover {
-  transform: scale(1.05);
-  /* מגדיל את התמונה ב-5% כשעוברים עליה */
-  transition: transform 0.3s ease;
+    transform: scale(1.05);
+    /* מגדיל את התמונה ב-5% כשעוברים עליה */
+    transition: transform 0.3s ease;
 }
 
 .info-boxes {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  margin-top: 20px;
-  width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-top: 20px;
+    width: 100%;
 }
 
 .info-box {
-  display: flex;
-  justify-content: space-between;
-  background-color: #1d7fa5;
-  color: white;
-  padding: 10px 20px;
-  margin-bottom: 5px;
-  border-radius: 5px;
-  font-size: 16px;
-  font-weight: bold;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
-  position: relative;
-  width: 20%;
-  gap: 5px;
+    display: flex;
+    justify-content: space-between;
+    background-color: #1d7fa5;
+    color: white;
+    padding: 10px 20px;
+    margin-bottom: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    font-weight: bold;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    width: 20%;
+    gap: 5px;
 }
 
 .info-description {
-  font-size: 14px;
-  color: black;
-  margin-top: 5px;
-  /* margin-bottom: 50px; */
+    font-size: 14px;
+    color: black;
+    margin-top: 5px;
+    /* margin-bottom: 50px; */
 }
 
 .friendliness-ranking {
-  position: absolute;
-  right: -150px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  gap: 5px;
+    position: absolute;
+    right: -150px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 5px;
 }
 
 .security-ranking {
-  position: absolute;
-  right: -150px;
-  top: 50%;
-  transform: translateY(-50%);
-  display: flex;
-  gap: 5px;
+    position: absolute;
+    right: -150px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 5px;
 }
 
 .friendliness-ranking .material-symbols-outlined,
 .security-ranking .material-symbols-outlined {
-  font-size: 24px;
-  color: gold;
-  cursor: pointer;
+    font-size: 24px;
+    color: gold;
+    cursor: pointer;
 }
 
 .os-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  margin-left: auto;
-  width: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    margin-left: auto;
+    width: 250px;
 }
 
 .os-title {
-  align-content: flex-end;
-  font-size: 16px;
-  font-weight: bold;
-  color: #1d7fa5;
-  margin-top: 100px;
+    align-content: flex-end;
+    font-size: 16px;
+    font-weight: bold;
+    color: #1d7fa5;
+    margin-top: 100px;
 }
 
 .os-list {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin-top: 5px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 5px;
 }
 
 .os-list p {
-  font-size: 14px;
-  color: black;
-  margin: 0;
+    font-size: 14px;
+    color: black;
+    margin: 0;
 }
 
 .review-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 20px;
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 800px;
-  min-height: 400px;
-  margin: 0 auto;
-  margin-bottom: 100px;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 800px;
+    min-height: 400px;
+    margin: 0 auto;
+    margin-bottom: 100px;
 }
 
 .nav-button {
-  position: absolute;
-  background-color: #1d7fa5;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  font-size: 18px;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
+    position: absolute;
+    background-color: #1d7fa5;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 .left-button {
-  left: -50px;
+    left: -50px;
 }
 
 .right-button {
-  right: -50px;
+    right: -50px;
 }
 
 .nav-button:hover {
-  background-color: #57adcf;
+    background-color: #57adcf;
 }
 
 .no-reviews h1 {
-  color: #555;
-  font-size: 18px;
-  text-align: center; /* למרכז את הטקסט */
-  margin-top: 20px;
-  font-style: italic;
-  width: 100%; /* להבטיח שההודעה תתפוס את כל הרוחב */
-  display: flex; /* שימוש ב-flexbox */
-  justify-content: center; /* למרכז את התוכן אופקית */
-  align-items: center; /* למרכז את התוכן אנכית */
-  height: 100%; /* תופס את כל הגובה של הקונטיינר */
-  margin-right: 280px;
+    color: #555;
+    font-size: 18px;
+    text-align: center;
+    /* למרכז את הטקסט */
+    margin-top: 20px;
+    font-style: italic;
+    width: 100%;
+    /* להבטיח שההודעה תתפוס את כל הרוחב */
+    display: flex;
+    /* שימוש ב-flexbox */
+    justify-content: center;
+    /* למרכז את התוכן אופקית */
+    align-items: center;
+    /* למרכז את התוכן אנכית */
+    height: 100%;
+    /* תופס את כל הגובה של הקונטיינר */
+    margin-right: 280px;
 }
 
 .review {
-  text-align: start;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  position: relative;
+    text-align: start;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
 }
 
 .review h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
 .actions {
-  display: flex;
-  gap: 10px;
-  align-items: center;
-  position: absolute;
-  top: 0;
-  right: 0;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    position: absolute;
+    top: 0;
+    right: 0;
 }
 
 .actions span {
-  cursor: pointer;
-  font-size: 24px;
+    cursor: pointer;
+    font-size: 24px;
 }
 
 .delete-modal {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
-  display: none;
-  justify-content: center;
-  align-items: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: none;
+    justify-content: center;
+    align-items: center;
 }
 
 .delete-modal-content {
-  background-color: #fff;
-  padding: 20px;
-  border-radius: 10px;
-  text-align: center;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
 }
 
 button {
-  margin: 5px;
-  padding: 10px;
-  cursor: pointer;
+    margin: 5px;
+    padding: 10px;
+    cursor: pointer;
 }
 
 .modal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
 }
 
 .review-rating {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  margin-left: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-left: 20px;
 }
 
 .modal-content {
-  background-color: white;
-  padding: 20px;
-  border-radius: 8px;
-  width: 60vw;
-  height: 60vh;
-  text-align: left;
-  overflow-y: auto;
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 60vw;
+    height: 60vh;
+    text-align: left;
+    overflow-y: auto;
 }
 
 .modal-title {
-  font-size: 24px;
-  margin-bottom: 20px;
+    font-size: 24px;
+    margin-bottom: 20px;
 }
 
 textarea#title {
-  width: 100%;
-  height: 5vh;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 20px;
+    width: 100%;
+    height: 5vh;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 textarea#content {
-  width: 100%;
-  height: 15vh;
-  padding: 10px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  margin-bottom: 20px;
+    width: 100%;
+    height: 15vh;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 20px;
 }
 
 #content-rating {
-  display: flex;
-  gap: 3px;
-  margin-top: 10px;
-  margin-bottom: 30px;
+    display: flex;
+    gap: 3px;
+    margin-top: 10px;
+    margin-bottom: 30px;
 }
 
 .rating-text {
-  font-size: 16px; /* גודל פונט לטקסט */
-  font-weight: bold; /* טקסט מודגש */
-  margin-right: 10px; /* רווח מימין */
-  color: #333; /* צבע הטקסט */
+    font-size: 16px;
+    /* גודל פונט לטקסט */
+    font-weight: bold;
+    /* טקסט מודגש */
+    margin-right: 10px;
+    /* רווח מימין */
+    color: #333;
+    /* צבע הטקסט */
 }
 
 .star {
-  font-size: 24px;
-  color: gray;
-  cursor: pointer;
-  transition: color 0.3s;
+    font-size: 24px;
+    color: gray;
+    cursor: pointer;
+    transition: color 0.3s;
 }
 
 .star.selected,
 .star:hover,
-.star:hover ~ .star {
-  color: gold;
+.star:hover~.star {
+    color: gold;
 }
 
 .modal-buttons {
-  display: flex;
-  justify-content: space-between;
+    display: flex;
+    justify-content: space-between;
 }
 
 .modal-buttons button {
-  padding: 10px 20px;
-  font-size: 14px;
-  cursor: pointer;
+    padding: 10px 20px;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 #approveBtn {
-  background-color: green;
-  color: white;
-  border: none;
-  border-radius: 5px;
+    background-color: green;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }
 
 #cancelBtn {
-  background-color: red;
-  color: white;
-  border: none;
-  border-radius: 5px;
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
 }
 
 .add-reaction-icon {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .review p {
-  font-size: 16px;
-  line-height: 1.5;
-  word-wrap: break-word;
-  white-space: normal;
-  box-sizing: border-box;
-  padding: 10px;
+    font-size: 16px;
+    line-height: 1.5;
+    word-wrap: break-word;
+    white-space: normal;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .review-footer {
-  position: absolute;
-  margin-top: 20px;
-  font-size: 18px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-weight: bold;
+    position: absolute;
+    margin-top: 20px;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
 }
 
 .add-raction-icon {
-  position: relative;
-  top: 0;
-  /* המרחק מהחלק העליון של הקונטיינר */
-  right: 0;
-  display: flex;
-  gap: 10px;
+    position: relative;
+    top: 0;
+    /* המרחק מהחלק העליון של הקונטיינר */
+    right: 0;
+    display: flex;
+    gap: 10px;
 }
 
 .add-comment-icon {
-  position: absolute;
-  top: -30px;
-  /* Adjust the distance above the actions icons */
-  right: 0;
-  /* Align it to the right, above the other icons */
-  cursor: pointer;
-  font-size: 30px;
-  /* Adjust the size of the icon */
+    position: absolute;
+    top: -30px;
+    /* Adjust the distance above the actions icons */
+    right: 0;
+    /* Align it to the right, above the other icons */
+    cursor: pointer;
+    font-size: 30px;
+    /* Adjust the size of the icon */
 }
 
 .material-symbols-outlined {
-  font-size: 20px;
-  cursor: pointer;
-  transition: color 0.3s ease;
+    font-size: 20px;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .top-category {
-  text-align: center;
-  padding: 20px;
+    text-align: center;
+    padding: 20px;
 }
 
 .items-container {
-  display: flex;
-  justify-content: center;
-  gap: 10px;
-  margin: 20px 0;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
 }
 
 .item {
-  border: 1px solid white;
-  padding: 10px;
-  width: 140px;
-  height: 120%;
-  text-align: left;
-  position: relative;
+    border: 1px solid white;
+    padding: 10px;
+    width: 140px;
+    height: 120%;
+    text-align: left;
+    position: relative;
 }
 
 .image-placeholder {
-  width: 140px;
-  height: 120px;
-  background-color: #f0f0f0;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-bottom: 10px;
+    width: 140px;
+    height: 120px;
+    background-color: #f0f0f0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
 }
 
 .price-5-top {
-  margin: 10px 0 0 0;
-  /* ריווח בין התמונה למחיר */
-  font-size: 16px;
-  /* גודל גופן */
-  color: black;
+    margin: 10px 0 0 0;
+    /* ריווח בין התמונה למחיר */
+    font-size: 16px;
+    /* גודל גופן */
+    color: black;
 }
 
 .arrow-button {
-  margin-left: 10px;
+    margin-left: 10px;
 }
 
 .arrow-button button {
-  background-color: #1d7fa5;
-  color: white;
-  border: none;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  font-size: 20px;
-  margin-top: 50px;
+    background-color: #1d7fa5;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 50px;
 }
 
 .arrow-button button:hover {
-  background-color: #57adcf;
+    background-color: #57adcf;
 }
+
 
 /* הסגנון לחוברת */
 
 #pdf-overlay {
-  position: fixed;
-  /* נציב את הרקע בכל המסך */
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: none;
-  justify-content: center;
-  z-index: 1000;
+    position: fixed;
+    /* נציב את הרקע בכל המסך */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: none;
+    justify-content: center;
+    z-index: 1000;
 }
 
 #pdf-container {
-  background-color: #fff;
-  padding: 20px;
-  max-width: 80%;
-  max-height: 80%;
-  overflow: auto;
-  border-radius: 10px;
-  /* זוויות מעוגלות */
-  width: 80%;
-  height: 100%;
-  align-self: center;
-  position: absolute;
+    background-color: #fff;
+    padding: 20px;
+    max-width: 80%;
+    max-height: 80%;
+    overflow: auto;
+    border-radius: 10px;
+    /* זוויות מעוגלות */
+    width: 80%;
+    height: 100%;
+    align-self: center;
+    position: absolute;
 }
 
 .close-icon {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 14px;
-  color: white;
-  /* צבע האיקס */
-  background-color: black;
-  /* צבע הרקע */
-  border-radius: 50%;
-  /* יוצר את העיגול */
-  width: 20px;
-  /* גודל העיגול */
-  height: 20px;
-  /* גודל העיגול */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  font-weight: bold;
-  z-index: 10;
-  /* לוודא שהאייקון יהיה מעל התוכן */
-  transition: background-color 0.3s;
-  /* אנימציה להחלפת צבע הרקע */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    font-size: 14px;
+    color: white;
+    /* צבע האיקס */
+    background-color: black;
+    /* צבע הרקע */
+    border-radius: 50%;
+    /* יוצר את העיגול */
+    width: 20px;
+    /* גודל העיגול */
+    height: 20px;
+    /* גודל העיגול */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: bold;
+    z-index: 10;
+    /* לוודא שהאייקון יהיה מעל התוכן */
+    transition: background-color 0.3s;
+    /* אנימציה להחלפת צבע הרקע */
 }
 
 .close-icon:hover {
-  background-color: red;
+    background-color: red;
 }
 
 .copy-link {
-  cursor: pointer;
-  transition: color 0.3s ease;
+    cursor: pointer;
+    transition: color 0.3s ease;
 }
 
 .copy-link:hover {
-  color: #007bff;
-  /* שינוי צבע בזמן מעבר */
+    color: #007bff;
+    /* שינוי צבע בזמן מעבר */
+}
+
+.top-category {
+    margin-bottom: 20px;
+    /* רווח בין הקטגוריה לתוכן מתחת */
+}
+
+.products-container {
+    display: flex;
+    /* מאפשר להניח את המוצרים והחץ באותה שורה */
+    align-items: center;
+    /* מיישר את התוכן במרכז */
+    justify-content: flex-start;
+    /* מיישר את המוצרים והחץ בהתחלה */
+}
+
+.items-container {
+    display: flex;
+    /* מאפשר להציג את המוצרים בשורה */
+    overflow-x: auto;
+    /* מאפשר גלילה אופקית אם יש יותר מדי מוצרים */
+    white-space: nowrap;
+    /* מונע שורות חדשות */
+    flex: 0.85;
+    /* מאפשר לקונטיינר למלא את השטח */
+    margin-left: 200px;
+}
+
+.item {
+    margin-right: 10px;
+    /* רווח בין המוצרים */
+    text-align: center;
+    /* מיישר את התמונה והמחיר */
+}
+
+.arrow-button {
+    margin-top: 10px;
+    /* רווח מעל הכפתור */
+}
+
+.arrow-button button {
+    background-color: #1d7fa5;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    font-size: 20px;
+    margin-top: 10px;
+    /* רווח מעל הכפתור */
+    margin-bottom: 50px;
+    /* רווח מתחת לכפתור */
 }
