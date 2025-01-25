@@ -6,6 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="shoppingCartPage_style.css" />
     <title>Shopping Cart</title>
+    <script>
+        function showAlert() {
+            alert("This module is still under construction, thanks for your patience!");
+        }
+    </script>
 </head>
 
 <body>
@@ -18,15 +23,15 @@
     <main class="main-content">
         <h2 class="main-message">Shopping cart is for registered customers only</h2>
         <div class="buttons-container">
-            <button class="action-button">Login</button>
-            <button class="action-button">Register</button>
+            <button class="action-button" onclick="showAlert()">Login</button>
+            <button class="action-button" onclick="showAlert()">Register</button>
         </div>
     </main>
 
     <!-- כותרת תחתונה -->
     <footer class="footer">
         <span>Total Payment:</span>
-        <button class="buy-button" disabled>Buy Now</button>
+        <button class="buy-button" onclick="showAlert()">Buy Now</button>
     </footer>
 </body>
 

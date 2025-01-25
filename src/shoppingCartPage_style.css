@@ -49,16 +49,17 @@ header .name {
 .buttons-container {
     display: flex;
     gap: 20px;
+    cursor: pointer;
 }
 
 .action-button {
+    cursor: pointer;
     background-color: #1d7fa5;
     color: #ffffff;
     font-size: 16px;
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    cursor: not-allowed;
     transition: background-color 0.3s ease;
 }
 
@@ -89,8 +90,7 @@ header .name {
     padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    cursor: not-allowed;
-    /* הכפתור לא פעיל */
+    cursor: pointer;
     margin-right: 10px;
     /* מרווח קטן בצד ימין */
     transition: background-color 0.3s ease;
