@@ -89,7 +89,10 @@ async function loadProducts(categoryId = null) {
     updateProductList(filteredProducts);
 }
 
+// הוספת משתנה לשמירה על מצב התצוגה
+let isGridView = true;
 
+// פונקציה לעדכון תצוגת המוצרים
 function updateProductList(products) {
     const productsContainer = document.querySelector(".products-container");
 
@@ -103,15 +106,87 @@ function updateProductList(products) {
         const productElement = document.createElement("div");
         productElement.classList.add("product");
 
-        // מוסיפים את התאריך הוספה של המוצר בתור תכונה שלא תוצג באתר כדי לנהל את השמת והסרת התווית ״חדש״
-        productElement.setAttribute("data-date-added", product.created_at);
 
-        let stars = "";
-        for (let i = 0; i < product.rating; i++) {
-            stars += `<span class="material-symbols-outlined">star</span>`; // כוכב זהב
-        }
 
-        productElement.innerHTML = `
+        // אם מצב התצוגה הוא "רשימה"
+        if (!isGridView) {
+            productElement.style.width = "90%";
+            productElement.style.margin = "10px auto"; // מרכז את המוצר
+            productElement.style.border = "2px solid #1d7fa5"; // גבול עבה בצבע 1d7fa5
+            productElement.style.padding = "10px"; // רווח פנימי למוצר
+            productElement.style.borderRadius = "5px"; // פינות מעוגלות
+
+            // מוסיפים את התאריך הוספה של המוצר בתור תכונה שלא תוצג באתר כדי לנהל את השמת והסרת התווית ״חדש״
+            productElement.setAttribute("data-date-added", product.created_at);
+
+            let stars = "";
+            for (let i = 0; i < product.rating; i++) {
+                stars += `<span class="material-symbols-outlined">star</span>`; // כוכב זהב
+            }
+
+            productElement.innerHTML = `
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div style="flex: 1; display: flex; align-items: center;">
+                        <a href="productPage.HTML?productId=${product.id}" class="product-name" style="font-weight: bold;">${product.name}</a>
+                        ${
+                            isNewProduct(product.created_at)
+                                ? '<span class="material-symbols-outlined new-icon" style="font-size: 30px; margin-left: 5px;">fiber_new</span>'
+                                : ""
+                        }
+                    </div>
+                    <div class="product-rating" style="margin-left: 10px;">${stars}</div>
+               </div>
+        <a href="#" class="product-category" data-category-id="${product.category_id}" style="font-weight: bold; display: block; margin-top: 5px;">Category: ${getCategoryNameById(product.category_id)}</a>
+        <div style="display: flex; margin-top: 10px;">
+            <div style="flex: 1; margin-right: 10px;"> <!-- הסבר -->
+                <div class="product-description" style="max-width: 100%; overflow-wrap: break-word;"> 
+                    <span style="font-weight: bold;">Description:</span> ${product.description}
+                </div>
+                <div style="flex: 0 0 50%; text-align: right;"> <!-- תמונה -->
+                <img src="${product.image_url}" alt="${product.name}" class="product-image" style="
+                    max-width: 35%; /* גודל התמונה */
+                    height: auto;
+                    border-radius: 10px;
+                    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+                    margin-top: 10px; /* רווח מעל התמונה */
+                "/>
+            </div>
+                    
+                </div>
+            `;
+
+            productElement.querySelector(".product-category").addEventListener("click", (event) => {
+                event.preventDefault(); // מניעת מעבר לדף חדש
+                const categoryId = product.category_id;
+                selectedCategory = categoryId; // עדכון הקטגוריה הנבחרת
+                loadProducts(categoryId); // קריאה לפונקציה שמציגה מוצרים לפי הקטגוריה
+            });
+
+
+
+
+        } else {
+            const productsContainer = document.querySelector(".products-container");
+
+            if (!productsContainer) {
+                console.error("Error: .products-container not found in the DOM!");
+                return;
+            }
+            productsContainer.innerHTML = "";
+
+            products.forEach((product) => {
+                const productElement = document.createElement("div");
+                productElement.classList.add("product");
+
+                // מוסיפים את התאריך הוספה של המוצר בתור תכונה שלא תוצג באתר כדי לנהל את השמת והסרת התווית ״חדש״
+                productElement.setAttribute("data-date-added", product.created_at);
+
+                let stars = "";
+                for (let i = 0; i < product.rating; i++) {
+                    stars += `<span class="material-symbols-outlined">star</span>`; // כוכב זהב
+                }
+
+                productElement.innerHTML = `
         <a href="productPage.HTML?productId=${product.id}" class="product-name">${product.name}</a>
         ${
           isNewProduct(product.created_at)
@@ -128,17 +203,22 @@ function updateProductList(products) {
         </div>
     `;
 
-        productElement.querySelector(".product-category").addEventListener("click", (event) => {
-            event.preventDefault(); // מניעת מעבר לדף חדש
-            const categoryId = product.category_id;
-            selectedCategory = categoryId; // עדכון הקטגוריה הנבחרת
-            loadProducts(categoryId); // קריאה לפונקציה שמציגה מוצרים לפי הקטגוריה
-        });
+                productElement.querySelector(".product-category").addEventListener("click", (event) => {
+                    event.preventDefault(); // מניעת מעבר לדף חדש
+                    const categoryId = product.category_id;
+                    selectedCategory = categoryId; // עדכון הקטגוריה הנבחרת
+                    loadProducts(categoryId); // קריאה לפונקציה שמציגה מוצרים לפי הקטגוריה
+                });
 
+
+                productsContainer.appendChild(productElement);
+            });
+        }
 
         productsContainer.appendChild(productElement);
     });
 }
+
 
 function handleFilterStars(starOrder) {
     document.querySelectorAll("#presentFilter>div>span").forEach(s => {
@@ -309,9 +389,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(favoriteIcon);
 
     favoriteIcon.addEventListener("click", () => {
-        alert(
-            "The Favorites module is still under construction, thanks for your patience!"
-        );
+        window.location.href = "favorite_productsPage.html";
     });
     const shoppingCartIcon = document.querySelector(".material-symbols-outlined.shopping_cart-icon");
     console.log(shoppingCartIcon);
@@ -337,14 +415,27 @@ document.addEventListener("DOMContentLoaded", () => {
             "Search history module is still under construction, thanks for your patience!"
         );
     });
-    const format_list_bulletedIcon = document.querySelector(".format-list-icon");
-    console.log(format_list_bulletedIcon);
 
-    format_list_bulletedIcon.addEventListener("click", () => {
-        alert(
-            "List view under construction, thanks for your patience!"
-        );
+    const listIcon = document.querySelector(".format-list-icon");
+    const gridIcon = document.querySelector(".grid-icon");
+    console.log(listIcon);
+    listIcon.addEventListener("click", () => {
+        isGridView = false; // שים את מצב התצוגה לרשימה
+
+        listIcon.style.display = "none"; // הסתר את אייקון הרשימה
+        gridIcon.style.display = "inline"; // הצג את אייקון הגריד
+        updateProductList(productsData.filteredProducts); // עדכן את התצוגה
+
     });
+
+    console.log(gridIcon);
+    gridIcon.addEventListener("click", () => {
+        isGridView = true; // שים את מצב התצוגה לגריד
+        gridIcon.style.display = "none"; // הסתר את אייקון הגריד
+        listIcon.style.display = "inline"; // הצג את אייקון הרשימה
+        updateProductList(productsData.filteredProducts); // עדכן את התצוגה
+    });
+
     const searchInput = document.getElementById("search-input");
     const searchButton = document.getElementById("search-button");
 

@@ -1,111 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Favorite products cart</title>
-    <link rel="stylesheet" href="favorite_productsPage.css" />
-    <link
-      href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined"
-      rel="stylesheet"
-    />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
-  </head>
+    <link rel="stylesheet" href="shoppingCartPage_style.css" />
+    <title>Shopping Cart</title>
+    <script>
+        function showAlert() {
+            alert("This module is still under construction, thanks for your patience!");
+        }
+    </script>
+</head>
 
-  <body>
-    <header>
-      <div class="site-name">Software Products</div>
-      <div>
-        <span class="material-symbols-outlined">favorite</span>
-        <span class="material-symbols-outlined">shopping_cart</span>
-      </div>
+<body>
+    <!-- כותרת עליונה -->
+    <header class="header">
+        <div class="name">Favorites Cart </div>
     </header>
 
-    <div
-      id="notification"
-      style="
-        display: none;
-        padding: 10px;
-        background-color: #1d7fa5;
-        color: white;
-        text-align: center;
-        margin-bottom: 10px;
-        border-radius: 4px;
-      "
-    ></div>
-
-    <!-- רשימת המוצרים המועדפים -->
-    <main class="product-list">
-      <div class="product">
-        <img
-          src="products_images/Client_Sphere_image.jpg"
-          alt="Product 1"
-          class="product-image"
-        />
-        <div class="product-details">
-          <h3 class="product-title">Product 1</h3>
-          <p class="product-description">Description of the product</p>
-          <p class="product-price">$29.99</p>
+    <!-- תוכן ראשי -->
+    <main class="main-content">
+        <h2 class="main-message">Favorites Cart is for registered customers only</h2>
+        <div class="buttons-container">
+            <button class="action-button" onclick="showAlert()">Login</button>
+            <button class="action-button" onclick="showAlert()">Register</button>
         </div>
-        <div class="product-actions">
-          <button class="add-to-cart">Add to Cart</button>
-          <button class="remove">Remove</button>
-        </div>
-      </div>
-
-      <div class="product">
-        <img
-          src="products_images/Connectify_CRM_image.jpg"
-          alt="Product 2"
-          class="product-image"
-        />
-        <div class="product-details">
-          <h3 class="product-title">Product 2</h3>
-          <p class="product-description">Description of the product</p>
-          <p class="product-price">$19.99</p>
-        </div>
-        <div class="product-actions">
-          <button class="add-to-cart">Add to Cart</button>
-          <button class="remove">Remove</button>
-        </div>
-      </div>
-
-      <div class="product">
-        <img
-          src="products_images/Trend_Fusion_image.jpg"
-          alt="Product 3"
-          class="product-image"
-        />
-        <div class="product-details">
-          <h3 class="product-title">Product 3</h3>
-          <p class="product-description">Description of the product</p>
-          <p class="product-price">$99.99</p>
-        </div>
-        <div class="product-actions">
-          <button class="add-to-cart">Add to Cart</button>
-          <button class="remove">Remove</button>
-        </div>
-      </div>
-
-      <div class="product">
-        <img
-          src="products_images/Vision_Analytics_image.jpg"
-          alt="Product 4"
-          class="product-image"
-        />
-        <div class="product-details">
-          <h3 class="product-title">Product 4</h3>
-          <p class="product-description">Description of the product</p>
-          <p class="product-price">$379.99</p>
-        </div>
-        <div class="product-actions">
-          <button class="add-to-cart">Add to Cart</button>
-          <button class="remove">Remove</button>
-        </div>
-      </div>
-      <!-- הוסף כאן מוצרים נוספים באותו מבנה -->
     </main>
 
-    <script src="favorite_productsPage.js"></script>
-  </body>
+</body>
+
 </html>

@@ -165,6 +165,15 @@ header .icons>* {
     cursor: pointer;
 }
 
+.grid-icon {
+    font-size: 24px;
+    /* גודל הטקסט */
+    color: #1d7fa5;
+    /* צבע */
+    cursor: pointer;
+    /* יד כשהעכבר מעל האייקון */
+}
+
 .dropdown-container {
     display: flex;
     flex-direction: column;
@@ -189,7 +198,7 @@ header .icons>* {
     color: #1d7fa5;
     margin-right: 10px;
     /* רווח בין הכיתוב למלבן */
-    width:4rem;
+    width: 4rem;
 }
 
 
@@ -419,8 +428,8 @@ header .icons>* {
 
 #presentFilter {
     z-index: 50;
-    width:10rem;
-    color:black;
+    width: 10rem;
+    color: black;
     background-color: #1d7fa5;
     position: fixed;
     top: 5rem;
@@ -430,19 +439,22 @@ header .icons>* {
     text-align: center;
 }
 
-#presentFilter>input{
-    width:5rem;
+#presentFilter>input {
+    width: 5rem;
 }
-#presentFilter>label{
+
+#presentFilter>label {
     display: inline-block;
-    width:3rem;
+    width: 3rem;
 }
-#presentFilter>p{
+
+#presentFilter>p {
     font-size: x-small;
     margin: 5px auto;
     margin-left: 3rem;
 }
-#presentFilter>button{
+
+#presentFilter>button {
     margin-bottom: 0.5em;
     background-color: black;
     color: white;
@@ -489,14 +501,15 @@ header .icons>* {
     color: #1d7fa5;
 }
 
-.presentSort_hidden{
-    display:none !important;
+.presentSort_hidden {
+    display: none !important;
 }
+
 #presentSort {
     z-index: 50;
-    width:10rem;
+    width: 10rem;
     height: 6rem;
-    color:black;
+    color: black;
     background-color: #1d7fa5;
     position: fixed;
     top: 7.7rem;
@@ -510,11 +523,10 @@ header .icons>* {
     align-items: center;
 }
 
-#presentSort>button{
-    width:6rem;
-    margin:0.5em;
+#presentSort>button {
+    width: 6rem;
+    margin: 0.5em;
     background-color: black;
     color: white;
     cursor: pointer;
 }
-
