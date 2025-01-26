@@ -838,3 +838,9 @@ textarea#content {
     margin-bottom: 50px;
     /* רווח מתחת לכפתור */
 }
+
+.view-compare{
+    background-color: #1D7FA5;
+    color: #FFFFFF !important;
+    padding: 3.5px;
+}

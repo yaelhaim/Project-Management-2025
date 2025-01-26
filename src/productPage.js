@@ -100,13 +100,13 @@ addReviewIcon.addEventListener("click", () => {
     reviewModal.style.display = "flex";
 });
 
-cancelBtn.addEventListener("click", function() {
+cancelBtn.addEventListener("click", function () {
     reviewModal.style.display = "none";
     clearContent();
     resetStars();
 });
 
-approveBtn.addEventListener("click", function(event) {
+approveBtn.addEventListener("click", function (event) {
     const maxTitleLength = 100; // לדוגמה
     const maxContentLength = 1000;
 
@@ -211,8 +211,8 @@ document.addEventListener("DOMContentLoaded", () => {
             <span>${review.user_name}</span>
             <div class="review-rating">
               ${createStarsHTML(
-                review.customer_rating
-              )} <!-- הצגת כוכבים לפי הדירוג -->
+            review.customer_rating
+        )} <!-- הצגת כוכבים לפי הדירוג -->
             </div>
           </div>
         </div>
@@ -226,7 +226,7 @@ document.addEventListener("DOMContentLoaded", () => {
         );
     }
 
-    document.addEventListener("DOMContentLoaded", async() => {
+    document.addEventListener("DOMContentLoaded", async () => {
         const productId = getProductIdFromURL(); // פונקציה לקבלת מזהה מוצר מכתובת ה-URL
         const reviewContainer = document.querySelector(".review-container .review");
 
@@ -300,7 +300,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 //implementing the possibility of deleting a review
 document.querySelectorAll(".delete-review-icon").forEach((deleteIcon) => {
-    deleteIcon.addEventListener("click", function(event) {
+    deleteIcon.addEventListener("click", function (event) {
         // מציאת ה-review-container שמכיל את הביקורת
         const reviewContainer = event.target.closest(".review-container");
         if (!reviewContainer) {
@@ -332,7 +332,7 @@ document.querySelectorAll(".delete-review-icon").forEach((deleteIcon) => {
         modal.style.display = "block";
 
         // אם המשתמש לוחץ על כפתור "בטוח", מחיקת הביקורת
-        confirmDeleteBtn.addEventListener("click", async function() {
+        confirmDeleteBtn.addEventListener("click", async function () {
             try {
                 const response = await fetch(`/api/reviews/${reviewId}`, {
                     method: "DELETE",
@@ -356,7 +356,7 @@ document.querySelectorAll(".delete-review-icon").forEach((deleteIcon) => {
         });
 
         // אם המשתמש לוחץ על כפתור "התחרטתי", סגירת ה-modal ללא מחיקה
-        cancelDeleteBtn.addEventListener("click", function() {
+        cancelDeleteBtn.addEventListener("click", function () {
             modal.style.display = "none";
         });
     });
@@ -401,12 +401,12 @@ document.getElementById("edit-review-form").addEventListener("submit", (e) => {
 
     // שליחה לשרת כדי לעדכן את הביקורת (PUT)
     fetch(`/api/reviews/${reviewId}`, {
-            method: "PUT",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify(updatedReview),
-        })
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedReview),
+    })
         .then((response) => response.json())
         .then((data) => {
             console.log("Review updated:", data);
@@ -582,8 +582,8 @@ function openPDF() {
 
     pdfjsLib
         .getDocument(product_pdf_url)
-        .promise.then(function(pdf) {
-            pdf.getPage(1).then(function(page) {
+        .promise.then(function (pdf) {
+            pdf.getPage(1).then(function (page) {
                 const viewport = page.getViewport({ scale: 1 });
                 canvas.height = viewport.height;
                 canvas.width = viewport.width;
@@ -595,7 +595,7 @@ function openPDF() {
                 page.render(renderContext);
             });
         })
-        .catch(function(error) {
+        .catch(function (error) {
             console.error("Error loading PDF:", error);
         });
 }
@@ -609,7 +609,7 @@ function closePDF() {
 // מאזין לאירוע על הקישור של חוברת המידע
 document
     .getElementById("brochure-link")
-    .addEventListener("click", function(event) {
+    .addEventListener("click", function (event) {
         event.preventDefault(); // מונע את הפעולה המוגדרת ב-href (#)
 
         // כאן אתה שולף את הקישור ל-PDF ממקור כלשהו, לדוגמה:
@@ -619,9 +619,70 @@ document
         openPDF(productPdfUrl); // קריאה לפונקציה עם ה-URL של ה-PDF
     });
 
-document.getElementById("compare").addEventListener("click", function(event){
+const compareModule = (function () {
+    let compareList = [];
+    const load = () => {
+        const strCompareList = localStorage.getItem("compareList");
+        if (strCompareList) {
+            compareList = JSON.parse(strCompareList);
+        }
+    }
+    const save = () => {
+        localStorage.setItem("compareList", JSON.stringify(compareList))
+    }
+    const add = (productId) => {
+        if(!exists(productId) && compareList.length < 2)
+            compareList.push(productId)
+    }
+    const remove = (productId) => {
+        if(exists(productId)){
+            const index = compareList.findIndex(id => id == productId);
+            compareList.splice(index, 1);
+        }
+    }
+    const exists = (productId) => compareList.includes(productId);
+    const display = (compare) => {
+        if(exists(productId)){
+            if(compareList.length == 2){
+                compare.title = "View comparison"
+                compare.classList.toggle("view-compare")
+            }else{
+                compare.title = "Remove from compare"
+                compare.classList.toggle("view-compare")
+            }
+        }else{
+            compare.title = "Add to compare";
+        }
 
-});
+    }
+    const handleProduct = (productId) => {
+        const compare = document.getElementById("compare");
+        load()
+        display(compare);
+
+        compare.addEventListener("click", function (event) {
+            if(compareList.length == 2){
+                window.location.href = "comparisonPage.html";
+            }else{
+                if(exists(productId)){
+                    remove(productId)
+                }else{
+                    add(productId);
+                }
+                display(compare)
+                save();
+            }
+            
+        });
+    }
+    return{
+        handleProduct, save, add, remove, exists
+    }
+})()
+compareModule.handleProduct(productId)
+
+//document.getElementById("compare")
+
 let currentIndex = 0; // משתנה שמזכיר את המיקום הנוכחי במערך
 const itemsToShow = 5; // מספר המוצרים המוצגים בכל פעם
 

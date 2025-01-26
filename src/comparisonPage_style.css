@@ -1,0 +1,11 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+
+#product1_title img,
+#product2_title img {
+  max-width: 150px; /* רוחב מקסימלי */
+  max-height: 150px; /* גובה מקסימלי */
+  width: auto; /* שומר על פרופורציות */
+  height: auto; /* שומר על פרופורציות */
+}
+
+  
