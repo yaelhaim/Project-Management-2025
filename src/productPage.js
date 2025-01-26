@@ -619,6 +619,9 @@ document
         openPDF(productPdfUrl); // קריאה לפונקציה עם ה-URL של ה-PDF
     });
 
+document.getElementById("compare").addEventListener("click", function(event){
+
+});
 let currentIndex = 0; // משתנה שמזכיר את המיקום הנוכחי במערך
 const itemsToShow = 5; // מספר המוצרים המוצגים בכל פעם
 

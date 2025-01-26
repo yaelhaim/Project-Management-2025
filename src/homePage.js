@@ -64,7 +64,7 @@ function updateCategoriesList(categories) {
 
 const productsData = {
     allProducts: [],
-    filteredProducts: []
+    filteredProducts:[]
 }
 
 
@@ -235,13 +235,13 @@ function handleFilterStars(starOrder) {
 }
 
 // module for sort
-const sortElements = (function() {
+const sortElements = (function(){
     const btnPopularity = document.getElementById("btnPopularity");
     const btnRecency = document.getElementById("btnRecency");
     const presentSort = document.getElementById("presentSort");
 
     const sortByPopularity = () => {
-        productsData.filteredProducts.sort((p1, p2) => p2.number_of_purchase - p1.number_of_purchases); //rating
+        productsData.filteredProducts.sort( (p1, p2) => p2.number_of_purchase - p1.number_of_purchases);  //rating
         updateProductList(productsData.filteredProducts);
         presentSort.classList.add('presentSort_hidden')
     }
@@ -260,7 +260,7 @@ const sortElements = (function() {
 })();
 
 // js module for accessing the filter elements
-const filterElements = (function() {
+const filterElements = (function(){
     const from = document.getElementById("from");
     const to = document.getElementById("to");
     const fromMessage = document.getElementById("fromMessage");
@@ -268,20 +268,18 @@ const filterElements = (function() {
     const btnApply = document.getElementById("btnApply");
     const starsFilter = document.querySelectorAll("#presentFilter>div>span")
 
-    return { from, to, fromMessage, toMessage, btnApply, starsFilter }
+    return{from, to, fromMessage, toMessage, btnApply, starsFilter}
 })()
 
 // js module for validating filter input changes
-const filterHandlers = (function() {
+const filterHandlers = (function(){
 
-    const validateCharacters = (input, p) => {
-
+    const validateCharacters = (input, p) =>{
         input.setAttribute("maxlength", "10"); // Ensure the input has a maxlength
-        const value = input.value.trim(); // get the value without space in the start and end
-        // Handle empty input
-        try {
-            const num = parseInt(value); // try to convert to integer
-            if (isNaN(value) || num < 0 || value.length > 10 || input.value.includes(".")) { // validate value is positive and up to 10 characters
+        const value = input.value.trim();   // get the value without space in the start and end
+        try{
+            const num = parseInt(value);    // try to convert to integer
+            if(isNaN(value) || num < 0 || value.length > 10 || input.value.includes(".") ){   // validate value is positive and up to 10 characters
                 throw new Exception()
             }
             p.innerHTML = "&nbsp;";
@@ -289,7 +287,7 @@ const filterHandlers = (function() {
             input.style.outlineColor = 'initial';
             filterElements.btnApply.disabled = false;
             return num;
-        } catch (err) { // on failure present an error meesgase
+        }catch(err){    // on failure present an error meesgase
             p.innerText = "Enter valid values";
             input.style.borderColor = 'red';
             input.style.outlineColor = 'red';
@@ -303,13 +301,13 @@ const filterHandlers = (function() {
     const validateTo = () => {
         const toNum = validateCharacters(filterElements.to, filterElements.toMessage);
         const fromNum = validateCharacters(filterElements.from, filterElements.fromMessage);
-        if (toNum > -1 && fromNum > -1) {
-            if (toNum < fromNum) {
+        if(toNum > -1 && fromNum > -1){
+            if(toNum < fromNum){
                 filterElements.toMessage.innerText = "Enter valid values";
                 filterElements.to.style.borderColor = 'red';
                 filterElements.to.style.outlineColor = 'red';
                 filterElements.btnApply.disabled = true;
-            } else {
+            }else{
                 filterElements.toMessage.innerHTML = "&nbsp;";
                 filterElements.to.style.borderColor = 'initial';
                 filterElements.to.style.outlineColor = 'initial';
@@ -321,8 +319,8 @@ const filterHandlers = (function() {
     }
     const countStars = () => {
         let count = 0;
-        for (star of filterElements.starsFilter) {
-            if (star.getAttribute("data-select") == "true") {
+        for(star of filterElements.starsFilter){
+            if(star.getAttribute("data-select") == "true"){
                 count++;
             }
         }
@@ -333,7 +331,7 @@ const filterHandlers = (function() {
         const to = validateTo();
         const stars = countStars();
         let lastFilter = productsData.filteredProducts;
-        if (lastFilter.length == 0) {
+        if(lastFilter.length == 0){
             productsData.allProducts;
         }
         productsData.filteredProducts = lastFilter
@@ -343,7 +341,7 @@ const filterHandlers = (function() {
         const productCountElement = document.getElementById("product-count");
         productCountElement.textContent = `Loading ${productsData.filteredProducts.length} products`;
     }
-    return {
+    return{
         validateFrom,
         validateTo,
         FilterByPriceAndRating
