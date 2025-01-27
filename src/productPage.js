@@ -575,9 +575,10 @@ if (productId) {
 // מניחים שמידע המוצר כבר טוען והשתמשנו ב-openPDF עם כתובת ה-PDF
 function openPDF() {
     const pdfOverlay = document.getElementById("pdf-overlay");
-    const pdfEmbed = document.getElementById("pdf-embed");
+    // const pdfEmbed = document.getElementById("pdf-embed");
+    const canvas = document.getElementById("pdf-canvas");
 
-    pdfEmbed.src = product_pdf_url; // עדכון ה-src של ה-embed עם ה-URL של ה-PDF
+    // pdfEmbed.src = product_pdf_url; // עדכון ה-src של ה-embed עם ה-URL של ה-PDF
     pdfOverlay.style.display = "flex"; // הצגת ה-overlay עם ה-PDF
 
     pdfjsLib
@@ -622,13 +623,13 @@ document
 const compareModule = (function () {
     let compareList = [];
     const load = () => {
-        const strCompareList = localStorage.getItem("compareList");
+        const strCompareList = sessionStorage.getItem("compareList");
         if (strCompareList) {
             compareList = JSON.parse(strCompareList);
         }
     }
     const save = () => {
-        localStorage.setItem("compareList", JSON.stringify(compareList))
+        sessionStorage.setItem("compareList", JSON.stringify(compareList))
     }
     const add = (productId) => {
         if(!exists(productId) && compareList.length < 2)
@@ -645,13 +646,14 @@ const compareModule = (function () {
         if(exists(productId)){
             if(compareList.length == 2){
                 compare.title = "View comparison"
-                compare.classList.toggle("view-compare")
+                compare.classList.add("view-compare")
             }else{
                 compare.title = "Remove from compare"
-                compare.classList.toggle("view-compare")
+                compare.classList.remove("view-compare")
             }
         }else{
             compare.title = "Add to compare";
+            compare.classList.remove("view-compare")
         }
 
     }
@@ -662,6 +664,13 @@ const compareModule = (function () {
 
         compare.addEventListener("click", function (event) {
             if(compareList.length == 2){
+                if(!compareList.includes(productId)){
+                    const yesNo = confirm("Cannot add to add more than two\nWould you like to goto the comparison page?")
+                    if(yesNo){
+                        window.location.href = "comparisonPage.html";
+                    }
+                    return;
+                }
                 window.location.href = "comparisonPage.html";
             }else{
                 if(exists(productId)){

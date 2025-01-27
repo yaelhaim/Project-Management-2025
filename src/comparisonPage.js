@@ -1,10 +1,12 @@
 
 // מניחים שמידע המוצר כבר טוען והשתמשנו ב-openPDF עם כתובת ה-PDF
-function openPDF() {
+function openPDF(product_pdf_url) {
     const pdfOverlay = document.getElementById("pdf-overlay");
-    const pdfEmbed = document.getElementById("pdf-embed");
+    // const pdfEmbed = document.getElementById("pdf-embed");
+    const canvas = document.getElementById("pdf-canvas");
 
-    pdfEmbed.src = product_pdf_url; // עדכון ה-src של ה-embed עם ה-URL של ה-PDF
+    // לבדוק אם לבטל
+    //pdfEmbed.src = product_pdf_url; // עדכון ה-src של ה-embed עם ה-URL של ה-PDF
     pdfOverlay.style.display = "flex"; // הצגת ה-overlay עם ה-PDF
 
     pdfjsLib
@@ -53,13 +55,14 @@ async function fetchProduct(productId){
 
 async function showComparison() {
     let compareList = []
-    const strCompareList = localStorage.getItem("compareList");
+    const strCompareList = sessionStorage.getItem("compareList");
     if (strCompareList) {
         compareList = JSON.parse(strCompareList);
     }else{
-        //TODO there are no products
+        const container = document.querySelector(".table-container");
+        container.innerHTML = `<h2 class="no-products">There are no Products to compare</h2>`;
+        return;
     }
-    console.log(compareList);
     
     const product1 = await fetchProduct(compareList[0])
     const product2 = await fetchProduct(compareList[1])
@@ -72,10 +75,10 @@ async function showComparison() {
     product2_title.innerHTML = "";
     productProperties.innerHTML = "";
     
-    product1_title.innerHTML = `<strong>${product1.name}</strong> <img src="${product1.image_url}" />`;
-    product2_title.innerHTML = `<strong>${product2.name}</strong> <img src="${product2.image_url}" />`;
+    product1_title.innerHTML = `<img src="${product1.image_url}" /><p><strong>${product1.name}</strong></p> `;
+    product2_title.innerHTML = `<img src="${product2.image_url}" /><p><strong>${product2.name}</strong></p> `;
 
-    productProperties.innerHTML += `<tr><td>${product1.catalog_number}</td<td>${product2.catalog_number}</td> </tr>`
+    productProperties.innerHTML += `<tr><td>${product1.catalog_number}</td><td>${product2.catalog_number}</td><td>catalog #</td> </tr>`
 
     let stars1 = "";
     let stars2 = "";
@@ -85,12 +88,12 @@ async function showComparison() {
     for(let i = 0; i < product2.rating; i++){
         stars2 += `<span class="material-symbols-outlined">star</span>` 
     }
-    productProperties.innerHTML += `<tr><td>${stars1}</td<td>${stars2}</td> </tr>`
+    productProperties.innerHTML += `<tr><td>${stars1}</td><td>${stars2}</td><td>rating</td> </tr>`
 
     const info1 = `<a href="#" id="brochure-link1">Information Brochure</a>`
     const info2 = `<a href="#" id="brochure-link2">Information Brochure</a>`
-    productProperties.innerHTML += `<tr><td>${info1}</td<td>${info2}</td> </tr>`
-
+    productProperties.innerHTML += `<tr><td>${info1}</td><td>${info2}</td><td>information</td> </tr>`
+    
     document.getElementById("brochure-link1").addEventListener("click", function (event) {
         event.preventDefault(); // מונע את הפעולה המוגדרת ב-href (#)
 
@@ -99,10 +102,33 @@ async function showComparison() {
     });
     document.getElementById("brochure-link2").addEventListener("click", function (event) {
         event.preventDefault(); // מונע את הפעולה המוגדרת ב-href (#)
-
+        
         // כאן אתה שולף את הקישור ל-PDF ממקור כלשהו, לדוגמה:
-        openPDF(product1.pdf_url); // קריאה לפונקציה עם ה-URL של ה-PDF
+        openPDF(product2.pdf_url); // קריאה לפונקציה עם ה-URL של ה-PDF
+    });
+    productProperties.innerHTML += `<tr><td>${product1.price}</td><td>${product2.price}</td><td>price</td> </tr>`
+    productProperties.innerHTML += `<tr><td>${product1.discount_price}</td><td>${product2.discount_price}</td><td>price</td> </tr>`
+    productProperties.innerHTML += `<tr><td><button type="button" id="btn1">buy</button></td><td><button type="button" id="btn2">buy</button></td><td>price</td> </tr>`
+
+    document.getElementById("btn1").addEventListener("click", function (event){
+        //product1
+        alert('Service is not available')
+    });
+    document.getElementById("btn2").addEventListener("click", function (event){
+        //product2
+        alert('Service is not available')
     });
 }
 
-showComparison();
+document.addEventListener("DOMContentLoaded", function(){
+    document.querySelector(".empty-comparison").addEventListener('click', function(){
+        sessionStorage.removeItem("compareList");
+        const container = document.querySelector(".table-container");
+        container.innerHTML = `<h2 class="no-products">There are no Products to compare</h2>`;
+        setTimeout(() => {
+            window.location.href = "homePage.html";
+        }, 3000);
+
+    })
+    showComparison();
+});
