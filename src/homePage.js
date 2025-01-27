@@ -166,17 +166,17 @@ function updateProductList(products) {
 
 
         } else {
-            const productsContainer = document.querySelector(".products-container");
+            // const productsContainer = document.querySelector(".products-container");
 
-            if (!productsContainer) {
-                console.error("Error: .products-container not found in the DOM!");
-                return;
-            }
-            productsContainer.innerHTML = "";
+            // if (!productsContainer) {
+            //     console.error("Error: .products-container not found in the DOM!");
+            //     return;
+            // }
+            // productsContainer.innerHTML = "";
 
-            products.forEach((product) => {
-                const productElement = document.createElement("div");
-                productElement.classList.add("product");
+            // products.forEach((product) => {
+                // const productElement = document.createElement("div");
+                // productElement.classList.add("product");
 
                 // מוסיפים את התאריך הוספה של המוצר בתור תכונה שלא תוצג באתר כדי לנהל את השמת והסרת התווית ״חדש״
                 productElement.setAttribute("data-date-added", product.created_at);
@@ -212,7 +212,7 @@ function updateProductList(products) {
 
 
                 productsContainer.appendChild(productElement);
-            });
+            // });
         }
 
         productsContainer.appendChild(productElement);
@@ -401,9 +401,7 @@ document.addEventListener("DOMContentLoaded", () => {
     console.log(acuteIcon);
 
     acuteIcon.addEventListener("click", () => {
-        alert(
-            "The Product History module is still under construction, thanks for your patience!"
-        );
+        window.location.href = "productHistoryPage.html";
     });
     const manageSearchIcon = document.querySelector(".manage-search-icon");
     console.log(manageSearchIcon);
