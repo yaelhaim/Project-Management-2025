@@ -28,7 +28,7 @@ header .material-symbols-outlined {
 }
 
 header div span:nth-child(1) {
-    color: red;
+    color: red !important;
     /* צבע אדום לאייקון הראשון */
 }
 

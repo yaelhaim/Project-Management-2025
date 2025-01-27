@@ -665,7 +665,7 @@ const compareModule = (function () {
         compare.addEventListener("click", function (event) {
             if(compareList.length == 2){
                 if(!compareList.includes(productId)){
-                    const yesNo = confirm("Cannot add to add more than two\nWould you like to goto the comparison page?")
+                    const yesNo = confirm("Cannot compare more than 2 products\nWould you like to goto the comparison page?")
                     if(yesNo){
                         window.location.href = "comparisonPage.html";
                     }

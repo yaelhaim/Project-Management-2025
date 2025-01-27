@@ -78,7 +78,7 @@ async function showComparison() {
     product1_title.innerHTML = `<img src="${product1.image_url}" /><p><strong>${product1.name}</strong></p> `;
     product2_title.innerHTML = `<img src="${product2.image_url}" /><p><strong>${product2.name}</strong></p> `;
 
-    productProperties.innerHTML += `<tr><td>${product1.catalog_number}</td><td>${product2.catalog_number}</td><td>catalog #</td> </tr>`
+    productProperties.innerHTML += `<tr><td>${product1.catalog_number}</td><td>${product2.catalog_number}</td><td>catalog number</td> </tr>`
 
     let stars1 = "";
     let stars2 = "";
@@ -107,8 +107,8 @@ async function showComparison() {
         openPDF(product2.pdf_url); // קריאה לפונקציה עם ה-URL של ה-PDF
     });
     productProperties.innerHTML += `<tr><td>${product1.price}</td><td>${product2.price}</td><td>price</td> </tr>`
-    productProperties.innerHTML += `<tr><td>${product1.discount_price}</td><td>${product2.discount_price}</td><td>price</td> </tr>`
-    productProperties.innerHTML += `<tr><td><button type="button" id="btn1">buy</button></td><td><button type="button" id="btn2">buy</button></td><td>price</td> </tr>`
+    productProperties.innerHTML += `<tr><td>${product1.discount_price !== null ? product1.discount_price : "-"}</td><td>${product2.discount_price !== null ? product2.discount_price : "-"}</td><td>discount price</td> </tr>`
+    productProperties.innerHTML += `<tr><td><button type="button" id="btn1">Buy now</button></td><td><button type="button" id="btn2">Buy now</button></td><td>purchase link</td> </tr>`
 
     document.getElementById("btn1").addEventListener("click", function (event){
         //product1
@@ -127,7 +127,7 @@ document.addEventListener("DOMContentLoaded", function(){
         container.innerHTML = `<h2 class="no-products">There are no Products to compare</h2>`;
         setTimeout(() => {
             window.location.href = "homePage.html";
-        }, 3000);
+        }, 2000);
 
     })
     showComparison();
