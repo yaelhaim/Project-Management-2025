@@ -25,17 +25,11 @@ header {
     cursor: pointer;
 }
 
-
-/* עיצוב שם האתר */
-
 header .site-name {
     color: #1d7fa5;
     font-size: 24px;
     font-weight: bold;
 }
-
-
-/* עיצוב האייקונים בכותרת */
 
 header .icons {
     display: flex;
@@ -43,15 +37,9 @@ header .icons {
     cursor: pointer;
 }
 
-
-/* מרווחים בין האייקונים */
-
 header .icons>* {
     margin-left: 12px;
 }
-
-
-/* עיצוב האייקונים */
 
 .material-symbols-outlined {
     font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
@@ -63,24 +51,17 @@ header .icons>* {
     left: 10px;
     font-size: 14px;
     color: white;
-    /* צבע האיקס */
     background-color: black;
-    /* צבע הרקע */
     border-radius: 50%;
-    /* יוצר את העיגול */
     width: 20px;
-    /* גודל העיגול */
     height: 20px;
-    /* גודל העיגול */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     font-weight: bold;
     z-index: 10;
-    /* לוודא שהאייקון יהיה מעל התוכן */
     transition: background-color 0.3s;
-    /* אנימציה להחלפת צבע הרקע */
 }
 
 .close-icon:hover {
@@ -89,7 +70,6 @@ header .icons>* {
 
 #pdf-overlay {
     position: fixed;
-    /* נציב את הרקע בכל המסך */
     top: 0;
     left: 0;
     width: 100%;
@@ -117,19 +97,10 @@ header .icons>* {
     margin-top: 3rem;
 }
 
-.empty-comparison {
-    font-size: 1.5em;
-    cursor: pointer;
-    color: black;
-}
-
 .no-products {
     text-align: center;
     margin-top: 8rem;
 }
-
-
-/* טבלה*/
 
 .comparison-container {
     display: flex;
@@ -142,25 +113,23 @@ header .icons>* {
     width: 80%;
 }
 
-
-/*prouduct name design*/
-
 #product1_title,
 #product2_title {
     font-size: large;
     font-family: Arial, sans-serif;
+    color: #1d7fa5;
+    /* כותרות בצבע #1d7fa5 */
 }
-
-
-/*prouduct image design*/
 
 #product1_title img,
 #product2_title img {
     max-width: 300px;
-    /* התאמה לגודל התמונה */
     height: auto;
     margin-bottom: 10px;
-    /* רווח מתחת לתמונה */
+    border-radius: 15px;
+    /* קצוות מעוגלים לתמונה */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* צל לתמונה */
 }
 
 #productProperties.icons {
@@ -170,25 +139,24 @@ header .icons>* {
 }
 
 table {
-    border: 1px solid #777;
     border-collapse: collapse;
     border-spacing: 0px;
+    border: 2px solid #1d7fa5;
+    margin-bottom: 40px;
 }
 
 table th {
     padding: 16px;
-    border-left: 1px solid #777;
+    border-left: 2px solid #1d7fa5;
+    /* כותרות בטבלה בצבע #1d7fa5 */
 }
 
 #productProperties td {
     padding: 16px;
-    border-left: 1px solid #777;
+    border-left: 2px solid #1d7fa5;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
-
-
-/*buy now button design*/
 
 #btn1,
 #btn2 {
@@ -199,7 +167,6 @@ table th {
     cursor: pointer;
     border-radius: 5px;
     display: inline-block;
-    /* הכפתור יישאר בשורה אחת */
     vertical-align: middle;
     justify-content: space-between;
 }
@@ -210,4 +177,6 @@ table th {
 
 h2 {
     font-family: Arial, Helvetica, sans-serif;
+    color: #1d7fa5;
+    /* צבע הכותרת */
 }

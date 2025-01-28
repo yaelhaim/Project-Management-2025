@@ -77,7 +77,7 @@ async function showComparison() {
     product1_title.innerHTML = `<img src="${product1.image_url}" /><p><strong>${product1.name}</strong></p> `;
     product2_title.innerHTML = `<img src="${product2.image_url}" /><p><strong>${product2.name}</strong></p> `;
 
-    productProperties.innerHTML += `<tr><td>${product1.catalog_number}</td><td>${product2.catalog_number}</td><td>catalog number</td> </tr>`
+    productProperties.innerHTML += `<tr><td>${product1.catalog_number}</td><td>${product2.catalog_number}</td><td>Catalog Number</td> </tr>`
 
     let stars1 = "";
     let stars2 = "";
@@ -88,17 +88,17 @@ async function showComparison() {
         stars2 += `<span class="material-symbols-outlined" style="color: gold;">star</span>`;
     }
 
-    productProperties.innerHTML += `<tr><td>${stars1}</td><td>${stars2}</td><td>rating</td> </tr>`
+    productProperties.innerHTML += `<tr><td>${stars1}</td><td>${stars2}</td><td>Rating</td> </tr>`
 
     const info1 = `<a href="#" id="brochure-link1">Information Brochure</a>`
     const info2 = `<a href="#" id="brochure-link2">Information Brochure</a>`
-    productProperties.innerHTML += `<tr><td>${info1}</td><td>${info2}</td><td>information</td> </tr>`
-    
-    productProperties.innerHTML += `<tr><td>${product1.price}</td><td>${product2.price}</td><td>price</td> </tr>`
-    productProperties.innerHTML += `<tr><td>${product1.discount_price !== null ? product1.discount_price : "-"}</td><td>${product2.discount_price !== null ? product2.discount_price : "-"}</td><td>discount price</td> </tr>`
-    productProperties.innerHTML += `<tr><td><button type="button" id="btn1">Buy now</button></td><td><button type="button" id="btn2">Buy now</button></td><td>purchase link</td> </tr>`
+    productProperties.innerHTML += `<tr><td>${info1}</td><td>${info2}</td><td>Information</td> </tr>`
 
-    document.getElementById("brochure-link1").addEventListener("click", function (event) {
+    productProperties.innerHTML += `<tr><td>${product1.price}</td><td>${product2.price}</td><td>Price</td> </tr>`
+    productProperties.innerHTML += `<tr><td>${product1.discount_price !== null ? product1.discount_price : "-"}</td><td>${product2.discount_price !== null ? product2.discount_price : "-"}</td><td>Discount Price</td> </tr>`
+    productProperties.innerHTML += `<tr><td><button type="button" id="btn1">Buy now</button></td><td><button type="button" id="btn2">Buy now</button></td><td>Purchase Link</td> </tr>`
+
+    document.getElementById("brochure-link1").addEventListener("click", function(event) {
         event.preventDefault(); // מונע את הפעולה המוגדרת ב-href (#)
 
         // כאן אתה שולף את הקישור ל-PDF ממקור כלשהו, לדוגמה:
@@ -110,8 +110,8 @@ async function showComparison() {
         // כאן אתה שולף את הקישור ל-PDF ממקור כלשהו, לדוגמה:
         openPDF(product2.pdf_url); // קריאה לפונקציה עם ה-URL של ה-PDF
     });
-    
-    document.getElementById("btn1").addEventListener("click", function (event){
+
+    document.getElementById("btn1").addEventListener("click", function(event) {
         //product1
         alert('Service is not available')
     });
