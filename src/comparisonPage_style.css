@@ -1,4 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined");
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: space-between;
+}
 
 header {
     display: flex;
@@ -11,7 +21,7 @@ header {
 
 .favorite-icon {
     font-variation-settings: "FILL" 1;
-    color: red ;
+    color: red;
     cursor: pointer;
 }
 
@@ -104,75 +114,85 @@ header .icons>* {
     position: absolute;
 }
 
-
-.empty-container{
-    margin-top:3rem;
+.empty-container {
+    margin-top: 3rem;
 }
-.empty-comparison{
+
+.empty-comparison {
     font-size: 1.5em;
     cursor: pointer;
-    color: black ;
+    color: black;
 }
 
-.no-products{
+.no-products {
     text-align: center;
     margin-top: 8rem;
 }
+
+
 /* טבלה*/
-.comparison-container{
+
+.comparison-container {
     display: flex;
     justify-content: center;
 }
-.table-container{
-    
+
+.table-container {
     display: flex;
     flex-direction: column;
     width: 80%;
 }
 
 
- /*prouduct name design*/
+/*prouduct name design*/
+
 #product1_title,
 #product2_title {
-  font-size: large;
-  font-family: Arial, sans-serif;
+    font-size: large;
+    font-family: Arial, sans-serif;
 }
 
- /*prouduct image design*/
+
+/*prouduct image design*/
+
 #product1_title img,
 #product2_title img {
-  max-width: 300px; /* התאמה לגודל התמונה */
-  height: auto;
-  margin-bottom: 10px; /* רווח מתחת לתמונה */
+    max-width: 300px;
+    /* התאמה לגודל התמונה */
+    height: auto;
+    margin-bottom: 10px;
+    /* רווח מתחת לתמונה */
 }
 
-#productProperties.icons
-{
+#productProperties.icons {
     font-size: 25px;
     color: gold;
     cursor: pointer;
 }
 
-
-table{
+table {
     border: 1px solid #777;
     border-collapse: collapse;
     border-spacing: 0px;
 }
 
-table th{
+table th {
     padding: 16px;
-    border-left: 1px solid #777;    
+    border-left: 1px solid #777;
 }
 
-#productProperties td{
+#productProperties td {
     padding: 16px;
     border-left: 1px solid #777;
     text-align: center;
     font-family: Arial, Helvetica, sans-serif;
 }
- /*buy now button design*/
-#btn1, #btn2 {
+
+
+/*buy now button design*/
+
+#btn1,
+#btn2 {
     background-color: #28a745;
     color: white;
     border: none;
@@ -188,7 +208,7 @@ table th{
 .product-header button.buy-now:hover {
     background-color: #218838;
 }
- 
-  h2 {
+
+h2 {
     font-family: Arial, Helvetica, sans-serif;
-  }
+}

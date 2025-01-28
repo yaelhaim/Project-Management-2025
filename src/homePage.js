@@ -115,6 +115,8 @@ function updateProductList(products) {
             productElement.style.border = "2px solid #1d7fa5"; // גבול עבה בצבע 1d7fa5
             productElement.style.padding = "10px"; // רווח פנימי למוצר
             productElement.style.borderRadius = "5px"; // פינות מעוגלות
+            productElement.style.height = "auto"; // הגדרה שהגובה ייקבע אוטומטית לפי התוכן
+
 
             // מוסיפים את התאריך הוספה של המוצר בתור תכונה שלא תוצג באתר כדי לנהל את השמת והסרת התווית ״חדש״
             productElement.setAttribute("data-date-added", product.created_at);
@@ -123,6 +125,8 @@ function updateProductList(products) {
             for (let i = 0; i < product.rating; i++) {
                 stars += `<span class="material-symbols-outlined">star</span>`; // כוכב זהב
             }
+
+
 
             productElement.innerHTML = `
                 <div style="display: flex; justify-content: space-between; align-items: center;">
@@ -138,18 +142,19 @@ function updateProductList(products) {
                </div>
         <a href="#" class="product-category" data-category-id="${product.category_id}" style="font-weight: bold; display: block; margin-top: 5px;">Category: ${getCategoryNameById(product.category_id)}</a>
        <div style="display: flex; align-items: flex-start; margin-top: 10px;">
-            <div style="flex: 1; margin-right: 10px;"> <!-- הסבר -->
-                <div class="product-description" style="max-width: 70%; overflow-wrap: break-word;"> 
+            <div style="flex: 1; margin-right: 10px;margin-top: 60px;"> <!-- הסבר -->
+                <div class="product-description" style="max-width: 80%; overflow-wrap: break-word;"> 
                     <span style="font-weight: bold;">Description:</span> ${product.description}
                 </div>
             </div>
             <div style="flex: 0 0 auto;"> <!-- תמונה -->
                 <img src="${product.image_url}" alt="${product.name}" class="product-image" style="
-                    max-width: 400px; /* גודל התמונה */
+                    max-width: 220px; /* גודל התמונה */
                     height: auto;
                     border-radius: 10px;
                     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
                     margin-left: 10px; /* רווח בין ההסבר לתמונה */
+                    margin-right: 50px;
                 "/>
             </div>
         </div>
