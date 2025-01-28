@@ -14,8 +14,8 @@
     <header>
         <div class="site-name">Software Products</div>
         <div>
-            <span class="material-symbols-outlined">favorite</span>
-            <span class="material-symbols-outlined">shopping_cart</span>
+            <span class="material-symbols-outlined" id="upper-favorite-icon">favorite</span>
+            <span class="material-symbols-outlined" id="upper-shopping-cart">shopping_cart</span>
         </div>
     </header>
 
@@ -56,9 +56,6 @@
             </div>
         </div>
 
-        <!-- "products_images/Client_Sphere_image.jpg" -->
-        <!-- "/products_brochures/Backup_Xpert.pdf" -->
-
         <!-- תיאור, אייקונים ותמונות נוספות -->
         <div class="product-details">
             <div class="product-description">
@@ -71,8 +68,8 @@
             </div>
 
             <div class="icons">
-                <span class="material-symbols-outlined">favorite</span>
-                <span class="material-symbols-outlined">add_shopping_cart</span>
+                <span class="material-symbols-outlined" id="favorite-icon">favorite</span>
+                <span class="material-symbols-outlined" id="cart-icon">add_shopping_cart</span>
                 <span class="material-symbols-outlined copy-link" title="Copy link" onclick="copyLink(this)">content_copy
             <span class="tooltip">Copy URL </span>
                 </span>
@@ -138,35 +135,6 @@
             </div>
           </div>
 
-          <!-- <div class="modal" id="edit-review-modal">
-            <div class="content">
-              <h2 class="modal-title">Edit Review</h2>
-              <form id="edit-review-form">
-                <label for="title">Title:</label>
-                <textarea
-                  type="text"
-                  id="edit-title"
-                  name="title"
-                  maxlength="100"
-                  required
-                ></textarea>
-
-                <label for="content">Content:</label>
-                <textarea
-                  id="edit-content"
-                  name="content"
-                  rows="4"
-                  maxlength="500"
-                  required
-                ></textarea>
-
-                <div class="modal-footer">
-                  <button type="submit" id="save-review">Save</button>
-                  <button type="button" id="cancel-edit">Cancel</button>
-                </div>
-              </form>
-            </div>
-          </div> -->
 
           <div class="modal" id="editReviewModal" style="display: none;">
             <div class="modal-content">
@@ -228,6 +196,30 @@
                     <span class="material-symbols-outlined">star</span>
                 </div>
 
+                <!-- דירוג ידידותיות -->
+                <div id="friendliness-rating">
+                    <span class="friendlinss-rating-text"
+                      >Friendliness rating 🤝</span
+                    >
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                </div>
+          
+                <!-- דירוג אבטחה -->
+                <div id="security-rating">
+                    <span class="security-rating-text"
+                      >Security rating 🔒</span
+                    >
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                  <span class="material-symbols-outlined">star</span>
+                </div>
+                
                 <div class="modal-buttons">
                     <button type="button" id="approveBtn">Approve</button>
                     <button type="button" id="cancelBtn">Cancel</button>

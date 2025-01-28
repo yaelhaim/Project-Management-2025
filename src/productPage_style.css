@@ -233,6 +233,15 @@ html {
   margin-bottom: 20px;
 }
 
+.icons span {
+  font-size: 30px; /* גודל אייקון */
+  transition: color 0.3s ease; /* אפקט רך לשינוי צבע */
+}
+
+.icons span:hover {
+  color: #007bff; /* צבע חדש כאשר מרחפים */
+}
+
 /* the message that appears when hovering on the copy icon*/
 
 .tooltip {
@@ -635,6 +644,20 @@ textarea#content {
   display: flex;
   gap: 3px;
   margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#friendliness-rating {
+  display: flex;
+  gap: 3px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+#security-rating {
+  display: flex;
+  gap: 3px;
+  margin-top: 10px;
   margin-bottom: 30px;
 }
 
@@ -646,14 +669,35 @@ textarea#content {
   margin-right: 10px;
   /* רווח מימין */
   color: #333;
+}
+
+.friendlinss-rating-text {
+  font-size: 16px;
+  /* גודל פונט לטקסט */
+  font-weight: bold;
+  /* טקסט מודגש */
+  margin-right: 10px;
+  /* רווח מימין */
+  color: #333;
   /* צבע הטקסט */
 }
 
-.star {
-  font-size: 24px;
-  color: gray;
-  cursor: pointer;
+.security-rating-text {
+  font-size: 16px;
+  /* גודל פונט לטקסט */
+  font-weight: bold;
+  /* טקסט מודגש */
+  margin-right: 10px;
+  /* רווח מימין */
+  color: #333;
+  /* צבע הטקסט */
+}
+
+.star .material-symbols-outlined {
+  color: gray; /* צבע ברירת מחדל */
+  cursor: pointer; /* מאפשר לחיצה על הכוכבים */
   transition: color 0.3s;
+  font-size: 24px;
 }
 
 .star.selected,

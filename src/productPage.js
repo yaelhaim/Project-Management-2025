@@ -10,6 +10,43 @@ button_buy_now.addEventListener("click", () => {
   );
 });
 
+document.addEventListener("DOMContentLoaded", () => {
+  const favoriteIcon = document.getElementById("upper-favorite-icon");
+  console.log(favoriteIcon);
+
+  favoriteIcon.addEventListener("click", () => {
+    window.location.href = "favorite_productsPage.html";
+  });
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const shoppingCartIcon = document.getElementById("upper-shopping-cart");
+  console.log(shoppingCartIcon);
+
+  shoppingCartIcon.addEventListener("click", () => {
+    window.location.href = "shoppingCartPage.html";
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  // קבלת האייקונים לפי ה-ID
+  const favoriteIcon = document.getElementById("favorite-icon");
+  const cartIcon = document.getElementById("cart-icon");
+
+  // מאזין ללחיצה על אייקון האהבה
+  favoriteIcon.addEventListener("click", function () {
+    alert(
+      "Liking a product is only for registered users.\nPlease register/Log-In to the system first"
+    );
+  });
+
+  // מאזין ללחיצה על אייקון עגלת הקניות
+  cartIcon.addEventListener("click", function () {
+    alert(
+      "Adding a product to the shopping cart is only for registered users.\nPlease register/Log-In to the system first"
+    );
+  });
+});
+
 // Implementing the click action on the copy link icon
 document.addEventListener("DOMContentLoaded", () => {
   const copyLinkIcon = document.querySelector(".copy-link");
@@ -47,11 +84,19 @@ const approveBtn = document.getElementById("approveBtn");
 const contentTextarea = document.getElementById("content");
 const titleInput = document.getElementById("title");
 const deleteIcons = document.querySelectorAll(".delete-review-icon");
+const friendlinessStars = document.querySelectorAll(
+  "#friendliness-rating .material-symbols-outlined"
+);
+const securityStars = document.querySelectorAll(
+  "#security-rating .material-symbols-outlined"
+);
 
 const ratingStars = document.querySelectorAll(
   "#content-rating .material-symbols-outlined"
 );
 let selectedRating = 0;
+let selectedFriendlinessRating = 0;
+let selectedSecurityRating = 0;
 
 // פונקציה לעדכון הכוכבים בהתאם לדירוג
 function updateStars(rating) {
@@ -83,6 +128,58 @@ ratingStars.forEach((star, index) => {
     updateStars(selectedRating); // הדגשת הכוכבים הקבועה
   });
 });
+
+// פונקציה לעדכון הדירוגים הנוספים (ידידותיות ואבטחה)
+function updateAdditionalStars(rating, stars) {
+  stars.forEach((star, index) => {
+    if (index < rating) {
+      star.style.color = "gold"; // הדגשה בצבע זהב
+    } else {
+      star.style.color = "gray"; // חזרה לצבע אפור
+    }
+  });
+}
+
+// הוספת מאזיני אירועים לדירוג הידידותיות
+friendlinessStars.forEach((star, index) => {
+  star.addEventListener("mouseover", () => {
+    updateAdditionalStars(index + 1, friendlinessStars);
+  });
+
+  star.addEventListener("mouseout", () => {
+    updateAdditionalStars(selectedFriendlinessRating, friendlinessStars);
+  });
+
+  star.addEventListener("click", () => {
+    selectedFriendlinessRating = index + 1;
+    updateAdditionalStars(selectedFriendlinessRating, friendlinessStars);
+  });
+});
+
+// הוספת מאזיני אירועים לדירוג האבטחה
+securityStars.forEach((star, index) => {
+  star.addEventListener("mouseover", () => {
+    updateAdditionalStars(index + 1, securityStars);
+  });
+
+  star.addEventListener("mouseout", () => {
+    updateAdditionalStars(selectedSecurityRating, securityStars);
+  });
+
+  star.addEventListener("click", () => {
+    selectedSecurityRating = index + 1;
+    updateAdditionalStars(selectedSecurityRating, securityStars);
+  });
+});
+
+function resetAdditionalStars() {
+  friendlinessStars.forEach((star) => {
+    star.style.color = "gray"; // צבע בסיסי (אפור)
+  });
+  securityStars.forEach((star) => {
+    star.style.color = "gray"; // צבע בסיסי (אפור)
+  });
+}
 
 // פונקציה לאיפוס הדירוג
 function resetStars() {
@@ -116,10 +213,20 @@ approveBtn.addEventListener("click", function (event) {
   const title = titleInput.value;
   const content = contentTextarea.value;
   const selected_rating = selectedRating;
+  const selectedFriendliness = selectedFriendlinessRating; // דירוג הידידותיות
+  const selectedSecurity = selectedSecurityRating; // דירוג האבטחה
 
   if (title.length > maxTitleLength || content.length > maxContentLength) {
     alert(
       "Please check the length of the title or the content, it might exceed the maximum length"
+    );
+  } else if (
+    selected_rating === 0 ||
+    selectedFriendliness === 0 ||
+    selectedSecurity === 0
+  ) {
+    alert(
+      "Please select a rating for all categories before submitting the review."
     );
   } else {
     const review = {
@@ -128,8 +235,11 @@ approveBtn.addEventListener("click", function (event) {
       user_name: generateRandomUsername(), // פונקציה ליצירת שם משתמש אקראי
       product_id: getCurrentProductId(),
       customer_rating: selected_rating,
+      customer_friendly_rating: selectedFriendliness,
+      customer_security_rating: selectedSecurity,
     };
-    resetStars();
+    resetStars(); // איפוס הכוכבים
+    resetAdditionalStars();
     const reviewContainer = event.target.closest(".review-container");
 
     // מצא את האייקון של הוספת תגובה בתוך הקונטיינר
@@ -139,6 +249,7 @@ approveBtn.addEventListener("click", function (event) {
       addReactionIcon.style.display = "none"; // הסתר את האייקון
     }
 
+    console.log("here", review);
     // שליחת הביקורת לשרת
     sendReviewToServer(review)
       .then(() => {
@@ -362,31 +473,6 @@ document.querySelectorAll(".delete-review-icon").forEach((deleteIcon) => {
   });
 });
 
-// // הוספת מאזין לאייקון העריכה
-// document.querySelectorAll(".edit-icon").forEach((icon) => {
-//   icon.addEventListener("click", (e) => {
-//     const reviewId = e.target.getAttribute("data-review-id");
-
-//     // בקשה לשרת כדי לקבל את פרטי הביקורת (GET)
-//     fetch(`/api/reviews/${reviewId}`)
-//       .then((response) => response.json())
-//       .then((review) => {
-//         // ממלא את השדות בטופס
-//         document.getElementById("title").value = review.review_title;
-//         document.getElementById("content").value = review.review_text;
-
-//         // מציג את הדיאלוג
-//         document.getElementById("edit-review-modal").style.display = "flex";
-//       })
-//       .catch((err) => console.error("Error fetching review:", err));
-//   });
-// });
-
-// // סגירת הדיאלוג
-// document.getElementById("cancel-edit").addEventListener("click", () => {
-//   document.getElementById("edit-review-modal").style.display = "none";
-// });
-
 // הגשת הטופס
 document.querySelectorAll(".edit-icon").forEach((editIcon) => {
   editIcon.addEventListener("click", async function (event) {
@@ -468,6 +554,7 @@ document.querySelectorAll(".edit-icon").forEach((editIcon) => {
 
           const result = await response.json();
           console.log("Review updated:", result);
+          alert("Review updated successfully");
           document.getElementById("editReviewModal").style.display = "none";
         } catch (error) {
           console.error("Error updating review:", error);

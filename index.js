@@ -234,7 +234,7 @@ app.get("/api/reviews/:productId", async (req, res) => {
 
   try {
     const result = await db.query(
-      "SELECT review_id, review_title, review_text, user_name, customer_rating FROM reviews WHERE product_id = $1",
+      "SELECT review_id, review_title, review_text, user_name, customer_rating, customer_friendly_rating, customer_security_rating FROM reviews WHERE product_id = $1",
       [productId]
     );
     res.json(result.rows); // שליחת הביקורות כ-JavaScript Object Notation
@@ -247,7 +247,7 @@ app.get("/api/reviews/:productId", async (req, res) => {
 app.get("/api/reviews", async (req, res) => {
   try {
     const result = await db.query(
-      "SELECT review_id, review_title, review_text, user_name, product_id, customer_rating FROM reviews"
+      "SELECT review_id, review_title, review_text, user_name, product_id, customer_rating, customer_friendly_rating, customer_security_rating FROM reviews"
     );
 
     // אם אין ביקורות, נחזיר תשובה עם קוד שגיאה 404
@@ -264,6 +264,8 @@ app.get("/api/reviews", async (req, res) => {
         user_name,
         product_id,
         customer_rating,
+        customer_friendly_rating,
+        customer_security_rating,
       } = row;
 
       return {
@@ -273,6 +275,8 @@ app.get("/api/reviews", async (req, res) => {
         user_name,
         product_id,
         customer_rating,
+        customer_friendly_rating,
+        customer_security_rating,
       };
     });
 
@@ -286,23 +290,40 @@ app.get("/api/reviews", async (req, res) => {
 });
 
 app.post("/api/reviews", express.json(), async (req, res) => {
-  const { review_title, review_text, user_name, product_id, customer_rating } =
-    req.body;
+  const {
+    review_title,
+    review_text,
+    user_name,
+    product_id,
+    customer_rating,
+    customer_friendly_rating,
+    customer_security_rating,
+  } = req.body;
 
   if (
     !review_title ||
     !review_text ||
     !user_name ||
     !product_id ||
-    !customer_rating
+    !customer_rating ||
+    !customer_friendly_rating ||
+    !customer_security_rating
   ) {
     return res.status(400).json({ message: "All fields are required" });
   }
 
   try {
     const result = await db.query(
-      "INSERT INTO reviews (review_title, review_text, user_name, product_id, customer_rating) VALUES ($1, $2, $3, $4, $5) RETURNING *",
-      [review_title, review_text, user_name, product_id, customer_rating]
+      "INSERT INTO reviews (review_title, review_text, user_name, product_id, customer_rating, customer_friendly_rating, customer_security_rating) VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+      [
+        review_title,
+        review_text,
+        user_name,
+        product_id,
+        customer_rating,
+        customer_friendly_rating,
+        customer_security_rating,
+      ]
     );
     res.status(201).json(result.rows[0]); // החזרת המוצר החדש
   } catch (error) {
