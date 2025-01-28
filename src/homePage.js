@@ -64,7 +64,9 @@ function updateCategoriesList(categories) {
 
 const productsData = {
     allProducts: [],
-    filteredProducts: []
+    filteredProducts: [],
+    categoryFilter: false,
+    nameFilter: false
 }
 
 
@@ -82,7 +84,8 @@ async function loadProducts(categoryId = null) {
     const filteredProducts = categoryId ?
         products.filter((product) => product.category_id === categoryId) :
         products; // אם אין קטגוריה נציג את כל המוצרים
-
+    
+    productsData.categoryFilter = categoryId != null;
     // עדכון כמות המוצרים
     productCountElement.textContent = `Loading ${filteredProducts.length} products`;
     productsData.filteredProducts = filteredProducts;
@@ -336,16 +339,22 @@ const filterHandlers = (function() {
         const from = validateFrom();
         const to = validateTo();
         const stars = countStars();
-        let lastFilter = productsData.filteredProducts;
-        if (lastFilter.length == 0) {
-            productsData.allProducts;
+
+        let lastFilter;
+        if(productsData.categoryFilter || productsData.nameFilter){
+            lastFilter = productsData.filteredProducts;
+        }else{
+            lastFilter = productsData.allProducts;
         }
-        productsData.filteredProducts = lastFilter
+        // if (lastFilter.length == 0) {
+        //     productsData.allProducts;
+        // }
+        lastFilter = lastFilter
             .filter(p => to > 0 ? p.price >= from && p.price <= to : true)
             .filter(p => p.rating >= stars);
-        updateProductList(productsData.filteredProducts);
+        updateProductList(lastFilter);
         const productCountElement = document.getElementById("product-count");
-        productCountElement.textContent = `Loading ${productsData.filteredProducts.length} products`;
+        productCountElement.textContent = `Loading ${lastFilter.length} products`;
     }
     return {
         validateFrom,
@@ -448,6 +457,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 product.name.toLowerCase().includes(query.toLowerCase())
             );
             productsData.filteredProducts = filteredProducts;
+            productsData.nameFilter = true;
             updateProductList(filteredProducts);
 
             const productCountElement = document.getElementById("product-count");
@@ -590,7 +600,7 @@ window.addEventListener("DOMContentLoaded", function() {
 async function searchProducts(query) {
     const products = await fetchData("/api/products");
     const results = products.filter(product => product.name.toLowerCase().includes(query.toLowerCase()));
-
+    productsData.nameFilter = true;
     const searchResultsContainer = document.getElementById("search-results");
     //searchResultsContainer.innerHTML = ""; // Clear previous results
 
