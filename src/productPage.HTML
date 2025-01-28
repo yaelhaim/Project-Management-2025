@@ -121,7 +121,7 @@
             <div class="review-container" style="margin-top: 150px">
                 <button class="nav-button left-button">&larr;</button>
                 <div class="actions">
-                    <span class="material-symbols-outlined">rate_review</span>
+                    <span class="material-symbols-outlined edit-icon" data-review-id="123">rate_review</span>
                     <span class="material-symbols-outlined delete-review-icon">delete</span
             >
             <span class="material-symbols-outlined add-reaction-icon"
@@ -138,7 +138,7 @@
             </div>
           </div>
 
-          <div class="modal" id="edit-review-modal">
+          <!-- <div class="modal" id="edit-review-modal">
             <div class="content">
               <h2 class="modal-title">Edit Review</h2>
               <form id="edit-review-form">
@@ -166,7 +166,40 @@
                 </div>
               </form>
             </div>
+          </div> -->
+
+          <div class="modal" id="editReviewModal" style="display: none;">
+            <div class="modal-content">
+              <h2 class="modal-title">Edit Review</h2>
+              <form>
+                <label for="edit-title">Title:</label>
+                <textarea id="edit-title" name="title" maxlength="100"></textarea>
+          
+                <label for="edit-content">Content:</label>
+                <textarea
+                  id="edit-content"
+                  name="content"
+                  rows="4"
+                  maxlength="500"
+                ></textarea>
+          
+                <div id="edit-content-rating">
+                  <span class="rating-text">Update your rating 😊</span>
+                  <span class="material-symbols-outlined edit-star">star</span>
+                  <span class="material-symbols-outlined edit-star">star</span>
+                  <span class="material-symbols-outlined edit-star">star</span>
+                  <span class="material-symbols-outlined edit-star">star</span>
+                  <span class="material-symbols-outlined edit-star">star</span>
+                </div>
+          
+                <div class="modal-buttons">
+                  <button type="button" id="editApproveBtn">Save Changes</button>
+                  <button type="button" id="editCancelBtn">Cancel</button>
+                </div>
+              </form>
+            </div>
           </div>
+          
 
           <!-- חלון קופץ -->
           <div class="modal" id="reviewModal">

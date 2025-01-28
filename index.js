@@ -335,14 +335,15 @@ app.delete("/api/reviews/:reviewId", async (req, res) => {
   }
 });
 
-app.put("/api/reviews/:reviewId", async (req, res) => {
-  const reviewId = req.params.reviewId;
-  const { review_title, review_text } = req.body;
+app.put("/api/reviews/:numericReviewId", async (req, res) => {
+  const reviewId = req.params.numericReviewId;
+  console.log("Request body received:", req.body);
+  const { review_title, review_text, customer_rating } = req.body;
 
   try {
     const result = await db.query(
-      "UPDATE reviews SET review_title = $1, review_text = $2 WHERE review_id = $3 RETURNING *",
-      [review_title, review_text, reviewId]
+      "UPDATE reviews SET review_title = $1, review_text = $2, customer_rating = $3 WHERE review_id = $4 RETURNING *",
+      [review_title, review_text, customer_rating, reviewId]
     );
 
     if (result.rowCount === 0) {
@@ -358,6 +359,51 @@ app.put("/api/reviews/:reviewId", async (req, res) => {
     res.status(500).json({ error: "Failed to update review" });
   }
 });
+
+// נתיב לשליפת ביקורת לפי מזהה
+app.get("/reviews/:numericReviewId", async (req, res) => {
+  const reviewId = req.params.numericReviewId;
+
+  try {
+    // const { id } = req.params;
+    const result = await db.query(
+      "SELECT * FROM reviews WHERE review_id = $1",
+      [reviewId]
+    );
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: "Review not found" });
+    }
+    console.log("Query result:", result.rows);
+
+    res.json(result.rows[0]); // החזרת הביקורת ללקוח
+  } catch (err) {
+    console.error("Error fetching review:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+// app.put("/reviews/:numericReviewId", async (req, res) => {
+//   const { id } = req.params;
+//   const { review_title, review_text } = req.body;
+//   console.log("server", id);
+
+//   try {
+//     const result = await pool.query(
+//       "UPDATE reviews SET review_title = $1, review_text = $2 WHERE review_id = $3 RETURNING *",
+//       [review_title, review_text, id]
+//     );
+
+//     if (result.rowCount === 0) {
+//       return res.status(404).json({ error: "Review not found" });
+//     }
+
+//     res.json(result.rows[0]);
+//   } catch (err) {
+//     console.error("Error updating review:", err);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
 
 // מסלול ראשי שיגיש את הדף הראשי
 app.get("/", (req, res) => {
