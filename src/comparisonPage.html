@@ -1,31 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.10.377/pdf.min.js"></script>
     <link rel="stylesheet" href="comparisonPage_style.css" />
-    <title>Software Products</title>
+
 </head>
+
 <body>
-    
-    <table>
-        <thead>
-            <tr>
-                <th>
-                    <td id="product1_title">
+    <!-- כותרת עליונה עם שם האתר ואייקונים -->
+    <header>
+        <div class="site-name">Comparison Page</div>
 
-                    </td>
-                    <td id="product2_title">
+    </header>
+    <div id="pdf-overlay" style="display: none" onclick="closePDF()">
+        <div id="pdf-container" onclick="event.stopPropagation();">
+            <!-- <embed id="pdf-embed" src="" type="application/pdf" width="100%" height="600px" /> לבדוק אם לבטל כי הוא מיותר -->
+            <canvas id="pdf-canvas"></canvas>
+            <span class="close-icon" onclick="closePDF()">&#10005;</span>
+        </div>
+    </div>
+    <div class="comparison-container">
+        <div class="table-container">
+            <div class="empty-container">
+                <span class="material-symbols-outlined empty-comparison" title="Delete comparison">Delete</span>
+            </div>
 
-                    </td>                    
-                </th>
-            </tr>
-        </thead>
-        <tbody id="productProperties">
+            <table>
+                <thead>
+                    <tr>
+                        <th id="product1_title"></th>
+                        <th id="product2_title"></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="productProperties">
 
-        </tbody>
-    </table>
-
+                </tbody>
+            </table>
+        </div>
+    </div>
     <script src="comparisonPage.js"></script>
 </body>
+
 </html>

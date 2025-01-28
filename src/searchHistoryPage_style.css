@@ -1,0 +1,71 @@
+@import url("https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200");
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    justify-content: flex-start;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+    border-bottom: 2px solid #1d7fa5;
+}
+
+
+/* עיצוב שם  */
+
+header .name {
+    color: #1d7fa5;
+    font-size: 24px;
+    font-weight: bold;
+}
+
+
+/* עיצוב רשומות חיפוש */
+
+.search-history {
+    padding: 20px;
+    flex: 1;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 15px;
+}
+
+.search-history ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.search-history ul li {
+    padding: 20px;
+    background: linear-gradient(145deg, #ffffff, #e6e6e6);
+    box-shadow: 4px 4px 6px #d1d1d1, -4px -4px 6px #ffffff;
+    border-radius: 10px;
+    text-align: center;
+    font-size: 18px;
+    color: #333;
+    cursor: pointer;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search-history ul li:hover {
+    transform: translateY(-5px);
+    box-shadow: 6px 6px 8px #c9c9c9, -6px -6px 8px #ffffff;
+    background: linear-gradient(145deg, #f0f8ff, #e6f3ff);
+    color: #1d7fa5;
+}
+
+.search-history ul li:active {
+    transform: translateY(2px);
+    box-shadow: 2px 2px 4px #c9c9c9, -2px -2px 4px #ffffff;
+}
