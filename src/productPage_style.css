@@ -819,7 +819,6 @@ textarea#content {
   overflow: auto;
   border-radius: 10px;
   /* זוויות מעוגלות */
-  width: 80%;
   height: 100%;
   align-self: center;
   position: absolute;
@@ -923,3 +922,4 @@ textarea#content {
   color: #ffffff !important;
   padding: 3.5px;
 }
+
