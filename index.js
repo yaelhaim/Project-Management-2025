@@ -1,16 +1,23 @@
+import path from "path";
+import { fileURLToPath } from "url";
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
 import express from "express";
 import dotenv from "dotenv";
-import pkg from "pg"; // ייבוא ברירת המחדל של החבילה
+import pkg from "pg";
+
+dotenv.config();
 const { Client } = pkg;
 
 const app = express();
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 app.use(express.static("public"));
 app.use(express.static("src"));
 app.use(express.json());
 
-dotenv.config();
 const connectionDetails = {
   user: "zohar",
   host: "dpg-cu3vl3rqf0us73bugfkg-a.frankfurt-postgres.render.com",
