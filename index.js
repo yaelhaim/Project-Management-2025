@@ -411,32 +411,10 @@ app.get("/reviews/:numericReviewId", async (req, res) => {
   }
 });
 
-// app.put("/reviews/:numericReviewId", async (req, res) => {
-//   const { id } = req.params;
-//   const { review_title, review_text } = req.body;
-//   console.log("server", id);
-
-//   try {
-//     const result = await pool.query(
-//       "UPDATE reviews SET review_title = $1, review_text = $2 WHERE review_id = $3 RETURNING *",
-//       [review_title, review_text, id]
-//     );
-
-//     if (result.rowCount === 0) {
-//       return res.status(404).json({ error: "Review not found" });
-//     }
-
-//     res.json(result.rows[0]);
-//   } catch (err) {
-//     console.error("Error updating review:", err);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });
-
 // מסלול ראשי שיגיש את הדף הראשי
-app.get("/", (req, res) => {
-  res.sendFile(__dirname + "/src/homePage.HTML");
-});
+// app.get("/", (req, res) => {
+//   res.sendFile(__dirname + "/src/homePage.HTML");
+// });
 
 // מסלול ראשי שיגיש את דף המוצר
 app.get("/", (req, res) => {
@@ -450,4 +428,8 @@ app.get("/", (req, res) => {
 
 app.listen(PORT, () => {
   console.groupCollapsed("Listening on port", PORT);
+});
+
+app.get("/", (req, res) => {
+  res.sendFile(path.join(__dirname, "public", "homePage.html"));
 });
