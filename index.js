@@ -446,6 +446,10 @@ app.get("/favorite", (req, res) => {
   res.sendFile(path.join(__dirname, "/src/favorite_productsPage.html"));
 });
 
+app.get("/homePage.HTML", (req, res) => {
+  res.sendFile(path.join(__dirname, "/src/homePage.HTML"));
+});
+
 app.listen(PORT, () => {
   console.log("Listening on port", PORT);
 });
