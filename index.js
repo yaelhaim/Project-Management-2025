@@ -435,15 +435,13 @@ app.get("/reviews/:numericReviewId", async (req, res) => {
 // });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "homePage.html"));
+  res.sendFile(path.join(__dirname, "src", "homePage.html"));
 });
 
-// נתיב לדף המוצרים
 app.get("/product", (req, res) => {
   res.sendFile(path.join(__dirname, "src", "productPage.HTML"));
 });
 
-// נתיב לדף המוצרים האהובים
 app.get("/favorite", (req, res) => {
   res.sendFile(path.join(__dirname, "src", "favorite_productsPage.HTML"));
 });
