@@ -411,29 +411,6 @@ app.get("/reviews/:numericReviewId", async (req, res) => {
   }
 });
 
-// מסלול ראשי שיגיש את הדף הראשי
-// app.get("/", (req, res) => {
-//   res.sendFile(__dirname + "/src/homePage.HTML");
-// });
-
-// // מסלול ראשי שיגיש את דף המוצר
-// app.get("/", (req, res) => {
-//   res.sendFile(__dirname + "/src/productPage.HTML");
-// });
-
-// // מסלול ראשי שיגיש את דף המוצרים האהובים
-// app.get("/", (req, res) => {
-//   res.sendFile(__dirname + "/src/favorite_productsPage.HTML");
-// });
-
-// app.listen(PORT, () => {
-//   console.groupCollapsed("Listening on port", PORT);
-// });
-
-// app.get("/", (req, res) => {
-//   res.sendFile(path.join(__dirname, "public", "homePage.html"));
-// });
-
 app.get("/", (req, res) => {
   res.sendFile(path.join(__dirname, "/src/homePage.HTML"));
 });
