@@ -435,15 +435,15 @@ app.get("/reviews/:numericReviewId", async (req, res) => {
 // });
 
 app.get("/", (req, res) => {
-  res.sendFile(path.join(__dirname, "src", "homePage.html"));
+  res.sendFile(path.join(__dirname, "homePage.html"));
 });
 
 app.get("/product", (req, res) => {
-  res.sendFile(path.join(__dirname, "src", "productPage.HTML"));
+  res.sendFile(path.join(__dirname, "productPage.HTML"));
 });
 
 app.get("/favorite", (req, res) => {
-  res.sendFile(path.join(__dirname, "src", "favorite_productsPage.HTML"));
+  res.sendFile(path.join(__dirname, "favorite_productsPage.HTML"));
 });
 
 app.listen(PORT, () => {
